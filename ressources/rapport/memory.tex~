@@ -33,7 +33,7 @@
 \end{minipage}
 \begin{minipage}{0.5\linewidth}
 \begin{flushright}
-\includegraphics[scale = 0.4]{../images/logo}
+\includegraphics[scale = 0.4]{logo}
 \end{flushright}
 \end{minipage}
 
