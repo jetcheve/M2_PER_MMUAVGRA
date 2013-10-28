@@ -1,0 +1,67 @@
+\section{Development Environment and Conventions}
+In this part, we will see the development environment we used, and the programming conventions we've applied.
+
+\subsection{Development Environment}
+- GitHub\\
+- ...\\
+
+\subsection{Programming Conventions}
+First, we've choosed to used the Java Coding Conventions, which we can see in the following link - http://www.oracle.com/technetwork/java/codeconventions-150003.pdf\\
+
+Then, in order to create our documentation, we've used the Doxygen Convention, viewable here - http://www.stack.nl/~dimitri/doxygen/manual/docblocks.html\\
+We've relied heavily on this documentation and have mostly employed these protocoles below.\\
+
+\lstset{language=Java,basicstyle=\footnotesize,commentstyle=\color{blue}}
+\begin{lstlisting}[frame=trBL, title=Doxygen Convention for classes]
+/**
+* @class name of the class
+* @brief Description of herself
+*/
+\end{lstlisting}
+
+\lstset{language=Java,basicstyle=\footnotesize,commentstyle=\color{blue}}
+\begin{lstlisting}[frame=trBL, title=Doxygen Convention for methods]
+/**
+* @brief Description of the method
+* @param the parameters and their descriptions
+* @return the description of what return the method (optional)
+*/
+\end{lstlisting}
+
+\lstset{language=Java,basicstyle=\footnotesize,keywordstyle=\color{red},commentstyle=\color{blue}}
+\begin{lstlisting}[frame=trBL, title=Doxygen Convention for members]
+int var; /**< Detailed description after the member */
+\end{lstlisting}
+~\\
+We've also resorted to programming conventions that we defined between us.\\
+For example, when a part of a code, was not finished yet, we put the following lines above the concerning part.\\
+
+\lstset{language=Java,basicstyle=\footnotesize,commentstyle=\color{blue}}
+\begin{lstlisting}[frame=trBL, title=Programming convention for unfinished code]
+/**
+* @TO_DO
+* Description
+*/
+\end{lstlisting}
+~\\
+We've also used a convention for the bugs found and wrote these protocoles, depending on whether the bug was resolved or not.\\
+We used it, in line with the Bug Tracking of GitHub.\\
+
+\lstset{language=Java,basicstyle=\footnotesize,commentstyle=\color{blue}}
+\begin{lstlisting}[frame=trBL, title=Programming convention for bugs]
+/**
+* @BUG
+* @Unfinished/finished
+* Description
+*/
+\end{lstlisting}
+~\\
+To finish, we've created the five essential files for a project : \\
+\begin{itemize}
+\item INSTALL.txt  : Installation instructions for the project,
+\item LICENCE.txt  : Licence and copyright \copyright{} of the project,
+\item README.txt   : General description of the project,
+\item AUTHORS.txt  : Authors of the project,
+\item MANIFEST.txt : Tree structure and files list of the project.
+\end{itemize}
+

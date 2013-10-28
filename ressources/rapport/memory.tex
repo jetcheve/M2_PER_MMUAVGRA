@@ -1,0 +1,138 @@
+\documentclass[12pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{graphicx}
+\usepackage[english]{babel}
+\usepackage{frbib}
+\usepackage{amsfonts}
+\usepackage{url}
+\usepackage{color}
+\usepackage{pifont}
+\usepackage{array}
+\usepackage{fancybox}
+\usepackage{lscape}
+\usepackage{fullpage}
+\usepackage{listings}
+\usepackage{multicol}
+\usepackage{diagbox}
+
+\author{CASTAGNET Florian, ETCHEVERRY Jérémy, PAZIEWSKY Hayley, TESSIER Alexis et TESTA Mickael}
+
+\title{Second year of Master : Mobility Models for UAV Group Reconnaissance Applications}
+
+
+\begin{document}
+\thispagestyle{empty}
+\setcounter{page}{0}
+
+\begin{minipage}{0.5\linewidth}
+\begin{flushleft}
+\textbf{University of Bordeaux 1 \\Science et Technology }\\ 
+\end{flushleft}
+\end{minipage}
+\begin{minipage}{0.5\linewidth}
+\begin{flushright}
+\includegraphics[scale = 0.4]{logo}
+\end{flushright}
+\end{minipage}
+
+\vspace{4cm}
+
+\cornersize{100}
+\begin{center}
+\boxput*(0,1){
+\colorbox{white}{Second year of Master - Studies Projects and Research}
+}
+{
+\setlength{\fboxsep}{12pt} \Ovalbox{\begin{minipage}{10cm}
+\centering
+\vspace{0.5cm}
+{\LARGE ~\\ Mobility Models for UAV Group Reconnaissance Applications\\} 
+\vspace{0.5cm}
+\large MEMORY \\
+
+\vspace{0.5cm}
+\end{minipage}}
+}
+
+
+\end{center}
+
+
+\vspace{4cm}
+
+
+\noindent
+\begin{center}
+
+\textbf{Customers :} AUTEFAGE Vincent and CHAUMETTE Serge\\~\\
+\textbf{Responsible of Directed Works :} AUTEFAGE Vincent and CHAUMETTE Serge\\~\\
+\vspace{4cm}
+\textbf{Authors :} CASTAGNET Florian, ETCHEVERRY Jérémy, PAZIEWSKY Hayley, TESSIER Alexis \& TESTA Mickael\\
+\end{center}
+\newpage
+\thispagestyle{empty}
+\setcounter{page}{0}
+
+\vspace*{\stretch{5}}
+\paragraph{Acknowledgement : }
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur vulputate, dui at cursus convallis, risus est faucibus massa, quis commodo lacus risus ut massa. Praesent sagittis massa enim, vel ultricies dolor imperdiet porttitor. Praesent vehicula leo sit amet risus porttitor posuere. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nam adipiscing ante vel diam semper, vitae pretium mi iaculis. Cras vitae molestie enim. Fusce aliquet ligula metus, et dictum neque sodales vestibulum. Vestibulum quis elementum risus. Etiam malesuada nulla vel viverra ullamcorper.\\
+
+Aenean vel aliquam lectus. Nam eu tellus at turpis volutpat dignissim. Donec massa erat, lobortis nec congue eget, gravida pretium ante. Maecenas sagittis vestibulum condimentum. Maecenas congue turpis eu magna molestie luctus. Aenean non mauris dignissim, facilisis nunc eu, tincidunt neque. Ut a arcu at tortor egestas dictum. Aenean sollicitudin lobortis quam, vel tempor risus congue nec. Nulla ornare purus eget vulputate venenatis.\\
+
+Donec non lacus lectus. Morbi pharetra tellus id sem vestibulum dictum. Maecenas tincidunt est nec ligula mollis vehicula. Proin egestas ligula fermentum, commodo mi ut, porta purus. Nulla pharetra orci massa, sed dignissim purus malesuada eu. Cras interdum leo nec commodo posuere. Curabitur pharetra aliquet aliquet. Donec nec libero diam. Nulla accumsan mattis consequat.\\
+
+Suspendisse potenti. Fusce vel viverra justo, id volutpat quam. Suspendisse venenatis dolor et pretium porttitor. Morbi a sodales nulla. Proin molestie orci faucibus enim pretium, sit amet bibendum arcu consectetur. Nulla non libero in risus lacinia venenatis eget ut sapien. Aliquam ut mollis lacus, vitae auctor dui.\\
+
+Aliquam in auctor augue. Morbi vitae accumsan dolor, at vulputate urna. Sed sed vulputate enim, id fringilla velit. Nunc ipsum leo, auctor nec felis ac, commodo sagittis metus. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Proin pulvinar et augue ut porttitor. Fusce at iaculis justo, vel eleifend quam. Donec blandit odio nec arcu hendrerit hendrerit. Sed lacinia eleifend metus, ut cursus dui pretium et. Sed ut erat metus. Mauris at nisi vel magna porta porta sit amet et tellus.\\
+
+\setcounter{page}{0}
+
+\vspace*{\stretch{7}}
+\newpage
+\tableofcontents
+\newpage
+\listoffigures
+\newpage
+
+\section*{Preface}
+Les drones sont de plus en plus présents sur le territoire français et partout dans le monde. De nombreuses recherches sont dédiées à ces appareils depuis des années, mais la plus part d’entre elles reposent sur un modèle de mobilité théorique et inadapté aux mouvements aériens réels.\\
+
+Le but de ce PER est donc d’étudier un modèle qui respecte les propriétés aérodynamiques des drones.\\
+
+Vous devrez tout d’abord comprendre le modèle de mobilité proposé,  extraire les algorithmes correspondants et enfin implémenter ces algorithmes au sein du simulateur JBotSim.\\ 
+Vous devrez également tester votre implémentation sur un scénario que vous établirez.\\
+
+Vous pourrez également comparer votre modèle avec ceux des autres groupes sur des scénarios communs.\\
+
+\newpage
+\input{analysis_of_existing}
+\newpage
+\input{scenarios}
+\newpage
+\input{needs_analysis}
+\newpage
+\input{architecture}
+\newpage
+\input{schedule}
+\newpage
+\input{works_done}
+\newpage
+\input{results}
+\newpage
+\input{tests}
+\newpage
+\input{improvements}
+\newpage
+\input{development_environment}
+\newpage
+\input{conclusion}
+\newpage
+\addcontentsline{toc}{section}{Bibliography}
+\nocite{*}
+\bibliographystyle{unsrt}
+\bibliography{bibliography}
+
+\end{document}
+
