@@ -35,7 +35,46 @@ Figure 5 : thre is a complex relationship between node speed and pause time. A s
 
 \subsection{City section}
 
-Similar to Random Waypoint MM but here, the simulation area is a city where the ad hoc network exists and each MN begins the simu at a defined point( opposite to RwaypointMM) on some street of the city. There exists also safe driving characteristics such as a speed limit or minimum distance allowed between the current position and the new location.
+Le but de ce modèle est de proposer un modèle réaliste. Il se base sur le mouvement de véhicule sur des cartes routières. La spécificité de ce modèle est que la carte dépend de chaque zone géographique. Ici, les véhicules sont des nœuds mobiles.
+\\\\
+The aim of this model is to propose a realistic model. It bases itself on the movement of vehicle on road maps. The specificity of this model is that the map depends on every geographical zone. Here, vehicles are mobile nodes.\\\\
+
+
+Les données cartographique des rues sont disponibles auprès du bureau américains du recensement. Les informations concernant les cartes sont récupérées dans des fichiers textes. Ces fichiers sont composés de plusieurs éléments :
+l'identifiant unique pour une route spécifiée.
+la nature de la route : Cela peut être une autoroute ou une rue.
+la longitude de départ.
+la latitude de départ
+la latitude d'arrivé.
+la longitude d'arrivé.
+Toutes les intersections de la carte sont représentées par des nœuds non mobile.
+Ce modèle prend également en compte l'intensité du trafic routier, plus le trafic est important et plus le trait représentant la route sera gros. Ce modèle est aussi sensible à la vitesse des voitures (en fonction notamment de l'heure). Par exemple, nous pouvons considérer que la vitesse de circulation des véhicules le matin est beaucoup moins importante qu'en début d'après-midi.
+Voici le déroulement de ce modèle. Chaque nœud commence à un point choisi aléatoirement et sa destination est également choisie aléatoirement. La stratégie de chaque nœud est de rechercher le plus court chemin jusqu'à la destination. Pour accomplir cela, l'algorithme de Dijkstra est utilisé. Plusieurs paramètres rentrent en compte dans cette algorithme comme la vitesse, le trafic. Ce trajet peut être changé dynamiquement. Quand un nœud a atteint sa destination, il recommence tout le processus décrit précédemment. Concernant la vitesse du nœud, il est limité à plus ou moins 5\% de la vitesse inscrite dans le fichier.\\\\
+
+
+The mapping data blocks are available from the office Americans of the census. The map information is retrieved from text files. These files are composed of several elements:
+\begin{itemize}
+\item The unique identifier for a specified road.
+\item The nature of the road: it can be a highway or a street.
+\item The longitude of the start of position.
+\item The latitude of the start of departure
+\item The latitude of arrived.
+\item The longitude of arrived.
+\end{itemize}
+
+All the intersections of the map are represented by nodes not mobile.
+\textbf{This model also takes into account the volume of road traffic, the more the traffic is important and the more the line(feature) representing the road will be big. ???}
+This model is also sensitive at the speed of cars (depending in particular on the hour). For example, we can consider that the speed of vehicular traffic in the morning is much smaller than at the beginning of the afternoon.
+\\\\
+Here is the progress of this model. Every node begins in a point chosen randomly and its destination is chosen also randomly. The strategy of every node is to look for the shortest way until the destination. To achieve it, the algorithm of Dijkstra is used. Several parameters bring in in account in this algorithm as the speed, the traffic. This route can be dynamically changed. When a node reached its destination, it begins again all the process described previously. Concerning the speed of the node, it is limited to more or less 5\% of the speed registered in the file.
+\\
+For example, here is a representation of the model. We see here that the traffic is little sparse, but with very different speeds.
+
+\begin{center}
+\includegraphics[width=7cm,height=50mm]{../images/city.png}
+\end{center}
+
+
 
 \textbf{METTRE DES SCHEMA ET a compléter}
 
