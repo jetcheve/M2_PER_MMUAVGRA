@@ -81,19 +81,16 @@ public class MovingNode extends Node implements ClockListener, MessageListener{
 		int y = (int)pos.getY();
 		int [][] tmp = (int[][]) getProperty("map");
 		tmp[x-1][y]+=1;
-		System.out.println(x-1 +"  "+y);
 		if(tmp[x-1][y] ==1){
 			Main.totalscan++;
 			Main.jtopo.addPoint(x-1, y);
 		}
 		tmp[x+1][y]+=1;
-		System.out.println(x+1 +"  "+y);
 		if(tmp[x+1][y] ==1){
 			Main.totalscan++;
 			Main.jtopo.addPoint(x+1, y);
 		}
 		for(int i = x, j=y-1,area = 3; area > 0; area--,j++){
-			System.out.println(i +"  "+j);
 			tmp[i][j] += 1;
 			if(tmp[i][j] == 1)
 			{
