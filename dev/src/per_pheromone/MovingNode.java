@@ -51,7 +51,7 @@ public class MovingNode extends Node implements ClockListener, MessageListener{
 		setCommunicationRange(50);
 		Clock.addClockListener(this, 1);
 		addMessageListener(this);
-		_steering_angle = _upward;  //direction : vers le haut.
+		_steering_angle = _upward;  //direction : upward
 		setDirection(_steering_angle);
 		_time = 0;
 		_start = System.currentTimeMillis();
@@ -103,7 +103,7 @@ public class MovingNode extends Node implements ClockListener, MessageListener{
 		//***************************************************************************
 		//******************** CALCULATION OF THE NEW DIRECTION AND MOVING *******
 		Double dir = getDirection();
-		dir = analysis(dir); //retourne la nouvelle direction
+		dir = analysis(dir); //return the new direction
 		if(dir != null)
 			setDirection(dir);
 		avoidEdges(x,y);
