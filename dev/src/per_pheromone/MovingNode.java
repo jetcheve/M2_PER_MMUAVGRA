@@ -5,9 +5,9 @@
  * @date 
  */
 package per_pheromone;
-
 import java.awt.Point;
 import java.awt.geom.Point2D;
+import java.util.Map;
 
 import jbotsim.Clock;
 import jbotsim.Message;
@@ -20,16 +20,25 @@ import jbotsim.event.MessageListener;
  * @brief Description
  * @details 
  */
-public class MovingNode extends Node implements ClockListener, MessageListener {
+public class MovingNode extends Node implements ClockListener, MessageListener{
 
-	private static double _steering_angle;									/**< The direction angle of an UAV */
-	private static int _time;												/**< Description */
-	private static long _start;												/**< Description */
-	private static int _total_pheromone = 0;								/**< Description */
-	private static int _dimension = 500;									/**< Description */
-	private boolean _first_launch = true;									/**< Description */
-	private static int _margin = 5;											/**< Description */
-	private static double _total_potential_scan = _dimension*_dimension;	/**< Description */
+	private double _upward = 3*Math.PI/2;
+	private double _upward_leftward = 5*Math.PI/4;
+	private double _upward_rightward = 7*Math.PI/4;
+	private double _downward = Math.PI/2;
+	private double _downward_leftward = 3*Math.PI/4;
+	private double _downward_rightward = Math.PI/4;
+	private double _leftward = Math.PI;
+	private double _rightward = 2*Math.PI;
+
+	private static double _steering_angle;
+	private static int _time;
+	private static long _start;
+	private static int _total_pheromone = 0;
+	private static int _dimension = 500;
+	private boolean _first_launch = true;
+	private static int _margin = 5;
+	private static double _total_potential_scan = _dimension*_dimension;
 
 	/**
 	 * @brief Constructor ...
@@ -40,12 +49,12 @@ public class MovingNode extends Node implements ClockListener, MessageListener {
 		setProperty("icon", "/avion.png");
 		setProperty("size", 20);
 		setCommunicationRange(50);
-		Clock.addClockListener(this, 5);
+		Clock.addClockListener(this, 1);
 		addMessageListener(this);
-		_steering_angle = 3 * Math.PI / 2;  //direction : upward
+		_steering_angle = _upward;  //direction : vers le haut.
 		setDirection(_steering_angle);
 		_time = 0;
-		set_start(System.currentTimeMillis());
+		_start = System.currentTimeMillis();
 	}
 
 	/**
@@ -55,40 +64,62 @@ public class MovingNode extends Node implements ClockListener, MessageListener {
 	 */
 	@Override
 	public void onClock() {
-		if(_first_launch) {
+		//*************** INITIALIZATION OF THE PHEROMONE'S MAP *****************
+		if(_first_launch)
+		{
 			int[][] pheromoneMap = new int[_dimension][_dimension];
-			for(int i = 0; i < _dimension; i++)			
-				for(int j = 0; j < _dimension; j++)
-					pheromoneMap[i][j] = 0;
+			for(int i=0;i<_dimension;i++)			
+				for(int j=0;j<_dimension;j++)
+					pheromoneMap[i][j] =0;
 			setProperty("map", pheromoneMap);
 			_first_launch = false;
 		}
-
+		//********************** SCAN OF THE AREA ************************************
+		// Scan en x,y : the UAV will scan each point around the position and also the position.
 		Point2D pos = getLocation();
 		int x = (int)pos.getX();
 		int y = (int)pos.getY();
 		int [][] tmp = (int[][]) getProperty("map");
-		tmp[x/2][y/2] += 1;
-
-		if(tmp[x/2][y/2] == 1) {
-			Main._totalscan++;
-			Main._jtopo.addPoint(x, y);
+		tmp[x-1][y]+=1;
+		System.out.println(x-1 +"  "+y);
+		if(tmp[x-1][y] ==1){
+			Main.totalscan++;
+			Main.jtopo.addPoint(x-1, y);
 		}
-		_total_pheromone++;
+		tmp[x+1][y]+=1;
+		System.out.println(x+1 +"  "+y);
+		if(tmp[x+1][y] ==1){
+			Main.totalscan++;
+			Main.jtopo.addPoint(x+1, y);
+		}
+		for(int i = x, j=y-1,area = 3; area > 0; area--,j++){
+			System.out.println(i +"  "+j);
+			tmp[i][j] += 1;
+			if(tmp[i][j] == 1)
+			{
+				Main.totalscan++;
+				Main.jtopo.addPoint(i, j);
+			}
+		}
+		_total_pheromone+=5;
 		setProperty("map", tmp);
+		//***************************************************************************
+		//******************** CALCULATION OF THE NEW DIRECTION AND MOVING *******
 		Double dir = getDirection();
-		dir = analysis(dir); //return the new direction
+		dir = analysis(dir); //retourne la nouvelle direction
 		if(dir != null)
 			setDirection(dir);
 		avoidEdges(x,y);
 		move(1);
 		wrapLocation();
 		_time++;
-		if(_time > 50) {
-			_time = 0;
+		if(_time > 50)
+		{
+			_time=0;
 			send(null,getProperty("map"));
 		}
 		displayScanPercentage();
+		//***************************************************************************
 	}
 
 	/**
@@ -100,24 +131,48 @@ public class MovingNode extends Node implements ClockListener, MessageListener {
 		Point2D pos = getLocation();
 		int x = (int)pos.getX();
 		int y = (int)pos.getY();
-
-		if(dir == 3*Math.PI/2) { //upward
-			int min = minimum(new Point(x-1,y),new Point(x,y-1),new Point(x+1,y));
+		if(dir == _upward) //upward
+		{
+			int min = minimum(new Point(x-1,y-1),new Point(x,y-1),new Point(x+1,y-1));
 			return min_to_dir(0,min);
 		}
-		else if(dir == Math.PI/2) { //downward
-			int min = minimum(new Point(x+1,y),new Point(x,y+1),new Point(x-1,y)); 
+		else if(dir == _downward)  //downward
+		{
+			int min = minimum(new Point(x+1,y+1),new Point(x,y+1),new Point(x-1,y+1)); 
 			return min_to_dir(1,min);
 		}
-		else if(dir == Math.PI) { //leftward
-			int min = minimum(new Point(x,y+1),new Point(x-1,y),new Point(x,y-1)); 
+		else if(dir == _leftward) //leftward
+		{
+			int min = minimum(new Point(x-1,y+1),new Point(x-1,y),new Point(x-1,y-1)); 
 			return min_to_dir(2,min);
 		}
-		else if(dir == 2*Math.PI) { //rightward
-			int min = minimum(new Point(x,y-1),new Point(x+1,y),new Point(x,y+1)); 
+		else if(dir == _rightward) //rightward
+		{
+			int min = minimum(new Point(x+1,y-1),new Point(x+1,y),new Point(x+1,y+1)); 
 			return min_to_dir(3,min);
 		}
+		else if(dir == _upward_leftward)  //upward and leftward
+		{
+			int min = minimum(new Point(x-2,y),new Point(x-1,y-1),new Point(x,y-2)); 
+			return min_to_dir(4,min);
+		}
+		else if(dir == _upward_rightward)  //upward and rightward
+		{
+			int min = minimum(new Point(x,y-2),new Point(x+1,y-1),new Point(x+2,y)); 
+			return min_to_dir(5,min);
+		}
+		else if(dir == _downward_leftward)  //downward and leftward
+		{
+			int min = minimum(new Point(x,y+2),new Point(x-1,y+1),new Point(x-2,y)); 
+			return min_to_dir(6,min);
+		}
+		else if(dir == _downward_rightward)  //downward and rightward
+		{
+			int min = minimum(new Point(x+2,y),new Point(x+1,y+1),new Point(x,y+2)); 
+			return min_to_dir(7,min);
+		}
 		return null;
+
 	}
 
 	/**
@@ -125,31 +180,71 @@ public class MovingNode extends Node implements ClockListener, MessageListener {
 	 * @param 
 	 * @return
 	 */
-	private Double min_to_dir(int i, int min) {
-		switch(i) {
-		case 0:
+	private Double min_to_dir(int i, int min) { //1 turn left, 
+		switch(i){								// 2 don't change the direction, 3 turn right
+		case 0: //upward
 			if(min == 1)
-				return Math.PI;
-			else if(min == 3)
-				return 2 * Math.PI;
-			break;
-		case 1:
-			if(min == 1)
-				return 2 * Math.PI;
+				return _upward_leftward;
+			else if(min ==2)
+				return _upward;
 			else if(min ==3)
-				return Math.PI;
+				return _upward_rightward;
 			break;
-		case 2:
+		case 1:  //downward
 			if(min == 1)
-				return Math.PI / 2;
-			else if(min == 3)
-				return 3 * Math.PI / 2;
+				return _downward_leftward;
+			else if(min ==2)
+				return _downward;
+			else if(min ==3)
+				return _downward_rightward;
 			break;
-		case 3:
+		case 2: //leftward
 			if(min == 1)
-				return 3 * Math.PI / 2;
-			else if(min == 3)
-				return Math.PI / 2;
+				return _downward_leftward;
+			else if(min ==2)
+				return _leftward;
+			else if(min ==3)
+				return _upward_leftward;
+			break;
+		case 3: //rightward
+			if(min == 1)
+				return _upward_rightward;
+			else if(min ==2)
+				return _rightward;
+			else if(min ==3)
+				return _downward_rightward;
+			break;
+		case 4: //upward and leftward
+			if(min == 1)
+				return _leftward;
+			else if(min ==2)
+				return _upward_leftward;
+			else if(min ==3)
+				return _upward;
+			break;
+		case 5:  //upward and rightward 
+			if(min == 1)
+				return _upward;
+			else if(min ==2)
+				return _upward_rightward;
+			else if(min ==3)
+				return _rightward;
+			break;
+		case 6:  //downward and leftward
+			if(min == 1)
+				return _downward;
+			else if(min ==2)
+				return _downward_leftward;
+			else if(min ==3)
+				return _leftward;
+			break;
+		case 7:  //downward and rightward
+			if(min == 1)
+				return _rightward;
+			else if(min ==2)
+				return _downward_rightward;
+			else if(min ==3)
+				return _downward;
 			break;
 		default:
 			break;
@@ -175,36 +270,36 @@ public class MovingNode extends Node implements ClockListener, MessageListener {
 		if(isInMatrix(point3))
 			right =  pheromonMap[point3.x][point3.y];
 
-		int turnleft = (_total_pheromone - left) / (2*_total_pheromone);
-		int turnright = (_total_pheromone - right) / (2*_total_pheromone);
-		int straightahead = (_total_pheromone - ahead) / (2*_total_pheromone);
+		int turnleft = (_total_pheromone - left)/(2*_total_pheromone);
+		int turnright = (_total_pheromone - right)/(2*_total_pheromone);
+		int straightahead = (_total_pheromone - ahead)/(2*_total_pheromone);
 
-		if(turnleft == turnright && turnright == straightahead) {
-			int alea = (int) (Math.random() * 3);
+		if(turnleft == turnright && turnright == straightahead){
+			int alea = (int) (Math.random()*3);
 			if(alea == 0)
 				return 1;
-			else if (alea == 1)
+			else if (alea ==1)
 				return 2;
 			else
 				return 3;
 		}
-		else {
-			if(turnleft == turnright && turnleft < straightahead) {
-				int alea = (int) (Math.random() * 2);
+		else{
+			if(turnleft == turnright && turnleft < straightahead){
+				int alea = (int) (Math.random()*2);
 				if(alea == 0)
 					return 1;
 				else 
 					return 3;
 			}
-			if(turnleft == straightahead && turnleft < turnright) {
-				int alea = (int) (Math.random() * 2);
+			if(turnleft == straightahead && turnleft < turnright){
+				int alea = (int) (Math.random()*2);
 				if(alea == 0)
 					return 1;
 				else 
 					return 2;
 			}
-			if(turnright == straightahead && turnright < turnleft) {
-				int alea = (int) (Math.random() * 2);
+			if(turnright == straightahead && turnright < turnleft){
+				int alea = (int) (Math.random()*2);
 				if(alea == 0)
 					return 2;
 				else 
@@ -234,29 +329,34 @@ public class MovingNode extends Node implements ClockListener, MessageListener {
 	 * @param 
 	 * @return
 	 */
-	public void avoidEdges(int x, int y) {
-		if(x - _margin < 0) { //touch the left edge
-			_steering_angle = 2 * Math.PI;
-			setLocation(x + _margin, y);
-			x += _margin;
+	public void avoidEdges(int x, int y){
+
+		if((x-_margin < 0))  //touch the left edge
+		{
+			_steering_angle = _rightward;
+			setLocation(x+_margin, y);
+			x+=_margin;
 			setDirection(_steering_angle);
 		}
-		if(y - _margin < 0) { //touch the up edge
-			_steering_angle = Math.PI / 2;
-			setLocation(x, y + _margin);
-			y += _margin;
+		if( y-_margin < 0)  //touch the up edge
+		{
+			_steering_angle = _downward;
+			setLocation(x, y+_margin);
+			y+=_margin;
 			setDirection(_steering_angle);
 		}
-		if(x + _margin > _dimension) { //touch the right edge
-			_steering_angle = Math.PI;
-			setLocation(x - _margin, y);
-			x -= _margin;
+		if((x+_margin >_dimension))  //touch the right edge
+		{
+			_steering_angle = _leftward;
+			setLocation(x-_margin, y);
+			x-=_margin;
 			setDirection(_steering_angle);
 		}
-		if(y + _margin > _dimension) { //touch the down edge
-			_steering_angle = 3 * Math.PI / 2;
-			setLocation(x, y - _margin);
-			y -= _margin;
+		if(y+_margin > _dimension)  //touch the down edge
+		{
+			_steering_angle = _upward;
+			setLocation(x, y-_margin);
+			y-=_margin;
 			setDirection(_steering_angle);
 		}
 	}
@@ -278,8 +378,8 @@ public class MovingNode extends Node implements ClockListener, MessageListener {
 	 */
 	private void update(int[][] content) {
 		int tmp[][] = (int[][]) getProperty("map");
-		for(int i = 0; i < _dimension; i++) {			
-			for(int j = 0; j < _dimension; j++) {			
+		for(int i=0;i<_dimension;i++){			
+			for(int j=0;j<_dimension;j++){			
 				if(tmp[i][j] < content[i][j])
 					tmp[i][j] = content[i][j];
 			}
@@ -292,8 +392,9 @@ public class MovingNode extends Node implements ClockListener, MessageListener {
 	 * @param 
 	 * @return
 	 */
-	public void displayScanPercentage()	{
-		System.out.println("Scan : " + (Main._totalscan / _total_potential_scan*100) + "%");
+	public void displayScanPercentage()
+	{
+		System.out.println("Scan : "+ (Main.totalscan/_total_potential_scan*100) + "%");
 	}
 
 	/**
