@@ -1,22 +1,26 @@
-package random_mobility;
 import jbotsim.ui.JViewer;
 import jbotsim.Topology;
 import jbotsim.Node;
 
 public class Main{
 
-	private static int dimension = 500;
-	public  static int[][] map = new int[500][500];
-	public static double totalscan = 0;
-
+	private static int _dimension = 500;
+	public  static int[][] _map = new int[_dimension][_dimension];
+	public static double _totalscan = 0;
+	public static JtopologyWalk _jtopo;	/**< An instance of our toopology */
+	public static JViewer _jv;					/**< An instance of a JViewer */
+	static long _time;
+	public static int _UAV_number = 10;
 	public static void main(String[] args)
 	{
+		final long start= System.currentTimeMillis(); 
 		Topology topo = new Topology();
-		topo.setDimensions(dimension, dimension);
+		topo.setDimensions(_dimension, _dimension);
 		Node.setModel("default", new MovingNode());
-		Node.setModel("scan", new ScanNode());
-		JViewer jv = new JViewer(topo);
-		for(int i= 0;i<10;i++)
-			topo.addNode(dimension/2, dimension);
+		_jtopo = new JtopologyWalk(topo);
+		_jv = new JViewer(_jtopo);   
+		for(int i= 0;i<_UAV_number;i++)
+			topo.addNode(_dimension/2-10, _dimension-50);
+		
 	}
 }

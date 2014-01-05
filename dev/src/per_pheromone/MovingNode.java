@@ -4,10 +4,9 @@
  * @version 1.0
  * @date 
  */
-package per_pheromone;
+
 import java.awt.Point;
 import java.awt.geom.Point2D;
-import java.util.Map;
 
 import jbotsim.Clock;
 import jbotsim.Message;
@@ -68,7 +67,7 @@ public class MovingNode extends Node implements ClockListener, MessageListener{
 		if(_first_launch)
 		{
 			int[][] pheromoneMap = new int[_dimension][_dimension];
-			for(int i=0;i<_dimension;i++)	 {		
+			for(int i=0;i<_dimension;i++){			
 				for(int j=0;j<_dimension;j++) {
 					pheromoneMap[i][j] =0;
 					Main._map_scan[i][j] = 0;
@@ -78,7 +77,7 @@ public class MovingNode extends Node implements ClockListener, MessageListener{
 			_first_launch = false;
 		}
 		//********************** SCAN OF THE AREA ************************************
-		// Scan en x,y : the UAV will scan each point around the position and also the position.
+		// Scan in x,y : the UAV will scan each point around the position and also the position.
 		Point2D pos = getLocation();
 		int x = (int)pos.getX();
 		int y = (int)pos.getY();
@@ -90,19 +89,22 @@ public class MovingNode extends Node implements ClockListener, MessageListener{
 			Main._totalscan++;
 		}
 		/*if(tmp[x-1][y] ==1){
-			Main.jtopo.addPoint(x-1, y);
+			Main._jtopo.addPoint(x-1, y);
 		}*/
+		
 		tmp[x+1][y]+=1;
 		if(Main._map_scan[x+1][y]==0)
 		{
 			Main._map_scan[x+1][y] = 1;
 			Main._totalscan++;
 		}
+		
 		/*if(tmp[x+1][y] ==1){
-			Main.jtopo.addPoint(x+1, y);
+			Main._jtopo.addPoint(x+1, y);
 		}*/
 		for(int i = x, j=y-1,area = 3; area > 0; area--,j++){
 			tmp[i][j] += 1;
+			
 			if(Main._map_scan[i][j]==0)
 			{
 				Main._map_scan[i][j] = 1;
@@ -110,7 +112,7 @@ public class MovingNode extends Node implements ClockListener, MessageListener{
 			}
 			/*if(tmp[i][j] == 1)
 			{
-				Main.jtopo.addPoint(i, j);
+				Main._jtopo.addPoint(i, j);
 			}*/
 		}
 		_total_pheromone+=5;
@@ -406,7 +408,7 @@ public class MovingNode extends Node implements ClockListener, MessageListener{
 	 */
 	public void displayScanPercentage()
 	{
-		System.out.println("Scan : "+ (Main.totalscan/_total_potential_scan*100) + "%");
+		System.out.println("Scan : "+ (Main._totalscan/_total_potential_scan*100) + "%");
 	}
 
 	/**

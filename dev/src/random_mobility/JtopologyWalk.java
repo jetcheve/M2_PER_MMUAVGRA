@@ -1,5 +1,5 @@
 /**
- * @file JtopologyPheromone.java
+ * @file JtopologyWalk.java
  * @author atessie, fcastagn, hpaziews, jetcheve & mtesta
  * @version 1.0
  * @date 
@@ -20,7 +20,7 @@ import jbotsim.ui.JTopology;
  * @details 
  */
 @SuppressWarnings("serial")
-public class JtopologyPheromone extends JTopology {
+public class JtopologyWalk extends JTopology {
 	private ArrayList<Point> _list;	/**< Description */
 
 	/**
@@ -28,7 +28,7 @@ public class JtopologyPheromone extends JTopology {
 	 * @param topo
 	 * @return
 	 */
-	public JtopologyPheromone(Topology topo) {
+	public JtopologyWalk(Topology topo) {
 		super(topo);
 		_list = new ArrayList<>();
 	}
@@ -40,10 +40,10 @@ public class JtopologyPheromone extends JTopology {
 	 */
 	public void paint(Graphics g) {
 		super.paint(g);
-	/*	for(Point s : _list) {
+		for(Point s : _list) {
 			g.drawOval(s.x, s.y, 1, 1);
 			g.setColor(new Color(0, 250, 0));
-		}*/
+		}
 	}
 
 	/**
@@ -51,7 +51,7 @@ public class JtopologyPheromone extends JTopology {
 	 * @param 
 	 * @return
 	 */
-	/*public void addPoint(int x,int y) {
+	public void addPoint(int x,int y) {
 		_list.add(new Point(x, y));
-	}*/
+	}
 }
