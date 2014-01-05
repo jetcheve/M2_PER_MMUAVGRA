@@ -68,9 +68,12 @@ public class MovingNode extends Node implements ClockListener, MessageListener{
 		if(_first_launch)
 		{
 			int[][] pheromoneMap = new int[_dimension][_dimension];
-			for(int i=0;i<_dimension;i++)			
-				for(int j=0;j<_dimension;j++)
+			for(int i=0;i<_dimension;i++)	 {		
+				for(int j=0;j<_dimension;j++) {
 					pheromoneMap[i][j] =0;
+					Main._map_scan[i][j] = 0;
+				}
+			}
 			setProperty("map", pheromoneMap);
 			_first_launch = false;
 		}
@@ -81,22 +84,34 @@ public class MovingNode extends Node implements ClockListener, MessageListener{
 		int y = (int)pos.getY();
 		int [][] tmp = (int[][]) getProperty("map");
 		tmp[x-1][y]+=1;
-		if(tmp[x-1][y] ==1){
-			Main.totalscan++;
+		if(Main._map_scan[x-1][y]==0)
+		{
+			Main._map_scan[x-1][y] = 1;
+			Main._totalscan++;
+		}
+		/*if(tmp[x-1][y] ==1){
 			Main.jtopo.addPoint(x-1, y);
-		}
+		}*/
 		tmp[x+1][y]+=1;
-		if(tmp[x+1][y] ==1){
-			Main.totalscan++;
-			Main.jtopo.addPoint(x+1, y);
+		if(Main._map_scan[x+1][y]==0)
+		{
+			Main._map_scan[x+1][y] = 1;
+			Main._totalscan++;
 		}
+		/*if(tmp[x+1][y] ==1){
+			Main.jtopo.addPoint(x+1, y);
+		}*/
 		for(int i = x, j=y-1,area = 3; area > 0; area--,j++){
 			tmp[i][j] += 1;
-			if(tmp[i][j] == 1)
+			if(Main._map_scan[i][j]==0)
 			{
-				Main.totalscan++;
-				Main.jtopo.addPoint(i, j);
+				Main._map_scan[i][j] = 1;
+				Main._totalscan++;
 			}
+			/*if(tmp[i][j] == 1)
+			{
+				Main.jtopo.addPoint(i, j);
+			}*/
 		}
 		_total_pheromone+=5;
 		setProperty("map", tmp);

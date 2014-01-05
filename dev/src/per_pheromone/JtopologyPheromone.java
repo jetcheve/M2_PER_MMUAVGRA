@@ -40,10 +40,10 @@ public class JtopologyPheromone extends JTopology {
 	 */
 	public void paint(Graphics g) {
 		super.paint(g);
-		for(Point s : _list) {
+		/*for(Point s : _list) {
 			g.drawOval(s.x, s.y, 1, 1);
 			g.setColor(new Color(0, 250, 0));
-		}
+		}*/
 	}
 
 	/**
@@ -51,7 +51,7 @@ public class JtopologyPheromone extends JTopology {
 	 * @param 
 	 * @return
 	 */
-	public void addPoint(int x,int y) {
+	/*public void addPoint(int x,int y) {
 		_list.add(new Point(x, y));
-	}
+	}*/
 }
