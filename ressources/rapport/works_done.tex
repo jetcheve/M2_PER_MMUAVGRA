@@ -57,13 +57,38 @@ The method which is going to change most with compared with the random model is 
 \includegraphics{../images/pheromon_model.png}
 \end{center}
 
-Nous avons traité tous les cas décrits dans l'article, c'est à dire que le noeud regarde les valeurs des phéromones à sa gauche, en diagonale gauche, devant lui, en diagonale droite et à droite.\\\\
+Nous avons traité tous les cas décrits dans l'article, c'est à dire que le noeud regarde les valeurs des phéromones en diagonale gauche, devant lui, en diagonale droite.\\\\
 
 Une autre caractéristique de notre implémentation est que cette fois-ci, nous ne scannons plus un point de la carte mais les 5 décrits précédemment.\\\\
 
-We handled all the cases described in the article, that is the node looks at the values of pheromones at its left, in left diagonal, in front of him, in right diagonal and in right. \\\\
+We handled all the cases described in the article, that is the node looks at the values of pheromones in its left diagonal, in front of him and in its right diagonal.
 
-Another characteristic of our implementation is that this time, we do not scan any more a point of the map but 5 described previously.
+\begin{figure}[!h]
+\center
+\includegraphics[width=5cm]{../images/grille_case_1.png}
+\caption{case 1}
+\end{figure}
+
+\begin{figure}[!h]
+\center
+\includegraphics[width=5cm]{../images/grille_case_2.png}
+\caption{case 2}
+\end{figure}
+
+These both case show how a node scan the map.
+\begin{itemize}
+\item the area A represents the left diagonal of the node.
+\item the area B represents the front of the node.
+\item the area C represents the right diagonal of the node.
+\end{itemize}
+
+Another characteristic of our implementation is that this time, we do not scan any more a point of the map but 5 described previously  like the picture below.
+
+\begin{figure}[!h]
+\center
+\includegraphics[width=5cm]{../images/grille_case_2_scan.png}
+\caption{scan of area C}
+\end{figure}
 
 \textbf{A COMPLETER}
 
