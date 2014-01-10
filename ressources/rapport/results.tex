@@ -1,10 +1,24 @@
 \chapter{Results}
 
 \section{The article}
+\subsection{Scan Coverage}
+The goal of the UAVs is to scan the full map once per hour. In theory, with a speed of 150 km/h, the maximum scan speed is 0.083 km\textsuperscript{2}/second/UAV. So with an area of 900 km\textsuperscript{2}, the fastest time to cover the full area is 18 minutes. The figure \ref{randomcoverage} and the figure \ref{pheromonecoverage} represent the coverage data from the mobility models.
 
+\begin{figure}[h]
+\caption{\label{randomcoverage} Random mobility coverage}
+   \includegraphics{../images/random_coverage.png}
+\end{figure}
+
+\begin{figure}[h]
+\caption{\label{pheromonecoverage} Pheromone mobility coverage}
+   \includegraphics{../images/pheromone_coverage.png}
+\end{figure}
+
+For the random model, we see that it need more than 5000 secondes to reach 80 percents of coverage. Whereas the pheromone model reach the 90 percents in one hour. Comparing the two models the pheromone model has a much higher coverage rate.
+\newpage
 \subsection{Never scanned area}
 
-In this tableau below, we can see the results about the percentage of the map never scanned.\\\\
+In this tableau below, we can see the results about the percentage of the map never scanned.\\
 
 \begin{tabular}{|c|c|c|c|}
 \hline
@@ -30,4 +44,6 @@ model to cover the complete area.
 \caption{\label{pheromoneconnect}Pheromone. Number of UAVs in contact with C\&C (max, average, min)}
    \includegraphics{../images/pheromone_resultat_connectivite.png}
 \end{figure}
-In Figure \ref{randomconnect} and Figure \ref{pheromoneconnect}...
+In Figure \ref{randomconnect} and Figure \ref{pheromoneconnect},we can see the number of UAV wich can communicate with the C\&C.  The  graphs  show the maximum, average, and minimum of this number for the ten runs.
+We saw that both models don't provides good connectivity. There are not enough UAV to have a fully connected communication graph. Because of the pheromone logic that pushes the UAVs away from each other, this modele have low connectivity. Whereas the random model have a high connectivity at the beginning of the run. Then With the random trajectory of each UAV, they move away from each others and finally this model finish to have the same poor connectivity as the pheromone model.
+
