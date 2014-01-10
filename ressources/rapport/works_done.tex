@@ -2,7 +2,7 @@
 \section{What we did}
 Durant les deux mois et demi de ce projet, nous avons implémenté les deux modèles qui étaient décrit dans l'article. Pour rappel, ces deux modèles sont un random simple et un modèle concernant des phéromones. Dans cette rubrique, nous allons vous expliquer le travail de développement que nous avons fourni et les différents choix effectués. Nous n'avons pas trouvé d'utilité à faire un diagramme UML vu la simplicité de l'architecture.\\\\
 
-During two and a half months of this project, we implemented both models which were described in the article. As a reminder, these two models are a simple random and a model concerning pheromones. In this section, we are going to explain you the work of development which we supplied and the various made choices. We did not find utility to make a UML diagram seen the simplicity of the architecture.\\\\
+During two and a half months of this project, we implemented both models which were described in the article. As a reminder, these two models are a simple random and a model concerning pheromones.We also implemented the Random Waypoint model on the demand of our customers. In this section, we are going to explain you the work of development which we supplied and the various made choices. We did not find utility to make a UML diagram seen the simplicity of the architecture.\\\\
 
 \subsection{random model} 
 
@@ -44,6 +44,11 @@ Every time a node scans a zone, it looks in the matrix if this position was alre
 
 The third class of our architecture is called \textit{Jtopology\_Random}. It inherits from JTopology and is going to allow to draw the tracks of scans on the map. This class JTopology inherits from JPanel, and is situated in fact between a JViewer and a Topology.
 
+\subsection{Random Waypoint Model}
+
+This model is very similar to the previous. The only difference is their way to move. \\In this model, the node choose one point randomly and move to it. \\So the only modification compared to the previous model is the class \textit{MovingNode} and more precisely the method \textit{on clock}.
+
+
 \subsection{Pheromone model}
 Au niveau architecture, l'implémentation du modèle des phéromones est très similaire. On retrouve pratiquement les 3 même classe. Seulement la classe \textit{MovingNode} va réellement être différente car les mouvements des noeuds vont dépendre de beaucoup de paramètre. Tout d'abord, cette classe implémente une interface de plus qui est \textit{MessageListener}. En effet, dans ce modèle, les noeuds vont devoir se transmettre des données (en l'occurrence leur map respective).\\\\
 
@@ -63,13 +68,13 @@ Une autre caractéristique de notre implémentation est que cette fois-ci, nous 
 
 We handled all the cases described in the article, that is the node looks at the values of pheromones in its left diagonal, in front of him and in its right diagonal.
 
-\begin{figure}[!h]
+\begin{figure}[h]
 \center
 \includegraphics[width=5cm]{../images/grille_case_1.png}
 \caption{case 1}
 \end{figure}
 
-\begin{figure}[!h]
+\begin{figure}[h]
 \center
 \includegraphics[width=5cm]{../images/grille_case_2.png}
 \caption{case 2}
@@ -84,7 +89,7 @@ These both case show how a node scan the map.
 
 Another characteristic of our implementation is that this time, we do not scan any more a point of the map but 5 described previously  like the picture below.
 
-\begin{figure}[!h]
+\begin{figure}[h]
 \center
 \includegraphics[width=5cm]{../images/grille_case_2_scan.png}
 \caption{scan of area C}
