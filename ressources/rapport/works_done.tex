@@ -1,8 +1,12 @@
 \chapter{Works Done}
 
-\section{What we did}
+\section{What we implemented}
 
 During two and a half months of this project, we implemented both models which were described in the article. As a reminder, these two models are a simple random and a model concerning pheromones. We also implemented the Random Waypoint model on the demand of our customers. In this section, we will explain the development work that we have provided and the different choices. We didn't find utility to make a UML diagram seen the simplicity of the architecture.
+
+\subsection{Architecture}
+
+Diagramme UML 
 
 \subsection{Random model} 
 
@@ -35,7 +39,10 @@ The third class of our architecture is called \textit{Jtopology\_Random}. It inh
 
 This model is very similar to the previous. The only difference is their way to move.\\
 In this model, the node choose one point randomly and move to it.\\
-So the only modification compared to the previous model is the class \textit{MovingNode} and more precisely the method \textit{onClock}.
+So the only modification compared to the previous model is the class \textit{MovingNode} and more precisely the method \textit{onClock}.\\
+In this method, we choose a random point and we move the node until it. To do this, we change the direction of the node to the direction of the point chosen. When the node arrive at this point, we choose an other random point and so on.\\
+In this model, we don't manage the edge of the window because all destination point are chosen on the window and so none UAV can qo out the window.
+
 
 \subsection{Pheromone model}
 
@@ -56,7 +63,7 @@ We handled all the cases described in the article, meaning node looks at the val
 \begin{figure}[!h]
 \center
 \includegraphics[width=5cm]{../images/grille_case_1.png}
-\caption{case 1}
+\caption{\label{case1}case 1}
 \end{figure}
 
 \newpage
@@ -64,10 +71,10 @@ We handled all the cases described in the article, meaning node looks at the val
 \begin{figure}[!h]
 \center
 \includegraphics[width=5cm]{../images/grille_case_2.png}
-\caption{case 2}
+\caption{\label{case2}case 2}
 \end{figure}
 
-These both case below show how a node scan the map.
+These both cases \ref{case1} and \ref{case2} show how a node scan the map.
 
 \begin{itemize}
 \item the area A represents the left diagonal of the node.
@@ -75,15 +82,15 @@ These both case below show how a node scan the map.
 \item the area C represents the right diagonal of the node.
 \end{itemize}
 
-Another characteristic of our implementation is that this time, we don't scan anymore a point of the map but 5 described previously  like the picture below.
+Another characteristic of our implementation is that this time, we don't scan anymore a point of the map but 5 described previously  like the picture \ref{scanofarea}. We do that to correspond better to the reality. An UAV scan a area and doesn't scan just a point. So if the UAV choose to scan the point (X,Y), it will move to it and will scan also each point around this position. This method permits us to have results more rapidly.
 
 \begin{figure}[!h]
 \center
 \includegraphics[width=5cm]{../images/grille_case_2_scan.png}
-\caption{scan of area C}
+\caption{\label{scanofarea}scan of area C}
 \end{figure}
 
-\textbf{A COMPLETER}
+We handle the communication between each node with the \textit{MessageListener} and the method \textit{onMessage}. This method is called when a node do the method \textit{send}. We have no destination in the method \textit{send} to broadcast the message. We send message all ten top of clock to respect the conditions of the scenario of the article.
 
 \section{Difficulties Encountered \& Solutions}
 
