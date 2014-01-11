@@ -15,6 +15,7 @@ During two and a half months of this project, we implemented both models which w
 \end{figure}
 
 The description of all the classes will be made in the next section of this chapter.
+
 \subsubsection{Pheromone model}
 
 \begin{figure}[h]
@@ -58,7 +59,7 @@ This model is very similar to the previous. The only difference is their way to 
 In this model, the node choose one point randomly and move to it.\\
 So the only modification compared to the previous model is the class \textit{MovingNode} and more precisely the method \textit{onClock}.\\
 In this method, we choose a random point and we move the node until it. To do this, we change the direction of the node to the direction of the point chosen. When the node arrive at this point, we choose an other random point and so on.\\
-In this model, we don't manage the edge of the window because all destination point are chosen on the window and so none UAV can qo out the window.
+In this model, we don't manage the edge of the window because all destination point are chosen on the window and so none UAV can go out the window.
 
 
 \subsection{Pheromone model}
@@ -99,7 +100,7 @@ These both cases \ref{case1} and \ref{case2} show how a node scan the map.
 \item the area C represents the right diagonal of the node.
 \end{itemize}
 
-Another characteristic of our implementation is that this time, we don't scan anymore a point of the map but 5 described previously  like the picture \ref{scanofarea}. We do that to correspond better to the reality. An UAV scan a area and doesn't scan just a point. So if the UAV choose to scan the point (X,Y), it will move to it and will scan also each point around this position. This method permits us to have results more rapidly.
+Another characteristic of our implementation is that this time, we don't scan anymore a point of the map but 5 described previously  like the picture \ref{scanofarea}. We do that to correspond better to the reality. An UAV scan an area and doesn't scan just a point. So if the UAV choose to scan the point (X,Y), it will move to it and will scan also each point around this position. This method permits us to have results more rapidly.
 
 \begin{figure}[!h]
 \center
