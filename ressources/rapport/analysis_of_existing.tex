@@ -1,21 +1,14 @@
 \chapter{Analysis Of Existing}
 
-Comme dit auparavant, les flottes de drones sont régis entres elles par des modèles de mobilités. Notre étude de l'existant s'est donc décomposée en plusieurs parties.\\\\
-
-As said before, fleets drones are governed by these models mobility. Our study of the current is therefore divided into several parts. \ \ \ \
+As said before, fleets drones are governed by these models mobility. Our study of the existing is therefore divided into several parts.
 
 \section{Summary of the problem}
 
-La problématique de notre article est de scanner une zone le plus efficacement possible et le plus rapidement possible, au maximum une fois par heure. Cette zone sera scannée par une flotte de drone qui devront coopérer entre eux et communiquer.\\\\
-
-The issue of this paper is to scan an area as efficiently as possible and as quickly as possible, at most once per hour. This area will be scanned by a fleet of drones that will cooperate and communicate.\\\\
-
+The issue of this paper is to scan an area as efficiently as possible and as quickly as possible, at least once per hour. This area will be scanned by a fleet of drones that will cooperate and communicate each other.
 
 \section{Existing models}
 
-De nombreux modèles de mobilité existent avec chacun des caractéristiques différentes. Tous ces modèles permettent de définir des mouvements à des flottes de drones. La plupart des modèles sont basés sur des situations de la vie réelle comme la cartographie routière, ou encore sur le comportement de nombreux animaux (fourmis, oiseaux, thermites etc). Nous allons vous en exposer certains que nous considérons les plus importants et les plus intéressants pour notre cas.\\\\
-
-Many mobility models exist each with different characteristics. All these models are used to define movements fleets drones. Most models are based on real-life situations such as road maps, or on the behavior of many animals (ants, birds, termites, wolves etc). We will expose some of which we consider the most important and most interesting for our case.\\\\ 
+Many mobility models exist with different characteristics. All these models are used to define movements for swarm of drones. Most models are based on real-life situations such as road maps, or on the behavior of many animals (ants, birds, termites, wolves etc). We will expose some of them we consider the most important and most interesting for our case.
 
 \subsection{Random Walk}
 
@@ -27,32 +20,18 @@ It's a memoryless mobility pattern because it retains no knowledge of its old lo
 \subsection{Random Waypoint}
 
 Includes pause times between changes in direction and/or speed.Once this time expires, the MN chooses a random destination and a speed, that is uniformly distributed between [minspeed, maxspeed]. The movement pattern of a MN who uses the RWaypointMM is similar to the RwalkMM if pause time is zero and [minspeed, maxspeed] = [speedmin, speedmax].
-During a performance investigation, MNs are initially distributed randomly around the simulation area. Figure 4 shows the average MN neighbor percentage of the MNs. For example, if there are 50 MNs in the network and a node has 10 neighborns, then the node's current neighbor percentage is 20\%. Moreover, during the first 600 seconds, due to initially distributed randomly of the MNs around the simulation area, there is an high variability in the average MN neighbor percentage.
-In the paper, there is presented three possible solutions to avoid this initialization problem. The first is to save the location of the MNs after the initial high variability and use this position as the initial starting point of the MNs in all future simulations. Second, initially distribute the MNs in a specific area to be a distribution more common the model, like fore example, initially placing the MNs in a triangle distribution. Lastly, discard the initial 1000 seconds of simulation time in each simulation trials, to ensure thatthe initialization problem is removed even if the MNs move slowly. But if the MNs move fastly, we can discard fewer seconds of simulation time. This third solution ensures that each simulation has a random initial configuration.
-Figure 5 : thre is a complex relationship between node speed and pause time. A scenario with fast MNs and long pause times actually produces a more stable networks than a scenario with slower MNs and shorter pause times. Hence, long pause times(over 20 seconds) produce a stable network even at high speeds.
+During a performance investigation, MNs are initially distributed randomly around the simulation area. Figure 4 shows the average MN neighbor percentage of the MNs. For example, if there are 50 MNs in the network and a node has 10 neighbors, then the node's current neighbor percentage is 20\%. Moreover, during the first 600 seconds, due to initially distributed randomly of the MNs around the simulation area, there is an high variability in the average MN neighbor percentage.
+In the paper, there is presented three possible solutions to avoid this initialization problem. The first is to save the location of the MNs after the initial high variability and use this position as the initial starting point of the MNs in all future simulations. Second, initially distribute the MNs in a specific area to be a distribution more common the model, like fore example, initially placing the MNs in a triangle distribution. Lastly, discard the initial 1000 seconds of simulation time in each simulation trials, to ensure that the initialization problem is removed even if the MNs move slowly. But if the MNs move fastly, we can discard fewer seconds of simulation time. This third solution ensures that each simulation has a random initial configuration.
+Figure 5 : there is a complex relationship between node speed and pause time. A scenario with fast MNs and long pause times actually produces a more stable networks than a scenario with slower MNs and shorter pause times. Hence, long pause times(over 20 seconds) produce a stable network even at high speeds.
 
 \textbf{METTRE DES SCHEMA ET a revoir}
 
 \subsection{City section}
 
-Le but de ce modèle est de proposer un modèle réaliste. Il se base sur le mouvement de véhicule sur des cartes routières. La spécificité de ce modèle est que la carte dépend de chaque zone géographique. Ici, les véhicules sont des nœuds mobiles.
-\\\\
-The aim of this model is to propose a realistic model. It bases itself on the movement of vehicle on road maps. The specificity of this model is that the map depends on every geographical zone. Here, vehicles are mobile nodes.\\\\
-
-
-Les données cartographique des rues sont disponibles auprès du bureau américains du recensement. Les informations concernant les cartes sont récupérées dans des fichiers textes. Ces fichiers sont composés de plusieurs éléments :
-l'identifiant unique pour une route spécifiée.
-la nature de la route : Cela peut être une autoroute ou une rue.
-la longitude de départ.
-la latitude de départ
-la latitude d'arrivé.
-la longitude d'arrivé.
-Toutes les intersections de la carte sont représentées par des nœuds non mobile.
-Ce modèle prend également en compte l'intensité du trafic routier, plus le trafic est important et plus le trait représentant la route sera gros. Ce modèle est aussi sensible à la vitesse des voitures (en fonction notamment de l'heure). Par exemple, nous pouvons considérer que la vitesse de circulation des véhicules le matin est beaucoup moins importante qu'en début d'après-midi.
-Voici le déroulement de ce modèle. Chaque nœud commence à un point choisi aléatoirement et sa destination est également choisie aléatoirement. La stratégie de chaque nœud est de rechercher le plus court chemin jusqu'à la destination. Pour accomplir cela, l'algorithme de Dijkstra est utilisé. Plusieurs paramètres rentrent en compte dans cette algorithme comme la vitesse, le trafic. Ce trajet peut être changé dynamiquement. Quand un nœud a atteint sa destination, il recommence tout le processus décrit précédemment. Concernant la vitesse du nœud, il est limité à plus ou moins 5\% de la vitesse inscrite dans le fichier.\\\\
-
+The aim of this model is to propose a realistic model. It bases on the vehicle's movement on road maps. The specificity of this model is the map depends on each geographical zone. Here, vehicles are mobile nodes.\\\\
 
 The mapping data blocks are available from the office Americans of the census. The map information is retrieved from text files. These files are composed of several elements:
+
 \begin{itemize}
 \item The unique identifier for a specified road.
 \item The nature of the road: it can be a highway or a street.
@@ -63,18 +42,17 @@ The mapping data blocks are available from the office Americans of the census. T
 \end{itemize}
 
 All the intersections of the map are represented by nodes not mobile.
-\textbf{This model also takes into account the volume of road traffic, the more the traffic is important and the more the line(feature) representing the road will be big. ???}
-This model is also sensitive at the speed of cars (depending in particular on the hour). For example, we can consider that the speed of vehicular traffic in the morning is much smaller than at the beginning of the afternoon.
-\\\\
-Here is the progress of this model. Every node begins in a point chosen randomly and its destination is chosen also randomly. The strategy of every node is to look for the shortest way until the destination. To achieve it, the algorithm of Dijkstra is used. Several parameters bring in in account in this algorithm as the speed, the traffic. This route can be dynamically changed. When a node reached its destination, it begins again all the process described previously. Concerning the speed of the node, it is limited to more or less 5\% of the speed registered in the file.
-\\
+This model also considers the volume of traffic : more traffic, the more the line representing the road will be thick.
+This model is also sensitive at the speed of cars (depending in particular on the hour). For example, we can consider that the speed of vehicular traffic in the morning is much smaller than at the beginning of the afternoon.\\\\
+
+Here is the progress of this model. Every node begins in a point chosen randomly and its destination is chosen also randomly. The strategy of every node is to look for the shortest way until the destination. To achieve it, the algorithm of Dijkstra is used. Several parameters has to be considered in this algorithm as the speed or the traffic. This route can be dynamically changed. When a node reachs its destination, it begins again all the process described previously. Concerning the node's speed, it is limited to more or less 5\% of the speed registered in the file.\\
 For example, here is a representation of the model. We see here that the traffic is little sparse, but with very different speeds.
 
-\begin{center}
+\begin{figure}[h]
+\center
 \includegraphics[width=7cm,height=50mm]{../images/city.png}
-\end{center}
-
-
+\caption{City application}
+\end{figure}
 
 \textbf{METTRE DES SCHEMA ET a compléter}
 
@@ -110,5 +88,3 @@ le modèle basé sur les guêpes est composé de plusieurs caractéristiques :
 \subsection{Birds and Fish}
 
 \subsection{Wolves}
-
- 
