@@ -12,13 +12,13 @@ Many mobility models exist with different characteristics. All these models are 
 
 \subsection{Random Walk}
 
-First described by Einstein in 1926, it was developed to mimic the extremely unpredictable movement of many entities in nature. An mobility node (MN) moves from its position to a new one by randomly choosing a direction and speed chosen by pre-defined ranges, [speedmin, speedmax] and [0, 2PI]. At the end of a constant time interval t or a constant distance traveled d, a new speed and direction are calculated. If a MN during his travel reaches a simulation boundary, it « bounces » off the simulation border with an angle determined by the incoming direction and continues to this new path.
-It's a memory-less mobility pattern because it retains no knowledge of its old locations and speed values. Therefore, the current position and speed of a MN is independent of its past location and speed. This can generate unrealistic movement because of sudden stops and sharp turns. If the specified time or distance of a MN motion is short, the resulting movement pattern will be a random roaming pattern restricted to a small part of the simulation area. The Figure \ref{RandomWalk} shows an example of the movement observed from this model. All the MN begin in the center of the 300mx600m simulation area (at the position (150,300)). Every 60 seconds, each MN randomly choose a direction between 0 and 2PI, and a speed between 0 and 10m/s.
+First described by Einstein in 1926, it was developed to mimic the extremely unpredictable movement of many entities in nature.\\ An mobility node (MN) moves from its position to a new one by randomly choosing a direction and speed chosen by pre-defined ranges, [speedmin, speedmax] and [0, 2PI]. At the end of a constant time interval t or a constant distance traveled d, a new speed and direction are calculated.\\ If a MN during his travel reaches a simulation boundary, it « bounces » off the simulation border with an angle determined by the incoming direction and continues to this new path.\\
+It's a memory-less mobility pattern because it retains no knowledge of its old locations and speed values. Therefore, the current position and speed of a MN is independent of its past location and speed. This can generate unrealistic movement because of sudden stops and sharp turns.\\ If the specified time or distance of a MN motion is short, the resulting movement pattern will be a random roaming pattern restricted to a small part of the simulation area. The Figure \ref{RandomWalk} shows an example of the movement observed from this model.\\ All the MN begin in the center of the 300mx600m simulation area (at the position (150,300)). Every 60 seconds, each MN randomly choose a direction between 0 and 2PI, and a speed between 0 and 10m/s.
 
 \begin{figure}[h]
 \center
 \includegraphics[width=7cm,height=50mm]{../images/randomwalk1.png}
-\caption{\label{RandomWalkFig}Resulting pattern of a MN using the Random Walk Mobility Model}
+\caption{\label{RandomWalk}Resulting pattern of a MN using the Random Walk Mobility Model}
 \end{figure}
 
 
@@ -26,7 +26,7 @@ It's a memory-less mobility pattern because it retains no knowledge of its old l
 
 \subsection{Random Waypoint}
 
-Includes pause times between changes in direction and/or speed.Once this time expires, the MN chooses a random destination and a speed, that is uniformly distributed between [minspeed, maxspeed]. The movement pattern of a MN who uses the RWaypointMM is similar to the RWalkMM if pause time is zero and [minspeed, maxspeed] = [speedmin, speedmax]. The Figure \ref{RandomWaypointFig} shows an example of the resulting pattern from the Random Waypoint Mobility Model.
+It includes pause times between changes in direction and/or speed.Once this time expires, the MN chooses a random destination and a speed, that is uniformly distributed between [minspeed, maxspeed].\\ The movement pattern of a MN who uses the RWaypointMM is similar to the RWalkMM if pause time is zero and [minspeed, maxspeed] = [speedmin, speedmax]. The Figure \ref{RandomWaypointFig} shows an example of the resulting pattern from the Random Waypoint Mobility Model.
 
 \begin{figure}[h]
 \center
@@ -34,8 +34,11 @@ Includes pause times between changes in direction and/or speed.Once this time ex
 \caption{\label{RandomWaypointFig}Resulting pattern of a MN using the Random Waypoint Mobility Model}
 \end{figure}
 
-During a run, MNs are initially distributed randomly around the simulation area. Figure \ref{RandomWaypointFig2} shows the average MN neighbors percentage of the MNs. For example, if there are 50 MNs in the network and a node has 10 neighbors, then the node's current neighbors percentage is 20\%. Moreover, during the first 600 seconds, due to initially distributed randomly of the MNs around the simulation area, there is an high variability in the average MN neighbors percentage.
-In the paper, there is presented three possible solutions to avoid this initialization problem. The first is to save the location of the MNs after the initial high variability and use this position as the initial starting point of the MNs in all future simulations. Second, initially distribute the MNs in a specific area to be a distribution more common the model, like fore example, initially placing the MNs in a triangle distribution. Lastly, discard the initial 1000 seconds of simulation time in each simulation trials, to ensure that the initialization problem is removed even if the MNs move slowly. But if the MNs move fastly, we can discard fewer seconds of simulation time. This third solution ensures that each simulation has a random initial configuration.
+During a run, MNs are initially distributed randomly around the simulation area. Figure \ref{RandomWaypointFig2} shows the average MN neighbors percentage of the MNs.\\ For example, if there are 50 MNs in the network and a node has 10 neighbors, then the node's current neighbors percentage is 20\%. Moreover, during the first 600 seconds, due to initially distributed randomly of the MNs around the simulation area, there is an high variability in the average MN neighbors percentage.\\
+In the paper, there is presented three possible solutions to avoid this initialization problem.\\ 
+The first is to save the location of the MNs after the initial high variability and use this position as the initial starting point of the MNs in all future simulations.\\ 
+Second, initially distribute the MNs in a specific area to be a distribution more common the model, like fore example, initially placing the MNs in a triangle distribution.\\ 
+Lastly, discard the initial 1000 seconds of simulation time in each simulation trials, to ensure that the initialization problem is removed even if the MNs move slowly. But if the MNs move fastly, we can discard fewer seconds of simulation time. This third solution ensures that each simulation has a random initial configuration.\\
 Figure 5 : there is a complex relationship between node speed and pause time. A scenario with fast MNs and long pause times actually produces a more stable networks than a scenario with slower MNs and shorter pause times. Hence, long pause times(over 20 seconds) produce a stable network even at high speeds.
 
 \begin{figure}[h]
@@ -75,6 +78,89 @@ For example, here is a representation of the model. We see here that the traffic
 \end{figure}
 
 \textbf{METTRE DES SCHEMA ET a compléter}
+
+\subsection{Pheromone}
+
+\subsubsection{Description of the model}
+This model is inspired by real pheromone. A pheromone is a chemical substance, secreted externally by certain animals, such as insects, affecting the behaviour or physiology of other animals of the same species.\footnote{\url{http://dictionary.reference.com/browse/pheromone?s=t}}
+\\
+This model use digital Pheromone.This pheromone have 3 properties :
+
+\begin{itemize}
+\item  Deposited and withdrawn pheromone from an area. (Information fusion and aggregation).
+\item  Evaporated over time. (Forget old information = Truth maintenance).
+\item  Propagated from a place to its neighboring places. (Information diffusion and dissemination). 
+\end{itemize}
+
+A  digital  pheromone  represents  information  about  the  system. Different  "flavors"  of  pheromones convey different kinds of information.\\ We can have for example, attractive pheromone or repel pheromone. The attractive pheromone will attract other UAVs whereas the repel pheromone will repulse other UAVs.Digital pheromones exist within in an artificial space called a pheromone map.
+
+\subsubsection{Scenario possible}
+Pheromone logic  can  be  used  for  several  types  of  surveillance  and target  acquisition  and  tracking scenarios.\\
+\begin{itemize}
+\item Surveillance and Patrol
+\begin{figure}[h]
+\center
+\includegraphics[scale=0.7]{../images/pheromone_surveillance.png}
+\caption{\label{surveillance}Attractive and repulsive pheromones for surveillance}
+\end{figure}\\\\
+In Figure \ref{surveillance}, each step mean :\\
+ 1. Surveillance area deposits attractive pheromone,\\
+ 2. UAV deposits repulsive pheromone,\\ 
+ 3. Pheromone infrastructure propagates both attractive and repulsive pheromone to form gradient,\\
+ 4. UAV climbs net gradient, withdrawing attractive pheromone.
+\item Target Acquisition
+\begin{figure}[h]
+\center
+\includegraphics[scale=0.7]{../images/pheromone_target_acquisition.png}
+\caption{\label{targetacquisition}Pheromones attracting confirming sensors}
+\end{figure}\\\\
+In Figure \ref{targetacquisition}, each step mean :\\
+1. UAVdet detects target and Red target is created,\\
+2. Red target deposits “NeedsID” pheromone, \\
+3. UAVid is more attracted to NeedsID pheromone than lawn pheromone and 
+climbs gradient to ID target. 
+\item Target Tracking
+\begin{figure}[h]
+\center
+\includegraphics[scale=0.7]{../images/pheromone_tracking.png}
+\caption{\label{tracking} Pheromone tracking algorithm}
+\end{figure}\\\\
+In Figure \ref{tracking}, each step mean :\\
+1. UAV acquires target and large Visited pheromone deposit repelling 
+other UAVs,\\
+2. Red target estimates movement, deposits “Tracking” pheromone that eventually overcomes strength of Visited pheromone, \\
+3. Nearby UAV is more attracted to Tracking pheromone than repelled by Visited pheromone and climbs gradient to reacquire the target. 
+\end{itemize}
+\subsubsection{Real scenario}
+
+We are going to see a real scenario wich demonstrate the use of pheromone model.\\
+The demonstration used: 
+\begin{itemize}
+\item Four robots 
+\item A mock urban area  
+\item Two UAVs controlled by pheromone technology 
+\end{itemize}
+
+\textbf{A CHANGER LE TEXTE CI DESSOU}
+The demonstration focused on the swarming algorithms that control and coordinate the behaviors of the heterogeneous mix of vehicles.  
+Pheromone  algorithms  controlled  and  coordinated  the  flight  of  the  two  UAVs  as  they  performed 
+continuous  surveillance  over  an  urban  area  looking  for  potential  adversaries.  The  two  air  units 
+worked together to ensure even, thorough, and continuous coverage of all areas in the surveillance 
+region  while  avoiding  any  collisions.  They  also  provided  patrol  coverage  of  a  mock  convoy  as  it 
+moved through the area. 
+While the UAVs surveyed a broad area over the airfield, the ground robots surveyed and patrolled 
+around  some  mock  buildings  set  up  for  the  demo.  During  the  demonstration,  one  of  the  ground 
+robots  failed.  The  other  ground  robots  were  able  to  dynamically  readjust  their  patrol  patterns to 
+accommodate  the  missing  unit  without  any  intervention  by  the  operator.  This  unplanned  event 
+helped to demonstrate the robustness of these algorithms to unexpected events. 
+The  demonstration  showed  cooperative  behavior  between  the  air  and  ground  units  when  the 
+identity of a potential adversary detected by one of the UAV’s was automatically confirmed by one of 
+the ground robots with a special sensor capable of target identification. 
+The operator simply gives a high level command to the whole swarm, such as “survey this area and 
+track  any  identified  targets”  or  “patrol  around  this  convoy”.  The  robots  autonomously  configured 
+themselves to determine which robot would perform what task in order to accomplish the overall 
+objective.  
+
 
 \subsection{Natural Agent}
 
