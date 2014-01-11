@@ -8,8 +8,8 @@ In this part, we will see the development environment we used, and the programmi
 
 To write this report and to be able to implement both models most effectively possible, we used a tool of hosting and management of program which is called Github. It is a tools of versionning which allows the collaborative work and allows a simplification of the methods of work.\\
 We used it throughout the project to put the summaries of articles that we read, the tasks which we had to make, this report or still the implementation.\\
-Our Git repository is located at the following address :
-https://github.com/jetcheve/M2\_PER\_MMUAVGRA.\\\\
+Our Git repository is located at the following address : \\
+https://github.com/jetcheve/M2\_PER\_MMUAVGRA.\\
 
 Our deposit decomposes into three branches :
 
@@ -21,15 +21,19 @@ Our deposit decomposes into three branches :
 
 \subsection{Eclipse}
 
-Eclipse is an integrated development environment for creating projects in any programming language. It supports many programming languages ​​like C, C++,JAVA etc ...\\\\
+Eclipse is an integrated development environment for creating projects in any programming language. It is used to develop programs in JAVA, Android, C, etc.\\
 
-We used Eclipse throughout the project implementation.
+We used Eclipse throughout the project implementation.\\
+
+As a supplement to Eclipse, we used a library that is called JBotsim \cite{JBotSim} proposed by Mr. Casteigts. This allows to simulate a dynamic network. This network is simulated with mobile nodes that interact. These nodes can send messages (in our case, maps of each UAVs).\\
+
+We used this library because it is very easy of use, and to adapt itself well to the needs which we had.
 
 \section{Programming Conventions}
 
-First, we've choosed to used the Java Coding Conventions, which we can see in the following link - http://www.oracle.com/technetwork/java/codeconventions-150003.pdf\\
+First, we've choosed to used the Java Coding Conventions, which we can see in the following link \url{http://www.oracle.com/technetwork/java/codeconventions-150003.pdf}\\
 
-Then, in order to create our documentation, we've used the Doxygen Convention, viewable here - \url{http://www.stack.nl/~dimitri/doxygen/manual/docblocks.html}\\
+Then, in order to create our documentation, we've used the Doxygen Convention, viewable here \url{http://www.stack.nl/~dimitri/doxygen/manual/docblocks.html}\\
 We've relied heavily on this documentation and have mostly employed these protocoles below.\\
 
 \lstset{language=Java,basicstyle=\footnotesize,commentstyle=\color{blue}}
@@ -56,7 +60,7 @@ int var; /**< Detailed description after the member */
 ~\\
 
 We've also resorted to programming conventions that we defined between us.\\
-For example, when a part of a code, was not finished yet, we put the following lines above the concerning part.\\
+For example, when a part of a code, was not finished yet, we put the following lines above the concerning part.\\\\\\\\
 
 \lstset{language=Java,basicstyle=\footnotesize,commentstyle=\color{blue}}
 \begin{lstlisting}[frame=trBL, title=Programming convention for unfinished code]
