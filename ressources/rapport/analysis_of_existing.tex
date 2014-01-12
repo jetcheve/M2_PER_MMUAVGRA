@@ -150,16 +150,36 @@ In this model, the individuals and the groups of individuals are how considered 
 
 Representation of social networks is made through weighted graphs, by defining the weights associated with each edge of the network to model the strength of direct interactions between individuals. The degree of interaction is a value between 0 and 1. 0 represents no interactions, 1 represents a strong interaction.
 The model assumes a level of interaction less than 0.25 represents a social interaction disconnection.\\
+
+
+\begin{figure}[h]
+\center
+\includegraphics{../images/MatrixInteractionSocialNetwork.png}
+\caption{\label{MatricSN}Matrix of interactions between nodes}
+\label{MatricSN}
+\end{figure}
+
 The objective of this model is to use social relationships between the individuals to define groups of hosts who move together of the scenarios.
-The first step is the generation of the social network. It is represented by a matrix of interaction.\\
-People can be grouped according to their social links or compared with their geographical location.
-Dynamic mechanisms are present in this model. The people can belong to a group at the moment T, and change group afterward. The notion of distance goes in account into the parameters.\\
+The first step is the generation of the social network. It is represented by a matrix of interaction \pageref{MatricSN}.\\
+
+People can be grouped according to their social links or compared with their geographical location. Dynamic mechanisms are present in this model. The people can belong to a group at the moment T, and change group afterward. The notion of distance goes in account into the parameters.\\
 A incalculable number of scenarios can be set up. Every groups move with a random speed and every host has a random speed of its own. A host, belonging to a group, moves inside this one. He can reach for example an aim which was fixed to its. Nodes not belonging to any group move randomly.\\
 
 When a knot reached its aim, he has to make a choice:
 It is stay in the group to which it is up.
 It is chooses to be alone.
-This choice is made according to the rate of sociability of the group.The node will join the group which exercises most attraction.
+This choice is made according to the rate of sociability of the group.The node will join the group which exercises most attraction.\\
+
+Two scenarios are presented for this model. They are characterized by a number of different node and a different number of groups.  The zone of simulation is a square of 1km on 1km, the zone of a group is of 200m. Every group has a speed between 1 and 2 m/s and every node has a speed between 1 and 3 m/s. The first scenario includes 30 computers (representing nodes) consisted in 5 geographically different groups. The second scenario includes 60 computers distributed in 5 groups. In both cases, 80\% of nodes are in a group. Thanks to these scenarios, we can obtain the average degree of connectivity of this model.\\
+
+\begin{tabular}{cc}
+   \includegraphics[scale=0.7]{../images/degreeConnectivitySocialNetwork30Nodes.png} &
+   \includegraphics[scale=0.7]{../images/degreeConnectivitySocialNetwork60Nodes.png} \\
+\end{tabular}
+
+In conclusion of this model, we can say that generally, the models of existing mobility leans on random movements which are very simplistic and most of the time unrealistic. It is necessary to make models which base themselves on real elements. Here, it is the human socialization which is put forward. But this model can be again improved for example by adding obstacles.
+
+
 
 
 \subsection{Pheromone}
