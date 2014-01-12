@@ -65,13 +65,39 @@ This model is also sensitive at the speed of cars (depending in particular on th
 Here is the progress of this model. Every node begins in a point chosen randomly and its destination is chosen also randomly. The strategy of every node is to look for the shortest way until the destination. To achieve it, the algorithm of Dijkstra is used. Several parameters has to be considered in this algorithm as the speed or the traffic. This route can be dynamically changed. When a node reaches its destination, it begins again all the process described previously. Concerning the node's speed, it is limited to more or less 5\% of the speed registered in the file.\\
 For example, here is a representation of the model. We see here that the traffic is little sparse, but with very different speeds.
 
-\begin{figure}[h]
-\center
-\includegraphics[width=7cm,height=50mm]{../images/city.png}
-\caption{City application}
-\end{figure}
+The comparisons of these two regions base themselves on the inaccessible pairs, the length of the average route and to finish the changes of neighbors.
 
-\textbf{METTRE DES SCHEMA ET a compléter}
+This article proposes two situations.
+The first situation, which they call region A, proposes a very dense road network with a constant speed limit on all the road network.
+The second situation, which they call region B, proposes a road network much less dense than the precedent, but with different speeds of movements.
+
+The comparisons of these two regions base themselves on the inaccessible pairs, the length of the average route and to finish the changes of neighbors.
+
+Here are representations of these two regions.\\\\
+
+\begin{tabular}{cc}
+   \includegraphics{../images/cityA.png} &
+   \includegraphics{../images/cityB.png} \\
+\end{tabular}
+
+
+
+\begin{multicols}{2}
+\textit{\textbf{Région A}}
+\begin{itemize}
+\item Transmission range : 250 meters.
+\item 200 nodes.
+\item 10\% of the pairs of nodes are incapable to communicate.
+\end{itemize}
+\columnbreak
+\textit{\textbf{Region B}}
+\begin{itemize}
+\item Transmission range : 250 meters.
+\item 200 nodes.
+\item 5\% of the pairs of knots were disconnected.
+\item The connectivity is better than in the region A.
+\end{itemize}
+\end{multicols}
 
 \subsection{Pheromone}
 
