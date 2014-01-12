@@ -270,18 +270,19 @@ objective.
 
 \subsubsection{Ants}
 
-Le modèle de mobilité des fourmis se base sur le fait que les fourmis construisent des réseaux de sentiers qui relient leurs   nids avec des sources de nourritures disponible.
-Chaque fourmi qui se nourrit à le même programme :
+The ants model is based on the fact that ants build networks of paths. These paths link their food source available to their nest.
+Each ant who eat has the same program:
 
 \begin{itemize}
-\item Elle doit éviter les obstacles.
-\item Aller ou elle veut (déplacement aléatoire) tant qu'il n'y a pas de phéromones.
-\item Si elle arrive à trouver de la nourriture, elle laisse des phéromones pendant un temps t pour pouvoir indiquer aux autres fourmis l'emplacement de la nourriture.
-\item Si la fourmi trouve de la nourriture, elle l'a ramène à son nid.
-\end{itemize}
+\item She must avoid obstacles.
+\item If there is no pheromone on the map, she can go where she wants (random trajectory).
+\item If she find some food, she depose pheromone during a time t. These pheromones indicate to other ants the location of the food.
+\item If an ant find some food, she brings back the food to her nest.\end{itemize}
 
-Les fourmis peuvent mourir. Soit elles ne trouvent pas de la nourriture assez rapidement et meurt de faim, soit elles se font tuer par d'autres prédateurs.
-Tous les chemins de phéromones conduisent à de la nourriture. Mais les phéromones s'évaporent dans le temps. Le taux de phéromone peut être renforcé si plusieurs fourmis passent par le même chemin.
+Ants can die. Either they don't find food enough rapidly, or predators kill them.
+
+All pheromone paths link to food. But the pheromones evaporate over time.  The rate of pheromone can be renforced if many ants come through the same path.
+
 
 \textbf{METTRE DES SCHEMA ET a compléter}
 
