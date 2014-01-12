@@ -12,36 +12,66 @@ Many mobility models exist with different characteristics. All these models are 
 
 \subsection{Random Walk}
 
-First described by Einstein in 1926, it was developed to mimic the extremely unpredictable movement of many entities in nature. An mobility node (MN) moves from its position to a new one by randomly choosing a direction and speed chosen by pre-defined ranges, [speedmin, speedmax] and [0, 2PI]. At the end of a constant time interval t or a constant distance traveled d, a new speed and direction are calculated. If a MN during his travel reaches a simulation boundary, it « bounces » off the simulation border with an angle determined by the incoming direction and continues to this new path.
-It's a memory-less mobility pattern because it retains no knowledge of its old locations and speed values. Therefore, the current position and speed of a MN is independent of its past location and speed. This can generate unrealistic movement because of sudden stops and sharp turns. If the specified time or distance of a MN motion is short, the resulting movement pattern will be a random roaming pattern restricted to a small part of the simulation area. The Figure \ref{RandomWalk} shows an example of the movement observed from this model. All the MN begin in the center of the 300mx600m simulation area (at the position (150,300)). Every 60 seconds, each MN randomly choose a direction between 0 and 2PI, and a speed between 0 and 10m/s.
+First described by Einstein in 1926, it was developed to mimic the extremely unpredictable movement of many entities in nature. An mobility node (MN) moves from its position to a new one by randomly choosing a direction and speed chosen by pre-defined ranges, [speedmin, speedmax] and [0, 2PI]. At the end of a constant time interval t or a constant distance traveled d, a new speed and direction are calculated. If a MN during his travel reaches a simulation boundary, it « bounces » off the simulation border with an angle determined by the incoming direction and continues to this new path.\\
+It's a memory-less mobility pattern because it retains no knowledge of its old locations and speed values. Therefore, the current position and speed of a MN is independent of its past location and speed. This can generate unrealistic movement because of sudden stops and sharp turns. If the specified time or distance of a MN motion is short, the resulting movement pattern will be a random roaming pattern restricted to a small part of the simulation area. The Figure \ref{RandomWalkFig} shows an example of the movement observed from this model. All the MN begin in the center of the 300mx600m simulation area (at the position (150,300)). Every 60 seconds, each MN randomly choose a direction between 0 and 2PI, and a speed between 0 and 10m/s.\\
 
 \begin{figure}[h]
 \center
-\includegraphics[width=7cm,height=50mm]{../images/randomwalk1.png}
+\includegraphics[width=10cm,height=55mm]{../images/randomwalk1.png}
 \caption{\label{RandomWalkFig}Resulting pattern of a MN using the Random Walk Mobility Model}
 \end{figure}
 
 
-
 \subsection{Random Waypoint}
 
-Includes pause times between changes in direction and/or speed.Once this time expires, the MN chooses a random destination and a speed, that is uniformly distributed between [minspeed, maxspeed]. The movement pattern of a MN who uses the RWaypointMM is similar to the RWalkMM if pause time is zero and [minspeed, maxspeed] = [speedmin, speedmax]. The Figure \ref{RandomWaypointFig} shows an example of the resulting pattern from the Random Waypoint Mobility Model.
+It includes pause times between changes in direction and/or speed.Once this time expires, the MN chooses a random destination and a speed, that is uniformly distributed between [minspeed, maxspeed]. The movement pattern of a MN who uses the RWaypointMM is similar to the RWalkMM if pause time is zero and [minspeed, maxspeed] = [speedmin, speedmax]. The Figure \ref{RandomWaypointFig} shows an example of the resulting pattern from the Random Waypoint Mobility Model.\\
 
 \begin{figure}[h]
 \center
-\includegraphics[width=7cm,height=50mm]{../images/randomwaypoint1.png}
+\includegraphics[width=10cm,height=55mm]{../images/randomwaypoint1.png}
 \caption{\label{RandomWaypointFig}Resulting pattern of a MN using the Random Waypoint Mobility Model}
 \end{figure}
 
-During a run, MNs are initially distributed randomly around the simulation area. Figure \ref{RandomWaypointFig2} shows the average MN neighbors percentage of the MNs. The average is the cumulative percentage of total MNs that are a given MN's neighbor. Therefore, if the network have 20 node and a node has 2 neighbors, then the node's current neighbors percentage is 10\%. Moreover, during the first 600 seconds, due to initially distributed randomly of the MNs around the simulation area, there is an high variability in the average MN neighbors percentage.
-In the paper, there is presented three possible solutions to avoid this initialization problem. The first is to save the location of the MNs after the initial high variability and use this position as the initial starting point of the MNs in the next simulations. Second is to change the initial distribution of the MNs in a specific area to be a distribution more common the model, like for example, initially placing the MNs in a triangle distribution. Lastly, the beginning of each simulation produce initialization problem due to the random distribution of the MNs around the simulation area. Throw out the initial 1000 seconds of simulation time in each simulation ensure that the initialization problem is removed even if the MNs move slowly. But if the MNs move fastly, we can discard fewer seconds of simulation time. This third solution ensures that each simulation has a random initial configuration.
+During a run, MNs are initially distributed randomly around the simulation area. Figure \ref{RandomWaypointFig2} shows the average MN neighbors percentage of the MNs. The average is the cumulative percentage of total MNs that are a given MN's neighbor. Therefore, if the network have 20 node and a node has 2 neighbors, then the node's current neighbors percentage is 10\%. Moreover, during the first 600 seconds, due to initially distributed randomly of the MNs around the simulation area, there is an high variability in the average MN neighbors percentage.\\
+In the paper, there is presented three possible solutions to avoid this initialization problem. The first is to save the location of the MNs after the initial high variability and use this position as the initial starting point of the MNs in the next simulations. Second is to change the initial distribution of the MNs in a specific area to be a distribution more common the model, like for example, initially placing the MNs in a triangle distribution. Lastly, the beginning of each simulation produce initialization problem due to the random distribution of the MNs around the simulation area. Throw out the initial 1000 seconds of simulation time in each simulation ensure that the initialization problem is removed even if the MNs move slowly. But if the MNs move fastly, we can discard fewer seconds of simulation time. This third solution ensures that each simulation has a random initial configuration.\\
 
 \begin{figure}[h]
 \center
-\includegraphics[width=7cm,height=50mm]{../images/randomwaypoint2.png}
+\includegraphics[width=10cm,height=55mm]{../images/randomwaypoint2.png}
 \caption{\label{RandomWaypointFig2}Average neighbor percentage vs. time}
 \end{figure}
 
+\subsubsection{Random Direction}
+
+The Random Waypoint Mobility Model produces a clustering of nodes near the center of the simulation area (see the figure \ref{RandomWaypointFig}). To overcome this problem, the Random Direction Mobility Model was created to ensure an almost constant number of nodes throughout the area simulation.\\ 
+In this model, a Mobility Nodes (MNs) chooses a random destination and he will travel to this in order to achieve the border of the simulation area. When a MN reaches a simulation boundary, he pauses for a time specified by the simulation. Then he chooses an other angular direction between 0 and 180 degrees and continues to travel.\\ 
+The figure \ref{RandomDirectionFig} shows us the resulting path of an MN using this mobility model. This MN begins to the center of the area(150,300). The dots in this figure illustrate the moment when a MN reached a border, paused and chosen a new direction to travel along.\\
+
+\begin{figure}[h]
+\center
+\includegraphics[width=10cm,height=55mm]{../images/randomdirection1.png}
+\caption{\label{RandomDirectionFig}Resulting pattern of a MN using the Random Direction Mobility Model}
+\end{figure}
+
+\subsubsection{A Boundless Simulation Area}
+
+In this model, there is an important relationship between the old direction and velocity and the current direction and velocity. A velocity vector V = (v,theta with v a speed and theta an angular) is used to describe an MN's velocity and a position of an MN is represented as (x,y). The velocity vector and the position are updated in a regular time t.\\
+The Boundless Simulation Area Mobility Model is very different that other Mobility Models because here, an MN who reached a border of the simulation area continues his travel and reappears on the opposite side of the simulation area. It results from this that we can consider the simulation area like a torus-shaped, illustrated by the figure \ref{BoundlessFig}. The simulation area is transformed in two step. Firstly, the top border is connected to the bottom border to create a cylinder and then we connected the both open circular ends.\\
+
+\begin{figure}[h]
+\center
+\includegraphics[width=10cm,height=55mm]{../images/boundlessmobilitymodel1.png}
+\caption{\label{BoundlessFig}Area mapped to a torus}
+\end{figure}
+
+
+With a speed between 0 and 10 m/s, an angular between 0 and 90 degrees and a time t to 0.1 seconds, the results of the boundless mobility models with this parameters can be seen on the figure \ref{BoundlessFig2}\\
+
+\begin{figure}[h]
+\center
+\includegraphics[width=10cm,height=55mm]{../images/boundlessmobilitymodel2.png}
+\caption{\label{BoundlessFig2}Resulting pattern of a MN using the Boundless Simulation Area Mobility Model}
+\end{figure}
 
 \subsection{City section}
 
@@ -141,6 +171,38 @@ Numerous improvements are possible so that the model is realistic :
 
 To conclude, this model uses data of the real life. A called protocol DSR was used to test the model. We were able to notice that the model Waypoint is a good approximation of the model concerning streets.
 
+\subsection{Gauss-Markov}
+
+The aim of this model is to be able to adapt with one parameter to different levels of randomness.\\
+Each MN has a current speed and direction. The speed and direction of each MN are updating at a regular time t. At each time t, the next destination and speed are calculated based on the current position of the MN. The MNs are forced away from an edge when the location of a MN is near an border of the simulation area, by modifying the angular direction of the MN like illustrated in the figure \ref{Gauss-MarkovFig1}.\\
+
+\begin{figure}[h]
+\center
+\includegraphics[width=10cm,height=55mm]{../images/gauss-markovmodel1.png}
+\caption{\label{Gauss-MarkovFig1} Change of angular direction near a border}
+\end{figure}
+
+In the figure \ref{Gauss-MarkovFig2}, an example of a resulting pattern of a MN using the Gauss-Markov Mobility Model is illustrated. The run takes 1000 seconds and the MN beings at the center of the simulation area. The parameter t is 1 second, the initial angular is 90 degrees and the speed is between 0 and 10 m/s. The Gauss-Markov MM can eliminate the sudden stops and sharp turns encountered in the Random Walk Mobility Model by saved past velocities and directions in order to be able to influence future velocities and directions.\\
+
+\begin{figure}[h]
+\center
+\includegraphics[width=10cm,height=55mm]{../images/gauss-markovmodel2.png}
+\caption{\label{Gauss-MarkovFig2} Traveling pattern of an MN using the Gauss-Markov Mobility Model}
+\end{figure}
+
+
+\subsection{Reference Point Group Mobility Model}
+
+Group movement are based on the movement of the center of the group. The movement of the group center completely characterizes the motion of the MNs of its group, including their direction and speed. Each MNs randomly and individually move about their own pre-defined reference points, where their movements depend on the group movement. Their position are regularly updated each time t and a new direction is calculated for every MN according to the center of the group.\\
+The figure \ref{RPGMMFig} shows us an illustration of a group of three MNs who move together. The Random Waypoint Mobility Model is used for the random motion of each individual MN in the group and the movement of the center of the group.\\
+In the paper, an application of this model is explained. The RPGMM can be used for example in an avalanche rescue scenario. In a scenario like this, the cooperation between human and canine is essential. We can see the human like the center of the group and the canines are the MNs of the group.\\
+
+
+\begin{figure}[h]
+\center
+\includegraphics[width=10cm,height=55mm]{../images/rpgmmodel1.png}
+\caption{\label{RPGMMFig}Resulting pattern of a MN using the Boundless Simulation Area Mobility Model}
+\end{figure}
 
 
 \subsection{Social Network Theory}
