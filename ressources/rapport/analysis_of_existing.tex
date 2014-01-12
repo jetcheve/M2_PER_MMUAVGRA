@@ -8,11 +8,7 @@ The issue of this paper is to scan an area as efficiently as possible and as qui
 
 \section{Existing models}
 
-Many mobility models exist with different characteristics. All these models are used to define movements for swarm of UAV. Most models are based on real-life situations such as road maps, or on the behavior of many animals (ants, birds, termites, wolves etc). We will expose some of them we consider the most important and most interesting for our case. We can also regroup mobility models in two groups, entities mobility models and group mobility models.
-
-\section{Entities Mobility Models}
-
-An Entity Mobility Model is a Mobility Model that represent mobile nodes whose movements are independents of each other.
+Many mobility models exist with different characteristics. All these models are used to define movements for swarm of UAV. Most models are based on real-life situations such as road maps, or on the behavior of many animals (ants, birds, termites, wolves etc). We will expose some of them we consider the most important and most interesting for our case.
 
 \subsection{Random Walk}
 
@@ -44,37 +40,6 @@ In the paper, there is presented three possible solutions to avoid this initiali
 \center
 \includegraphics[width=7cm,height=50mm]{../images/randomwaypoint2.png}
 \caption{\label{RandomWaypointFig2}Average neighbor percentage vs. time}
-\end{figure}
-
-\subsection{Random Direction}
-
-The Random Waypoint Mobility Model produces a clustering of nodes near the center of the simulation area (see the figure \ref{RandomWaypointFig}). To overcome this problem, the Random Direction Mobility Model was created to ensure an almost constant number of nodes throughout the area simulation. 
-In this model, a Mobility Nodes (MNs) chooses a random destination and he will travel to this in order to achieve the border of the simulation area. When a MN reaches a simulation boundary, he pauses for a time specified by the simulation. Then he chooses an other angular direction between 0 and 180 degrees and continues to travel. 
-The figure \ref{RandomDirectionFig} shows us the resulting path of an MN using this mobility model. This MN begins to the center of the area(150,300). The dots in this figure illustrate the moment when a MN reached a border, paused and chosen a new direction to travel along.
-
-\begin{figure}[ht]
-\center
-\includegraphics[width=7cm,height=50mm]{../images/randomdirection1.png}
-\caption{\label{RandomDirectionFig}Resulting pattern of a MN using the Random Direction Mobility Model}
-\end{figure}
-
-\subsection{A Boundless Simulation Area}
-
-In this model, there is an important relationship between the old direction and velocity and the current direction and velocity. A velocity vector V = (v,theta with v a speed and theta an angular) is used to describe an MN's velocity and a position of an MN is represented as (x,y). The velocity vector and the position are updated in a regular time t. The Boundless Simulation Area Mobility Model is very different that other Mobility Models because here, an MN who reached a border of the simulation area continues his travel and reappears on the opposite side of the simulation area. It results from this that we can consider the simulation area like a torus-shaped, illustrated by the figure \ref{BoundlessFig}. The simulation area is transformed in two step. Firstly, the top border is connected to the bottom border to create a cylinder and then we connected the both open circular ends.
-
-\begin{figure}[h]
-\center
-\includegraphics[width=7cm,height=50mm]{../images/boundlessmobilitymodel1.png}
-\caption{\label{BoundlessFig}Area mapped to a torus}
-\end{figure}
-
-
-With a speed between 0 and 10 m/s, an angular between 0 and 90 degrees and a time t to 0.1 seconds, the results of the boundless mobility models with this parameters can be seen on the figure \ref{BoundlessFig2}
-
-\begin{figure}[h]
-\center
-\includegraphics[width=7cm,height=50mm]{../images/boundlessmobilitymodel2.png}
-\caption{\label{BoundlessFig2}Resulting pattern of a MN using the Boundless Simulation Area Mobility Model}
 \end{figure}
 
 
@@ -182,7 +147,20 @@ To conclude, this model uses data of the real life. A called protocol DSR was us
 
 This model bases on the theory of the social networks and on the decisions and the social behavior of the human beings. For example, how the human beings move in a group, and between the groups. A notion of relation between the people is thus identified.\\
 In this model, the individuals and the groups of individuals are how considered entities of the first one classes. The second class represents the strength of the social links (probability of collocation).\\
-Representation of social networks is made ​​through weighted graphs, by defining the weights associated with each edge of the network to model the strength of direct interactions between individuals. The degree of interaction is a value between 0 and 1. 0 represents no interactions, 1 represents a strong interaction.
+
+Representation of social networks is made through weighted graphs, by defining the weights associated with each edge of the network to model the strength of direct interactions between individuals. The degree of interaction is a value between 0 and 1. 0 represents no interactions, 1 represents a strong interaction.
+The model assumes a level of interaction less than 0.25 represents a social interaction disconnection.\\
+The objective of this model is to use social relationships between the individuals to define groups of hosts who move together of the scenarios.
+The first step is the generation of the social network. It is represented by a matrix of interaction.\\
+People can be grouped according to their social links or compared with their geographical location.
+Dynamic mechanisms are present in this model. The people can belong to a group at the moment T, and change group afterward. The notion of distance goes in account into the parameters.\\
+A incalculable number of scenarios can be set up. Every groups move with a random speed and every host has a random speed of its own. A host, belonging to a group, moves inside this one. He can reach for example an aim which was fixed to its. Nodes not belonging to any group move randomly.\\
+
+When a knot reached its aim, he has to make a choice:
+It is stay in the group to which it is up.
+It is chooses to be alone.
+This choice is made according to the rate of sociability of the group.The node will join the group which exercises most attraction.
+
 
 \subsection{Pheromone}
 
