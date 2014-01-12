@@ -63,15 +63,12 @@ This model also considers the volume of traffic : more traffic, the more the lin
 This model is also sensitive at the speed of cars (depending in particular on the hour). For example, we can consider that the speed of vehicular traffic in the morning is much smaller than at the beginning of the afternoon.\\\\
 
 Here is the progress of this model. Every node begins in a point chosen randomly and its destination is chosen also randomly. The strategy of every node is to look for the shortest way until the destination. To achieve it, the algorithm of Dijkstra is used. Several parameters has to be considered in this algorithm as the speed or the traffic. This route can be dynamically changed. When a node reaches its destination, it begins again all the process described previously. Concerning the node's speed, it is limited to more or less 5\% of the speed registered in the file.\\
-For example, here is a representation of the model. We see here that the traffic is little sparse, but with very different speeds.
-
-The comparisons of these two regions base themselves on the inaccessible pairs, the length of the average route and to finish the changes of neighbors.
+For example, here is a representation of the model. We see here that the traffic is little sparse, but with very different speeds. The comparisons of these two regions base themselves on the inaccessible pairs, the length of the average route and to finish the changes of neighbors.\\
 
 This article proposes two situations.
-The first situation, which they call region A, proposes a very dense road network with a constant speed limit on all the road network.
-The second situation, which they call region B, proposes a road network much less dense than the precedent, but with different speeds of movements.
+The first situation, which they call region A, proposes a very dense road network with a constant speed limit on all the road network. The second situation, which they call region B, proposes a road network much less dense than the precedent, but with different speeds of movements.
 
-The comparisons of these two regions base themselves on the inaccessible pairs, the length of the average route and to finish the changes of neighbors.
+The comparisons of these two regions base themselves on the inaccessible pairs, the length of the average route and to finish the changes of neighbors.\\
 
 Here are representations of these two regions.\\\\
 
@@ -88,6 +85,10 @@ Here are representations of these two regions.\\\\
 \item Transmission range : 250 meters.
 \item 200 nodes.
 \item 10\% of the pairs of nodes are incapable to communicate.
+\item the connectivity of a network is poor
+\item New parameters : Transmission range : 500 meters.
+\item 50 nodes.
+\item Result : the connectivity fluctuates a lot.
 \end{itemize}
 \columnbreak
 \textit{\textbf{Region B}}
@@ -95,9 +96,50 @@ Here are representations of these two regions.\\\\
 \item Transmission range : 250 meters.
 \item 200 nodes.
 \item 5\% of the pairs of knots were disconnected.
-\item The connectivity is better than in the region A.
+\item Result: The connectivity is better than in the region A.
+\item New parameters : Transmission range : 500 meters.
+\item 50 nodes.
+\item The area covered in Region B is less than the area covered in Region A.
+\item The connectivity corresponding to Region B is better as compared to scenarios corresponding to Region A.
 \end{itemize}
 \end{multicols}
+
+
+Another experiment was conducted on the two regions previously mentioned with a routing protocol called DSR. The DSR protocol consists of two mechanisms : Route Discovery and Route Maintenance. According to the article, 
+\begin{quotation}
+To perform a Route Discovery for a destination node D, a source node S broadcasts a ROUTE REQUEST that gets flooded through the network in a controlled manager. This request is answered by a ROUTE REPLY from either D or some other node that knows a route to D. To reduce frequency and propagation of ROUTE REQUESTs each node aggressively caches source routes that the node learns or overhears.\\
+Route Maintenance detects when some link over which a data packet is being transmitted breaks\cite{VehicularAdHocNetworks9}.
+\end{quotation}
+
+Simulations were made by using 150 knots with a wireless transmission range of 500m. The communication  pattern  consisted of 10 constant bit rate flows, each sending 4 64 Bytes data packets from the source to the destination.
+The evaluation of this protocol is made on 3 properties.
+\begin{itemize}
+\item Packet Delivery Ratio
+\item Packet delivery latency
+\item Packet overhead
+\end{itemize}
+
+Here are the results obtained with the protocol DSR:\\
+
+\begin{figure}[h]
+\center
+\includegraphics{../images/protocoleDSR.png}
+\caption{\label{ProtDSR}DSR Performance}
+\end{figure}
+
+We see that the obtained results are very similar in the Waypoint model. The average path length does not differ much.\\
+We can conclude that from it the Waypoint model is a very good approximation of the model concerning streets.
+
+Numerous improvements are possible so that the model is realistic :
+
+\begin{itemize}
+\item Changing settings depending on the time (lots of car in the morning for example).
+\item Possibility of introducing obstacles.
+\item Currently, each vehicle moves independently. But in the real life, it has to pay attention on his environment.
+\item The model does not take into account the waiting time in the intersections.
+\end{itemize}
+
+To conclude, this model uses data of the real life. A called protocol DSR was used to test the model. We were able to notice that the model Waypoint is a good approximation of the model concerning streets.
 
 \subsection{Pheromone}
 
