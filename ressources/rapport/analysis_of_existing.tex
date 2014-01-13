@@ -10,6 +10,7 @@ The issue of this paper is to scan an area as efficiently as possible and as qui
 
 Many mobility models exist with different characteristics. All these models are used to define movements for swarm of UAV. Most models are based on real-life situations such as road maps, or on the behavior of many animals (ants, birds, termites, wolves etc). We will expose some of them we consider the most important and most interesting for our case.
 
+\newpage
 \subsection{Random Walk}
 
 First described by Einstein in 1926, it was developed to mimic the extremely unpredictable movement of many entities in nature. An mobility node (MN) moves from its position to a new one by randomly choosing a direction and speed chosen by pre-defined ranges, [speedmin, speedmax] and [0, 2PI]. At the end of a constant time interval t or a constant distance traveled d, a new speed and direction are calculated. If a MN during his travel reaches a simulation boundary, it « bounces » off the simulation border with an angle determined by the incoming direction and continues to this new path.\\
@@ -21,7 +22,7 @@ It's a memory-less mobility pattern because it retains no knowledge of its old l
 \caption{\label{RandomWalkFig}Resulting pattern of a MN using the Random Walk Mobility Model}
 \end{figure}
 
-
+\newpage
 \subsection{Random Waypoint}
 
 It includes pause times between changes in direction and/or speed.Once this time expires, the MN chooses a random destination and a speed, that is uniformly distributed between [minspeed, maxspeed]. The movement pattern of a MN who uses the RWaypointMM is similar to the RWalkMM if pause time is zero and [minspeed, maxspeed] = [speedmin, speedmax]. The Figure \ref{RandomWaypointFig} shows an example of the resulting pattern from the Random Waypoint Mobility Model.\\
@@ -41,6 +42,7 @@ In the paper, there is presented three possible solutions to avoid this initiali
 \caption{\label{RandomWaypointFig2}Average neighbor percentage vs. time}
 \end{figure}
 
+\newpage
 \subsubsection{Random Direction}
 
 The Random Waypoint Mobility Model produces a clustering of nodes near the center of the simulation area (see the figure \ref{RandomWaypointFig}). To overcome this problem, the Random Direction Mobility Model was created to ensure an almost constant number of nodes throughout the area simulation.\\ 
@@ -53,6 +55,7 @@ The figure \ref{RandomDirectionFig} shows us the resulting path of an MN using t
 \caption{\label{RandomDirectionFig}Resulting pattern of a MN using the Random Direction Mobility Model}
 \end{figure}
 
+\newpage
 \subsubsection{A Boundless Simulation Area}
 
 In this model, there is an important relationship between the old direction and velocity and the current direction and velocity. A velocity vector V = (v,theta with v a speed and theta an angular) is used to describe an MN's velocity and a position of an MN is represented as (x,y). The velocity vector and the position are updated in a regular time t.\\
@@ -73,6 +76,7 @@ With a speed between 0 and 10 m/s, an angular between 0 and 90 degrees and a tim
 \caption{\label{BoundlessFig2}Resulting pattern of a MN using the Boundless Simulation Area Mobility Model}
 \end{figure}
 
+\newpage
 \subsection{City section}
 
 The aim of this model is to propose a realistic model. It bases on the vehicle's movement on road maps. The specificity of this model is the map depends on each geographical zone. Here, vehicles are mobile nodes.\\\\
@@ -107,7 +111,7 @@ Here are representations of these two regions.\\\\
    \includegraphics{../images/cityB.png} \\
 \end{tabular}
 
-
+\newpage
 
 \begin{multicols}{2}
 \textit{\textbf{Région A}}
@@ -125,7 +129,7 @@ Here are representations of these two regions.\\\\
 \begin{itemize}
 \item Transmission range : 250 meters.
 \item 200 nodes.
-\item 5\% of the pairs of knots were disconnected.
+\item 5\% of the pairs of nodes were disconnected.
 \item Result: The connectivity is better than in the region A.
 \item New parameters : Transmission range : 500 meters.
 \item 50 nodes.
@@ -141,7 +145,7 @@ To perform a Route Discovery for a destination node D, a source node S broadcast
 Route Maintenance detects when some link over which a data packet is being transmitted breaks\cite{VehicularAdHocNetworks9}.
 \end{quotation}
 
-Simulations were made by using 150 knots with a wireless transmission range of 500m. The communication  pattern  consisted of 10 constant bit rate flows, each sending 4 64 Bytes data packets from the source to the destination.
+Simulations were made by using 150 nodes with a wireless transmission range of 500m. The communication  pattern  consisted of 10 constant bit rate flows, each sending 4 64 Bytes data packets from the source to the destination.
 The evaluation of this protocol is made on 3 properties.
 \begin{itemize}
 \item Packet Delivery Ratio
@@ -171,6 +175,7 @@ Numerous improvements are possible so that the model is realistic :
 
 To conclude, this model uses data of the real life. A called protocol DSR was used to test the model. We were able to notice that the model Waypoint is a good approximation of the model concerning streets.
 
+\newpage
 \subsection{Gauss-Markov}
 
 The aim of this model is to be able to adapt with one parameter to different levels of randomness.\\
@@ -190,7 +195,7 @@ In the figure \ref{Gauss-MarkovFig2}, an example of a resulting pattern of a MN 
 \caption{\label{Gauss-MarkovFig2} Traveling pattern of an MN using the Gauss-Markov Mobility Model}
 \end{figure}
 
-
+\newpage
 \subsection{Reference Point Group Mobility Model}
 
 Group movement are based on the movement of the center of the group. The movement of the group center completely characterizes the motion of the MNs of its group, including their direction and speed. Each MNs randomly and individually move about their own pre-defined reference points, where their movements depend on the group movement. Their position are regularly updated each time t and a new direction is calculated for every MN according to the center of the group.\\
@@ -204,7 +209,7 @@ In the paper, an application of this model is explained. The RPGMM can be used f
 \caption{\label{RPGMMFig}Resulting pattern of a MN using the Boundless Simulation Area Mobility Model}
 \end{figure}
 
-
+\newpage
 \subsection{Social Network Theory}
 
 This model bases on the theory of the social networks and on the decisions and the social behavior of the human beings. For example, how the human beings move in a group, and between the groups. A notion of relation between the people is thus identified.\\
@@ -227,7 +232,7 @@ The first step is the generation of the social network. It is represented by a m
 People can be grouped according to their social links or compared with their geographical location. Dynamic mechanisms are present in this model. The people can belong to a group at the moment T, and change group afterward. The notion of distance goes in account into the parameters.\\
 A incalculable number of scenarios can be set up. Every groups move with a random speed and every host has a random speed of its own. A host, belonging to a group, moves inside this one. He can reach for example an aim which was fixed to its. Nodes not belonging to any group move randomly.\\
 
-When a knot reached its aim, he has to make a choice:
+When a node reached its aim, he has to make a choice:
 It is stay in the group to which it is up.
 It is chooses to be alone.
 This choice is made according to the rate of sociability of the group.The node will join the group which exercises most attraction.\\
@@ -236,14 +241,14 @@ Two scenarios are presented for this model. They are characterized by a number o
 
 \begin{tabular}{cc}
    \includegraphics[scale=0.7]{../images/degreeConnectivitySocialNetwork30Nodes.png} &
-   \includegraphics[scale=0.7]{../images/degreeConnectivitySocialNetwork60Nodes.png} \\
+   \includegraphics[scale=0.6]{../images/degreeConnectivitySocialNetwork60Nodes.png} \\
 \end{tabular}
 
 In conclusion of this model, we can say that generally, the models of existing mobility leans on random movements which are very simplistic and most of the time unrealistic. It is necessary to make models which base themselves on real elements. Here, it is the human socialization which is put forward. But this model can be again improved for example by adding obstacles.
 
 
 
-
+\newpage
 \subsection{Pheromone}
 
 \subsubsection{Description of the model}
@@ -327,9 +332,18 @@ themselves to determine which robot would perform what task in order to accompli
 objective.  
 
 
-
+\newpage
 \subsection{Natural Agent}
 
+
+The basic idea of this article is the simulation of mobile model by basing itself on the animal behavior.
+Animals, called a mobile agent in the article, cannot be separated from the environment in which they are and through of whom(which) they interact and through which they interact. This idea is often ignored in the works on computer multi-agent systems, or the researchers consider the environment as a communication framework liabilities.\\
+A multi-agent system is a three-tuple : a set of agents, an environment, and a coupling.
+Each agent is a four-tuple constitued of a set of agent, a state, an input and an output(subset of state) and a process which allows to change the state of the agent. The presence of input and output shows that the agents are limited processes.
+The environment is a 2-tuple that is a subset of an agent. It consists of a state and a process. The environment is active. It has its own process which can change its state. The works on the artificial agents lean on the artificial intelligence. None agents only can predict the effect of its actions on the environment, because they do not depend on an agent but of a set of agent.\\
+Thereafter, we are going to describe you the various mobile agents described in this article
+
+\newpage
 \subsubsection{Ants}
 
 The ants model is based on the fact that ants build networks of paths. These paths link their food source available to their nest.
@@ -345,19 +359,53 @@ Ants can die. Either they don't find food enough rapidly, or predators kill them
 
 All pheromone paths link to food. But the pheromones evaporate over time.  The rate of pheromone can be renforced if many ants come through the same path.
 
+Here is a representation of the behavior of ants (This diagram is from \url{http://pro.cleamax.fr/info-bioinspiree/?p=fourmis}) :
 
-\textbf{METTRE DES SCHEMA ET a compléter}
+\begin{figure}[h]
+\center
+\includegraphics{../images/SchemaFourmi.png}
+\caption{\label{AntsRepresentation}Representation of ants}
+\end{figure}
 
-\subsubsection{Termites}
+\newpage
+\subsubsection{Ants: Brod Sorting}
 
-\subsubsection{Wasps}
-
-le modèle basé sur les guêpes est composé de plusieurs caractéristiques :
+This model is similar to the model previously quoted. It bases on a system of sorting concerning entities. A nest shelters various things inside, larvae, eggs, food. The ant colony keeps the entities sorted by kind.
+The behavior of ants is it :
 \begin{itemize}
-\item un chef qui répartit les différentes guêpes dans différents groupes
-\item 
+\item Ants have a random behavior around the nest.
+\item Ants locate nearby objects and and memorize them.
+\item If an ant was carrying no elements, it has the choice to collect the object or to leave it. The probability to collect an object decreases if the ant recently met similar objects.
+\item If an ant carries something, she can decide at any time to release this element. The probability that it releases it increases if the ant recently met similar elements in the environment.
 \end{itemize}
 
-\subsection{Birds and Fish}
+\newpage
+\subsubsection{Termites}
+This model bases itself on the behavior of termites. These also use pheromones. Here are the rules(rulers) which follow termites:
+\begin{itemize}
+\item Pheromones consist of physical waste.
+\item This waste is the material from which the termite mound is constructed.
+\item If there is no pheromone, ants move in a random way. If they detect pheromones, they will prefer to follow them.
+\item At each time step, termites decides if they deposit pheromones.
+\item The rate of pheromone is decreasing according to time.
+\end{itemize} 
 
-\subsection{Wolves}
+\newpage
+\subsubsection{Wasps}
+
+The model based on wasps consists of several characteristics:
+\begin{itemize}
+\item All the wasps is distributed in three groups.
+\item A single chief who distributes the various wasps in various groups.
+\item A group of foragers which have for mission to go hunting to obtain food.
+\item A group of nurses who care for the brood.\\
+\end{itemize}
+
+Every wasp possesses two parameters. The first one concerns the strength of the wasp. It also represents the way it moves. The second parameter corresponds to a foraging threshold which determines the probability of a wasp to fetch of the food. The third parameter is associated with the brood. He allows to specify the demand in food. It allows to stimulate the foragers.
+
+
+\newpage
+\subsubsection{Birds and Fish}
+
+\newpage
+\subsubsection{Wolves}
