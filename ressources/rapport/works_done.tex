@@ -100,14 +100,6 @@ These both cases \ref{case1} and \ref{case2} show how a node scan the map.
 \item the area C represents the right diagonal of the node.
 \end{itemize}
 
-Another characteristic of our implementation is that this time, we don't scan anymore a point of the map but 5 described previously  like the picture \ref{scanofarea}. We do that to correspond better to the reality. An UAV scan an area and doesn't scan just a point. So if the UAV choose to scan the point (X,Y), it will move to it and will scan also each point around this position. This method permits us to have results more rapidly.
-
-\begin{figure}[!h]
-\center
-\includegraphics[width=5cm]{../images/grille_case_2_scan.png}
-\caption{\label{scanofarea}scan of area C}
-\end{figure}
-
 We handle the communication between each node with the \textit{MessageListener} and the method \textit{onMessage}. This method is called when a node do the method \textit{send}. We have no destination in the method \textit{send} to broadcast the message. We send message all ten top of clock to respect the conditions of the scenario of the article.
 
 \section{Difficulties Encountered \& Solutions}
