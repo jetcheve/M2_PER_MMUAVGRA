@@ -4,55 +4,80 @@ import jbotsim.Node;
 import jbotsim.event.ClockListener;
 
 public class MovingNode extends Node implements ClockListener{
-	private int _lastdirection; //  1 -> gauche , 2-> tout droit, 3 -> droite
-	private static double _angle_towards; //direction d'un UAV en Radian.
-	private static double _amplitude_variation_towards = Math.PI/4; // l'amplitude du changement de direction
+	private static boolean display_trajectory = false;
+	private int _lastdirection; //  1 -> left , 2-> straight ahead, 3 -> right
+	private static double _angle_towards; //direction of an UAV.
+	private static double _amplitude_variation_towards = Math.PI/4;
 	private static double _totalscanpossible = 500 * 500;
 	private static long _time;
 	private static long _start;	
 	private static int _margin = 5;
+	
 	
 	public MovingNode(){
 		setProperty("icon", "/avion.png");
 		setProperty("size", 20);
 		setCommunicationRange(-1);
 		Clock.addClockListener(this, 1);
-		_angle_towards = 3*Math.PI/2;  //direction : vers le haut.
+		_angle_towards = 3*Math.PI/2;  //direction : upward.
 		setDirection(_angle_towards);
 		_lastdirection = 2;
-		_time = 0;
 		_start = System.currentTimeMillis();
 	}
 
+	/**
+	 * @brief 
+	 * @param 
+	 * @return
+	 */
 	public void onClock(){
-		_time++;
+		analysis();  //change the direction according to the last direction chosen
+		Point2D _pos = getLocation();
+		int _x = (int)_pos.getX();
+		int _y = (int)_pos.getY();
+		avoidEdges(x, y)
+		move(1);
+		wrapLocation();
+		_pos = getLocation();
+		_x = (int)_pos.getX();
+		_y = (int)_pos.getY();
+		scan((int)_pos.getX(), (int)_pos.getY());
+		display_percentage_scan();
+	}
+
+	/**
+	 * @brief 
+	 * @param 
+	 * @return
+	 */
+	public void analysis(){
 		int _alea = (int) (Math.random()*10);
 		switch (_lastdirection){
 
-		//derniere action gauche :
+		//last action left:
 		case 1:  
-			if(_alea <= 2) //30% probabilité d'aller tout droit donc aucun changement direction.
+			if(_alea <= 2) //30% probability straight ahead.
 			{
 				_lastdirection = 2;
 			}
-			else   //70% probabilité de tourner a gauche.
+			else   //70% probability turn left
 			{
 				_angle_towards -= _amplitude_variation_towards;
 				setDirection(_angle_towards);
 			}
 			break;
 
-			//derniere action tout droit :
+			//last action straight ahead :
 		case 2:    
-			if(_alea == 0) //10% probabilité de tourner a gauche.
+			if(_alea == 0) //10% probability turn left.
 			{
 				_lastdirection = 1;
 				_angle_towards -= _amplitude_variation_towards;
 				setDirection(_angle_towards);
 			}
-			else if(_alea <= 8 && _alea !=0) // 80% probabilité d'aller tout droit donc aucun changement direction.
+			else if(_alea <= 8 && _alea !=0) // 80% probability straight ahead.
 				;
-			else if(_alea == 9) //10% probabilité de tourner a droite.
+			else if(_alea == 9) //10% probability turn right.
 			{
 				_lastdirection = 3;
 				_angle_towards += _amplitude_variation_towards;
@@ -61,11 +86,11 @@ public class MovingNode extends Node implements ClockListener{
 			}
 			break;
 
-			//derniere action droite :  
+			//last action right :  
 		case 3:  
-			if(_alea <= 2) //30% probabilité d'aller tout droit donc aucun changement direction.
+			if(_alea <= 2) //30% probability straight ahead.
 				;
-			else  //70% probabilité de tourner a droite.
+			else  //70% probability turn right.
 			{
 				_lastdirection = 2;
 				_angle_towards += _amplitude_variation_towards;
@@ -76,84 +101,64 @@ public class MovingNode extends Node implements ClockListener{
 		default:
 			break;
 		}
-		Point2D _pos = getLocation();
-		int _x = (int)_pos.getX();
-		int _y = (int)_pos.getY();
-
-
-		if((_x-_margin < 0))
-		{
-			_angle_towards+=Math.PI;
-			setLocation(_x+2, _y);
-			setDirection(_angle_towards);
-		}
-		if( _y-_margin < 0)
-		{
-			_angle_towards+=Math.PI/2;
-			setLocation(_x, _y+2);
-			setDirection(_angle_towards);
-		}
-		if((_x+_margin >500))
-		{
-			_angle_towards+=Math.PI;
-			setLocation(_x-2, _y);
-			setDirection(_angle_towards);
-		}
-		if(_y+_margin > 500)
-		{
-			_angle_towards+=3*Math.PI/2;
-			setLocation(_x, _y-2);
-			setDirection(_angle_towards);
-		}
-
-		move(1);
-		wrapLocation();
-		_pos = getLocation();
-		_x = (int)_pos.getX();
-		_y = (int)_pos.getY();
-		scan((int)_pos.getX(), (int)_pos.getY());
-		display_percentage_scan();
-		display_hours();
 	}
-
-	private void display_hours() {
-		//System.out.println("Le test a commencé depuis " +time + "toc d'horloge");
-		
-		_time= System.currentTimeMillis(); 
-		System.out.println((_time - _start)/1000 + " secondes");
-	}
-
+	
+	/**
+	 * @brief 
+	 * @param 
+	 * @return
+	 */
 	public void scan(int x, int y){
 		if(Main._map[x][y]==0)
 		{
 			Main._map[x][y]=1;
 			Main._totalscan++;
-			//Main._jtopo.addPoint(x, y);
+			if(display_trajectory)
+				Main._jtopo.addPoint(x, y);
 		}
-		if(Main._map[x-1][y]==0)
+	}
+	
+	/**
+	 * @brief 
+	 * @param 
+	 * @return
+	 */
+	public void avoidEdges(int x, int y){
+		if((_x-_margin < 0))
 		{
-			Main._map[x-1][y] = 1;
-			Main._totalscan++;
-			//Main._jtopo.addPoint(x-1, y);
+			_angle_towards+=Math.PI;
+			setLocation(_x+_margin, _y);
+			setDirection(_angle_towards);
 		}
-		if(Main._map[x+1][y]==0)
+		if( _y-_margin < 0)
 		{
-			Main._map[x+1][y] = 1;
-			Main._totalscan++;
-			//Main._jtopo.addPoint(x+1, y);
+			_angle_towards+=Math.PI/2;
+			setLocation(_x, _y+_margin);
+			setDirection(_angle_towards);
 		}
-		for(int i = x, j=y-1,area = 3; area > 0; area--,j++){
-			if(Main._map[i][j]==0)
-			{
-				Main._map[i][j] = 1;
-				Main._totalscan++;
-			//	Main._jtopo.addPoint(i, j);
-			}
+		if((_x+_margin >500))
+		{
+			_angle_towards+=Math.PI;
+			setLocation(_x-_margin, _y);
+			setDirection(_angle_towards);
+		}
+		if(_y+_margin > 500)
+		{
+			_angle_towards+=3*Math.PI/2;
+			setLocation(_x, _y-_margin);
+			setDirection(_angle_towards);
 		}
 	}
 
 	public void display_percentage_scan()
 	{
-		System.out.println("Scan : "+ (Main._totalscan/_totalscanpossible*100) + "%");
+	long s = (System.currentTimeMillis()-_start)/1000;
+		long min = 0;
+		if(s > 60){
+			min = (s-(s%60))/60;
+			s = s%60;
+		}
+		
+		System.out.println("Scan : "+ (Main._totalscan/_totalscanpossible*100) + "% during " + min + " min " + s + " sec");
 	}
 }

@@ -8,6 +8,8 @@ import jbotsim.Node;
 import jbotsim.event.ClockListener;
 
 public class MovingNode extends Node implements ClockListener{
+	private static long _start;
+	private static boolean display_trajectory = false;	
 	private static int _dimension = 500;
 	private static double _totalscanpossible = _dimension * _dimension;
 	private Point2D _destination = new Point(0,0);
@@ -23,6 +25,7 @@ public class MovingNode extends Node implements ClockListener{
 		_destination.setLocation(x, y);
 		setDirection(_destination);
 		new HashMap<Integer, ArrayList<Integer>>();
+		_start = System.currentTimeMillis();
 	}
 
 	public void onClock(){
@@ -47,32 +50,20 @@ public class MovingNode extends Node implements ClockListener{
 		{
 			Main._map[x][y]=1;
 			Main._totalscan++;
-			//Main._jtopo.addPoint(x, y);
-		}
-		if(x-1 >0 && Main._map[x-1][y]==0 )
-		{
-			Main._map[x-1][y] = 1;
-			Main._totalscan++;
-			//Main._jtopo.addPoint(x-1, y);
-		}
-		if(x+1 < _dimension && Main._map[x+1][y]==0 )
-		{
-			Main._map[x+1][y] = 1;
-			Main._totalscan++;
-		//	Main._jtopo.addPoint(x+1, y);
-		}
-		for(int i = x, j=y-1,area = 3; area > 0; area--,j++){
-			if(j >0 && j < _dimension && i < _dimension && i > 0 && Main._map[i][j]==0)
-			{
-				Main._map[i][j] = 1;
-				Main._totalscan++;
-			//	Main._jtopo.addPoint(i, j);
-			}
+			if(display_trajectory)
+				Main._jtopo.addPoint(x, y);
 		}
 	}
 
 	public void displayScanPercentage()
 	{
-		System.out.println("Scan : "+ (Main._totalscan/_totalscanpossible*100) + "%");
+	long s = (System.currentTimeMillis()-_start)/1000;
+		long min = 0;
+		if(s > 60){
+			min = (s-(s%60))/60;
+			s = s%60;
+		}
+		
+		System.out.println("Scan : "+ (Main._totalscan/_totalscanpossible*100) + "% during " + min + " min " + s + " sec");
 	}
 }

@@ -6,7 +6,7 @@ import jbotsim.event.MessageListener;
 
 
 public class CandC extends Node implements ClockListener, MessageListener{
-	private boolean affichage_pheromone = false; //affichage des pheromones desactiver
+	private boolean display_pheromone = false;
 
 	private static long _start;
 	private boolean _first_launch = true;
@@ -73,7 +73,7 @@ public class CandC extends Node implements ClockListener, MessageListener{
 				if(Main._map_scan[i][j] < content[i][j])
 					Main._map_scan[i][j] = content[i][j];
 				if(Main._map_scan[i][j] > 0){
-					if(affichage_pheromone){
+					if(display_pheromone){
 						Main._jtopo.addPoint(i, j);
 					}
 					Main._totalscan++;
