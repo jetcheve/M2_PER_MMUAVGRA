@@ -33,11 +33,11 @@ public class MovingNode extends Node implements ClockListener, MessageListener{
 	private static double _steering_angle;
 	private static int _time;
 	private static long _start;
-	private static int _total_pheromone = 0;
 	private static int _dimension = 500;
 	private boolean _first_launch = true;
 	private static int _margin = 5;
-	private static double _total_potential_scan = _dimension*_dimension;
+	private static int posx;
+	private static int posy;
 
 	/**
 	 * @brief Constructor ...
@@ -46,14 +46,18 @@ public class MovingNode extends Node implements ClockListener, MessageListener{
 	 */
 	public MovingNode() {
 		setProperty("icon", "/avion.png");
+		setState("UAV");
 		setProperty("size", 20);
-		setCommunicationRange(50);
+		setCommunicationRange(133);
 		Clock.addClockListener(this, 1);
 		addMessageListener(this);
 		_steering_angle = _upward;  //direction : upward
 		setDirection(_steering_angle);
 		_time = 0;
 		_start = System.currentTimeMillis();
+		Point2D pos = getLocation();
+		posx = (int)pos.getX();
+		posy = (int)pos.getY();
 	}
 
 	/**
@@ -67,55 +71,22 @@ public class MovingNode extends Node implements ClockListener, MessageListener{
 		if(_first_launch)
 		{
 			int[][] pheromoneMap = new int[_dimension][_dimension];
-			for(int i=0;i<_dimension;i++){			
+			for(int i=0;i<_dimension;i++){                        
 				for(int j=0;j<_dimension;j++) {
 					pheromoneMap[i][j] =0;
-					Main._map_scan[i][j] = 0;
 				}
 			}
 			setProperty("map", pheromoneMap);
 			_first_launch = false;
 		}
 		//********************** SCAN OF THE AREA ************************************
-		// Scan in x,y : the UAV will scan each point around the position and also the position.
 		Point2D pos = getLocation();
 		int x = (int)pos.getX();
 		int y = (int)pos.getY();
+		posx = x;
+		posy = y;
 		int [][] tmp = (int[][]) getProperty("map");
-		tmp[x-1][y]+=1;
-		if(Main._map_scan[x-1][y]==0)
-		{
-			Main._map_scan[x-1][y] = 1;
-			Main._totalscan++;
-		}
-		/*if(tmp[x-1][y] ==1){
-			Main._jtopo.addPoint(x-1, y);
-		}*/
-		
-		tmp[x+1][y]+=1;
-		if(Main._map_scan[x+1][y]==0)
-		{
-			Main._map_scan[x+1][y] = 1;
-			Main._totalscan++;
-		}
-		
-		/*if(tmp[x+1][y] ==1){
-			Main._jtopo.addPoint(x+1, y);
-		}*/
-		for(int i = x, j=y-1,area = 3; area > 0; area--,j++){
-			tmp[i][j] += 1;
-			
-			if(Main._map_scan[i][j]==0)
-			{
-				Main._map_scan[i][j] = 1;
-				Main._totalscan++;
-			}
-			/*if(tmp[i][j] == 1)
-			{
-				Main._jtopo.addPoint(i, j);
-			}*/
-		}
-		_total_pheromone+=5;
+		tmp[x][y] += 1;
 		setProperty("map", tmp);
 		//***************************************************************************
 		//******************** CALCULATION OF THE NEW DIRECTION AND MOVING *******
@@ -132,7 +103,6 @@ public class MovingNode extends Node implements ClockListener, MessageListener{
 			_time=0;
 			send(null,getProperty("map"));
 		}
-		displayScanPercentage();
 		//***************************************************************************
 	}
 
@@ -167,22 +137,22 @@ public class MovingNode extends Node implements ClockListener, MessageListener{
 		}
 		else if(dir == _upward_leftward)  //upward and leftward
 		{
-			int min = minimum(new Point(x-2,y),new Point(x-1,y-1),new Point(x,y-2)); 
+			int min = minimum(new Point(x-1,y),new Point(x-1,y-1),new Point(x,y-1)); 
 			return min_to_dir(4,min);
 		}
 		else if(dir == _upward_rightward)  //upward and rightward
 		{
-			int min = minimum(new Point(x,y-2),new Point(x+1,y-1),new Point(x+2,y)); 
+			int min = minimum(new Point(x,y-1),new Point(x+1,y-1),new Point(x+1,y)); 
 			return min_to_dir(5,min);
 		}
 		else if(dir == _downward_leftward)  //downward and leftward
 		{
-			int min = minimum(new Point(x,y+2),new Point(x-1,y+1),new Point(x-2,y)); 
+			int min = minimum(new Point(x-1,y),new Point(x-1,y+1),new Point(x,y+1)); 
 			return min_to_dir(6,min);
 		}
 		else if(dir == _downward_rightward)  //downward and rightward
 		{
-			int min = minimum(new Point(x+2,y),new Point(x+1,y+1),new Point(x,y+2)); 
+			int min = minimum(new Point(x+1,y),new Point(x+1,y+1),new Point(x,y+1)); 
 			return min_to_dir(7,min);
 		}
 		return null;
@@ -195,7 +165,7 @@ public class MovingNode extends Node implements ClockListener, MessageListener{
 	 * @return
 	 */
 	private Double min_to_dir(int i, int min) { //1 turn left, 
-		switch(i){								// 2 don't change the direction, 3 turn right
+		switch(i){                              // 2 don't change the direction, 3 turn right
 		case 0: //upward
 			if(min == 1)
 				return _upward_leftward;
@@ -275,7 +245,11 @@ public class MovingNode extends Node implements ClockListener, MessageListener{
 		int left = 0;
 		int right = 0;
 		int ahead = 0;
-		int[][]	pheromonMap = (int[][]) getProperty("map");
+		int turnleft = 0;
+		int turnright = 0;
+		int straightahead = 0;
+		
+		int[][]        pheromonMap = (int[][]) getProperty("map");
 
 		if(isInMatrix(point))
 			left = pheromonMap[point.x][point.y];
@@ -283,11 +257,12 @@ public class MovingNode extends Node implements ClockListener, MessageListener{
 			ahead =  pheromonMap[point2.x][point2.y];
 		if(isInMatrix(point3))
 			right =  pheromonMap[point3.x][point3.y];
-
-		int turnleft = (_total_pheromone - left)/(2*_total_pheromone);
-		int turnright = (_total_pheromone - right)/(2*_total_pheromone);
-		int straightahead = (_total_pheromone - ahead)/(2*_total_pheromone);
-
+		int total_pheromone = left + right + ahead;
+		if(total_pheromone !=0){
+			turnleft = (total_pheromone - left)/(2*total_pheromone);
+			turnright = (total_pheromone - right)/(2*total_pheromone);
+			straightahead = (total_pheromone - ahead)/(2*total_pheromone);
+		}
 		if(turnleft == turnright && turnright == straightahead){
 			int alea = (int) (Math.random()*3);
 			if(alea == 0)
@@ -326,7 +301,7 @@ public class MovingNode extends Node implements ClockListener, MessageListener{
 			if(turnright < turnleft && turnright < straightahead)
 				return 3;
 			return 0;
-		}	
+		}        
 	}
 
 	/**
@@ -382,7 +357,7 @@ public class MovingNode extends Node implements ClockListener, MessageListener{
 	 */
 	@Override
 	public void onMessage(Message msg) {
-		update((int[][])msg.content);
+		update((int[][])msg.content,posx, posy);
 	}
 
 	/**
@@ -390,25 +365,17 @@ public class MovingNode extends Node implements ClockListener, MessageListener{
 	 * @param 
 	 * @return
 	 */
-	private void update(int[][] content) {
+	private void update(int[][] content, int x, int y) {
 		int tmp[][] = (int[][]) getProperty("map");
-		for(int i=0;i<_dimension;i++){			
-			for(int j=0;j<_dimension;j++){			
+		int i = (x-41 < 0) ? 0 : x-41;
+		int j = (y-41 < 0) ? 0 : y-41;
+		for(;i < x+41 && i <= _dimension-1;i++){                        
+			for(;j < y+41 && j <= _dimension-1;j++){
 				if(tmp[i][j] < content[i][j])
 					tmp[i][j] = content[i][j];
 			}
 		}
-		setProperty("map", tmp);			
-	}
-
-	/**
-	 * @brief 
-	 * @param 
-	 * @return
-	 */
-	public void displayScanPercentage()
-	{
-		System.out.println("Scan : "+ (Main._totalscan/_total_potential_scan*100) + "%");
+		setProperty("map", tmp);                        
 	}
 
 	/**
