@@ -10,6 +10,17 @@ We need to cover the area the most efficiently and rapidly.
 \item The connectivity\\
 UAVs need to be always in contact with the C\&C to transmit the information at any time.
 
+
+
 \end{itemize}
 
 \section{Non-Functional Requirements}
+
+\item No excessive use of bandwidth\\
+The bandwidth is a limited and a precious resource. Therefore UAVs have to used bandwidth the better possible to not overloaded her.
+
+\item Regurlarly updated the information\\
+UAVs transmit their information to the C\&C and other UAVs when they are near . Thus, if a UAV have data much old, it is possible that he scans a part of the area already scanned. Hence, the data transmitted by UAVs have not to be older than prescribed and if each UAV has up-to-date information, the scan coverage will be more quickly.
+
+\item A robust model\\
+Lost or unaivable UAVs during a scenario not involved the good progress of the scan coverage. The resulting of a lost UAV should not degrade the final result.
