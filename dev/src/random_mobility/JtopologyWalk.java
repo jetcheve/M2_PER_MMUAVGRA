@@ -1,4 +1,6 @@
+package walk;
 /**
+ *
  * @file JtopologyWalk.java
  * @author atessie, fcastagn, hpaziews, jetcheve & mtesta
  * @version 1.0

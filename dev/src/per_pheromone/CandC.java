@@ -12,7 +12,7 @@ public class CandC extends Node implements ClockListener, MessageListener{
 	private boolean _first_launch = true;
 	private static int _dimension = 500;
 	private static int _margin = 5;
-	private static double _total_potential_scan = (_dimension*_dimension) - ((4 * _margin * _dimension) - (4 * _margin* _margin));
+	private static double _total_potential_scan = ((_dimension - (2*_margin)) * (_dimension- (2*_margin)));
 
 	/**
 	 * @brief Constructor ...

@@ -1,3 +1,4 @@
+package walk;
 import jbotsim.ui.JViewer;
 import jbotsim.Topology;
 import jbotsim.Node;
@@ -13,7 +14,6 @@ public class Main{
 	public static int _UAV_number = 10;
 	public static void main(String[] args)
 	{
-		final long start= System.currentTimeMillis(); 
 		Topology topo = new Topology();
 		topo.setDimensions(_dimension, _dimension);
 		Node.setModel("default", new MovingNode());

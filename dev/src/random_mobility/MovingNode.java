@@ -1,3 +1,4 @@
+package walk;
 import java.awt.geom.Point2D;
 import jbotsim.Clock;
 import jbotsim.Node;
@@ -8,12 +9,12 @@ public class MovingNode extends Node implements ClockListener{
 	private int _lastdirection; //  1 -> left , 2-> straight ahead, 3 -> right
 	private static double _angle_towards; //direction of an UAV.
 	private static double _amplitude_variation_towards = Math.PI/4;
-	private static double _totalscanpossible = 500 * 500;
-	private static long _time;
+	private static int _dimension = 500;
 	private static long _start;	
 	private static int _margin = 5;
-	
-	
+	private static double _totalscanpossible= ((_dimension - (2*_margin)) * (_dimension- (2*_margin)));
+
+
 	public MovingNode(){
 		setProperty("icon", "/avion.png");
 		setProperty("size", 20);
@@ -35,13 +36,14 @@ public class MovingNode extends Node implements ClockListener{
 		Point2D _pos = getLocation();
 		int _x = (int)_pos.getX();
 		int _y = (int)_pos.getY();
-		avoidEdges(x, y)
+		avoidEdges(_x, _y);
 		move(1);
 		wrapLocation();
 		_pos = getLocation();
 		_x = (int)_pos.getX();
 		_y = (int)_pos.getY();
-		scan((int)_pos.getX(), (int)_pos.getY());
+		if(_x < (_dimension - _margin) && _x >= _margin && _y >= _margin && _y < (_dimension - _margin))
+			scan((int)_pos.getX(), (int)_pos.getY());
 		display_percentage_scan();
 	}
 
@@ -102,7 +104,7 @@ public class MovingNode extends Node implements ClockListener{
 			break;
 		}
 	}
-	
+
 	/**
 	 * @brief 
 	 * @param 
@@ -117,48 +119,48 @@ public class MovingNode extends Node implements ClockListener{
 				Main._jtopo.addPoint(x, y);
 		}
 	}
-	
+
 	/**
 	 * @brief 
 	 * @param 
 	 * @return
 	 */
 	public void avoidEdges(int x, int y){
-		if((_x-_margin < 0))
+		if((x-_margin < 0))
 		{
 			_angle_towards+=Math.PI;
-			setLocation(_x+_margin, _y);
+			setLocation(x+_margin, y);
 			setDirection(_angle_towards);
 		}
-		if( _y-_margin < 0)
+		if( y-_margin < 0)
 		{
 			_angle_towards+=Math.PI/2;
-			setLocation(_x, _y+_margin);
+			setLocation(x, y+_margin);
 			setDirection(_angle_towards);
 		}
-		if((_x+_margin >500))
+		if((x+_margin >500))
 		{
 			_angle_towards+=Math.PI;
-			setLocation(_x-_margin, _y);
+			setLocation(x-_margin, y);
 			setDirection(_angle_towards);
 		}
-		if(_y+_margin > 500)
+		if(y+_margin > 500)
 		{
 			_angle_towards+=3*Math.PI/2;
-			setLocation(_x, _y-_margin);
+			setLocation(x, y-_margin);
 			setDirection(_angle_towards);
 		}
 	}
 
 	public void display_percentage_scan()
 	{
-	long s = (System.currentTimeMillis()-_start)/1000;
+		long s = (System.currentTimeMillis()-_start)/1000;
 		long min = 0;
 		if(s > 60){
 			min = (s-(s%60))/60;
 			s = s%60;
 		}
-		
+
 		System.out.println("Scan : "+ (Main._totalscan/_totalscanpossible*100) + "% during " + min + " min " + s + " sec");
 	}
 }

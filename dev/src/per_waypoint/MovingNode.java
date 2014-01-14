@@ -1,3 +1,4 @@
+package waypoint;
 import java.awt.Point;
 import java.awt.geom.Point2D;
 import java.util.ArrayList;
@@ -10,7 +11,7 @@ import jbotsim.event.ClockListener;
 public class MovingNode extends Node implements ClockListener{
 	private static long _start;
 	private static boolean display_trajectory = false;	
-	private static int _dimension = 500;
+	private static int _dimension = 480;
 	private static double _totalscanpossible = _dimension * _dimension;
 	private Point2D _destination = new Point(0,0);
 	
@@ -20,8 +21,8 @@ public class MovingNode extends Node implements ClockListener{
 		setProperty("size", 20);
 		setCommunicationRange(-1);
 		Clock.addClockListener(this, 1);
-		int x = (int) (Math.random()*501);
-		int y = (int) (Math.random()*501);
+		int x = (int) (Math.random()*_dimension+1);
+		int y = (int) (Math.random()*_dimension+1);
 		_destination.setLocation(x, y);
 		setDirection(_destination);
 		new HashMap<Integer, ArrayList<Integer>>();
@@ -33,8 +34,8 @@ public class MovingNode extends Node implements ClockListener{
 				&& (int)getLocation().getY() >= (int)_destination.getY()-1 && (int) getLocation().getY() <=(int)_destination.getY()+1)
 		{
 			System.out.println("Destination reached, changing target");
-			int x = (int) (Math.random()*501);
-			int y = (int) (Math.random()*501);
+			int x = (int) (Math.random()*_dimension+1);
+			int y = (int) (Math.random()*_dimension+1);
 			_destination.setLocation(x,y);
 		}
 		setDirection(_destination);

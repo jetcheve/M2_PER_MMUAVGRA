@@ -8,6 +8,8 @@
 import java.awt.Point;
 import java.awt.geom.Point2D;
 
+import javax.swing.plaf.basic.BasicBorders.MarginBorder;
+
 import jbotsim.Clock;
 import jbotsim.Message;
 import jbotsim.Node;
@@ -85,9 +87,11 @@ public class MovingNode extends Node implements ClockListener, MessageListener{
 		int y = (int)pos.getY();
 		posx = x;
 		posy = y;
-		int [][] tmp = (int[][]) getProperty("map");
-		tmp[x][y] += 1;
-		setProperty("map", tmp);
+		if(x < (_dimension - _margin) && x >= _margin && y >= _margin &&y < (_dimension - _margin)){
+			int [][] tmp = (int[][]) getProperty("map");
+			tmp[x][y] += 1;
+			setProperty("map", tmp);
+		}
 		//***************************************************************************
 		//******************** CALCULATION OF THE NEW DIRECTION AND MOVING *******
 		Double dir = getDirection();
@@ -248,7 +252,7 @@ public class MovingNode extends Node implements ClockListener, MessageListener{
 		int turnleft = 0;
 		int turnright = 0;
 		int straightahead = 0;
-		
+
 		int[][]        pheromonMap = (int[][]) getProperty("map");
 
 		if(isInMatrix(point))

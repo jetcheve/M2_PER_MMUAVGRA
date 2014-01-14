@@ -1,10 +1,11 @@
+package waypoint;
 import jbotsim.Node;
 import jbotsim.Topology;
 import jbotsim.ui.JViewer;
 
 public class Main {
 
-	private static int _dimension = 500;
+	private static int _dimension = 480;
 	public static double _totalscan = 0;
 	public static Jtopology_waypoint _jtopo;
 	public static int[][] _map = new int[_dimension][_dimension];
