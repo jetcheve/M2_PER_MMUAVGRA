@@ -16,6 +16,8 @@ During two and a half months of this project, we implemented both models which w
 
 The description of all the classes will be made in the next section of this chapter.
 
+\newpage
+
 \subsubsection{Pheromone model}
 
 \begin{figure}[h]
@@ -26,18 +28,20 @@ The description of all the classes will be made in the next section of this chap
 
 The description of all the classes will be made in the next section of this chapter.
 
+\newpage
+
 \subsection{Random model} 
 
 To implement this model, we needed three classes.\\
 The first class, which is called \textit{Main.java}, allows as its name indicates it, launching the program. It is in this class that we define the size of the window, the matrix which will serve to simulate the scan of a zone (all the nodes will have the same matrix), and the instanciation of the various objects coming of JBotSim library. We have for example, an object named \textit{topo} which is a topology. This object is the basis for our simulator. It is to this topology that we are going to be able to add mobile nodes (here planes).\\
 
-We also instantiated a Jtopology's object type. We will explain this choice during the presentation of entities.\\\\
+We also instantiated a Jtopology's object type. We will explain this choice during the presentation of entities.\\
 
-The second class of our architecture is called \textit{MovingNode}. It is in this class that will be handled the movement of the various nodes. That's why this class inherits from the class \textit{Node} and implement the interface \textit{ClockListesner}, both coming from the JBotSim librairies. It inherits from the class \textit{Node} because planes will be represented by mobile node, so we need the characteristics of that class. Moreover, It implements the interface \textit{ClockListener} because we need that our nodes move all the seconds, so we need a top of clock to realize it. We will have a listener for time , as well as a method \textit{onClock} which will be called to every top of horloge.\\\\
+The second class of our architecture is called \textit{MovingNode}. It is in this class that will be handled the movement of the various nodes. That's why this class inherits from the class \textit{Node} and implement the interface \textit{ClockListesner}, both coming from the JBotSim librairies. It inherits from the class \textit{Node} because planes will be represented by mobile node, so we need the characteristics of that class. Moreover, It implements the interface \textit{ClockListener} because we need that our nodes move all the seconds, so we need a top of clock to realize it. We will have a listener for time , as well as a method \textit{onClock} which will be called to every top of horloge.\\
 
-This class contains a constructor by default, allowing to instantiate and to initialize the different variable, and to associate images with the mobile nodes (call of the method \textit{setProperty}). The random model gets characteristic to have no communication between the different nodes. To realize it, we pass an argument of \-1 in the method \textit{setCommunicationRange}.\\\\
+This class contains a constructor by default, allowing to instantiate and to initialize the different variable, and to associate images with the mobile nodes (call of the method \textit{setProperty}). The random model gets characteristic to have no communication between the different nodes. To realize it, we pass an argument of \-1 in the method \textit{setCommunicationRange}.\\
 
-As indicated in the article, the nodes of the random model change actions every seconds in functions of the last undertaken action. As a reminder, here is the table of action for the random model:\\\\
+As indicated in the article, the nodes of the random model change actions every seconds in functions of the last undertaken action. As a reminder, here is the table of action for the random model:\\
 
 \begin{figure}[h]
 \center
@@ -45,11 +49,11 @@ As indicated in the article, the nodes of the random model change actions every 
 \caption{Random model}
 \end{figure}
 
-In our implementation, we have a variable \textit{lastdirection} allowing to know the last action which was made. We associated figures with the last actions. If the last direction was the left, then the variable \textit {lastdirection} takes the value 1, if it was straight, then we associate the value 2, and if it was to the right, we associate the value 3.\\\\
+In our implementation, we have a variable \textit{lastdirection} allowing to know the last action which was made. We associated figures with the last actions. If the last direction was the left, then the variable \textit {lastdirection} takes the value 1, if it was straight, then we associate the value 2, and if it was to the right, we associate the value 3.\\
 
-To respect as much as possible the reality, we had to modify the management of the edges of the window. Indeed, originally in JBotSim, nodes can pass from an edge to the other one. For example, if they reached the left edge, they went to the right of the window, what is not possible in the real life. We blocked this problem by rectifying the position of the node, and by changing its angle of direction.\\\\
+To respect as much as possible the reality, we had to modify the management of the edges of the window. Indeed, originally in JBotSim, nodes can pass from an edge to the other one. For example, if they reached the left edge, they went to the right of the window, what is not possible in the real life. We blocked this problem by rectifying the position of the node, and by changing its angle of direction.\\
 
-Each time a node scans a zone, it looks in the matrix if this position was already scanned (0 if the zone was never scanned, 1 otherwise). If it is, then it makes nothing, otherwise it puts the value to 1.\\\\
+Each time a node scans a zone, it looks in the matrix if this position was already scanned (0 if the zone was never scanned, 1 otherwise). If it is, then it makes nothing, otherwise it puts the value to 1.\\
 
 The third class of our architecture is called \textit{Jtopology\_Random}. It inherits from JTopology and is going to draw the scans footprint on the map. This class JTopology inherits from JPanel, and is situated in fact between a JViewer and a Topology.
 
@@ -61,12 +65,13 @@ So the only modification compared to the previous model is the class \textit{Mov
 In this method, we choose a random point and we move the node until it. To do this, we change the direction of the node to the direction of the point chosen. When the node arrive at this point, we choose an other random point and so on.\\
 In this model, we don't manage the edge of the window because all destination point are chosen on the window and so none UAV can go out the window.
 
-
 \subsection{Pheromone model}
 
-Concerning the architecture, the implementation of the model of pheromones is very similar. We find practically 3 even classy. Only the class \textit{MovingNode} is really going to be different because the movements of nodes are going to depend on a lot of parameter. First of all, this class implements a new interface which is \textit{MessageListener}. Indeed, in this model, nodes have to sent data each others (in this particular case their respective map).\\\\
+Concerning the architecture, the implementation of the model of pheromones is very similar. We find practically 3 even classy. Only the class \textit{MovingNode} is really going to be different because the movements of nodes are going to depend on a lot of parameter. First of all, this class implements a new interface which is \textit{MessageListener}. Indeed, in this model, nodes have to sent data each others (in this particular case their respective map).\\
 
 The method which is going to change compared with the random model is the method \textit{onClock}. Indeed, it is here that we are going to apply rules as described on the following image:
+
+\newpage
 
 \begin{figure}[!h]
 \center
@@ -74,17 +79,15 @@ The method which is going to change compared with the random model is the method
 \caption{Pheromone model}
 \end{figure}
 
-\newpage
-
 We handled all the cases described in the article, meaning node looks at the values of pheromones in its left diagonal, in front of him and in its right diagonal.
+
+\newpage
 
 \begin{figure}[!h]
 \center
 \includegraphics[width=5cm]{../images/grille_case_1.png}
 \caption{\label{case1}case 1}
 \end{figure}
-
-\newpage
 
 \begin{figure}[!h]
 \center
@@ -102,10 +105,10 @@ These both cases \ref{case1} and \ref{case2} show how a node scan the map.
 
 We handle the communication between each node with the \textit{MessageListener} and the method \textit{onMessage}. This method is called when a node do the method \textit{send}. We have no destination in the method \textit{send} to broadcast the message. We send message all ten top of clock to respect the conditions of the scenario of the article.
 
+\newpage
+
 \section{Difficulties Encountered \& Solutions}
 
-The bigger difficulty encountered has been the reading of lot of articles in annexe of our main article. They included many pages and the reading of them in english taken us a lot of time. We had to update each of them on internet in order to learn the evolution of the differents models, the technologies used, etc.
-
-La plus grosse difficultés rencontrées a été la lecture des nombreux articles en correspondance avec notre article d'étude. Ils comportaient de nombreuses pages et la lecture de ceux-ci en Anglais nous a prit énormément de temps. Nous avons dû par la suite mettre à jour les articles lus en recherchant sur internet les mises à jour.
+The bigger difficulty encountered has been the reading of lot of articles in annexe of our main article. They included many pages and the reading of them in english which it took us a lot of time. We had to update each of them on internet in order to learn the evolution of the differents models, the technologies used, etc.\\
 
 Concerning the implementation, we did not meet many difficulties. The only big problem is the display of the scanned zones. On the advice of Mister Casteigts, we had to create a class inheriting from JTopology and redefine the method \textit{paint}. Indeed, the display refreshment of the scanned zones is a problem because we lost zones scanned previously. We created an ArrayList to save area scanned to redraw them in every times.

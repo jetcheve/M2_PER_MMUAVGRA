@@ -20,13 +20,13 @@ The goal of the UAVs is to scan the full map once per hour. In theory, with a sp
 
 For the random model, we see that it need more than 83 minutes to reach 80 percents of coverage. Whereas the pheromone model reach the 90 percents in 60 minutes. Comparing the two models, the pheromone model has a much higher coverage rate.
 
-\newpage
-
 \subsection{Scan Characteristic}
 
 In Figure \ref{randomchar} and Figure \ref{pheromonechar}, the solid lines represent the probability distribution of each models. This curve permits to calculate the probability of the next scan.\\
 To know the probability of the next scan between the time t1 and t2, we have to calculate the area under the curve between t1 and t2.\\
 So to meet with the requirement of one scan of the map per hour, the curve must be 0 at 1 hour. However none models reach 0 before one hour, because no model manages to achieve full coverage, the pheromone model manages well to avoid rescanning a recently scanned area. We can see that on the graphic : the median curve follows the dashed line at time between 0 seconds and 1000 seconds.
+
+\newpage
 
 \begin{figure}[!h]
 \caption{\label{randomchar} Random mobility}
@@ -37,8 +37,6 @@ So to meet with the requirement of one scan of the map per hour, the curve must 
 \caption{\label{pheromonechar} Pheromone mobility}
    \includegraphics{../images/pheromone_scan_characteristic.png}
 \end{figure}
-
-\newpage
 
 \subsection{Never scanned area}
 
