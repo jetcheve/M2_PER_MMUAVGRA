@@ -1,10 +1,10 @@
-\chapter{Analysis Of Existing}
+\chapter{Analysis Of Existing models}
 
-As said before, drone swarm are governed by these models mobility. Our study of the existing is therefore divided into several parts.
+As said before, drone swarms are governed by these models mobility. Our study of existing models is therefore divided into several parts.
 
 \section{Summary of the problem}
 
-The issue of this paper is to scan an area as efficiently as possible and as quickly as possible, at least once per hour. This area will be scanned by a UAV swarm that will cooperate and communicate each other.
+The issue of this paper is to scan an area as efficiently as possible and as quickly as possible, at least once per hour. This area will be scanned by a UAV swarm that will cooperate and communicate together.
 
 \section{Existing models}
 
@@ -14,8 +14,8 @@ Many mobility models exist with different characteristics. All these models are 
 
 \subsection{Random Walk}
 
-First described by Einstein in 1926, it was developed to mimic the extremely unpredictable movement of many entities in nature. An mobility node (MN) moves from its position to a new one by randomly choosing a direction and speed chosen by pre-defined ranges, [speedmin, speedmax] and [0, 2PI]. At the end of a constant time interval t or a constant distance traveled d, a new speed and direction are calculated. If a MN during his travel reaches a simulation boundary, it « bounces » off the simulation border with an angle determined by the incoming direction and continues to this new path.\\
-It's a memory-less mobility pattern because it retains no knowledge of its old locations and speed values. Therefore, the current position and speed of a MN is independent of its past location and speed. This can generate unrealistic movement because of sudden stops and sharp turns. If the specified time or distance of a MN motion is short, the resulting movement pattern will be a random roaming pattern restricted to a small part of the simulation area. The Figure \ref{RandomWalkFig} shows an example of the movement observed from this model. All the MN begin in the center of the 300mx600m simulation area (at the position (150,300)). Every 60 seconds, each MN randomly choose a direction between 0 and 2PI, and a speed between 0 and 10m/s.\\
+First described by Einstein in 1926, it was developed to mimic the extremely unpredictable movement of many entities in nature. A mobility node (MN) moves from its position to a new one by randomly choosing a direction and speed chosen by pre-defined ranges, [speedmin, speedmax] and [0, 2PI]. At the end of a constant time interval t or a constant distance traveled d, a new speed and direction are calculated. If a MN during its travel reaches a simulation boundary, it « bounces » off the simulation border with an angle determined by the incoming direction and continues to this new path.\\
+It's a memory-less mobility pattern because it retains no knowledge of its old locations and speed values. Therefore, the current position and speed of a MN is independent from its past location and speed. This can generate unrealistic movement because of sudden stops and sharp turns. If the specified time or distance of a MN motion is short, the resulting movement pattern will be a random roaming pattern restricted to a small part of the simulation area. Figure \ref{RandomWalkFig} shows an example of the movement observed from this model. All the MN begin in the center of the 300mx600m simulation area (at the position (150,300)). Every 60 seconds, each MN randomly chooses a direction between 0 and 2PI, and a speed between 0 and 10m/s.\\
 
 \begin{figure}[h]
 \center
@@ -27,7 +27,7 @@ It's a memory-less mobility pattern because it retains no knowledge of its old l
 
 \subsection{Random Waypoint}
 
-It includes pause times between changes in direction and/or speed.Once this time expires, the MN chooses a random destination and a speed, that is uniformly distributed between [minspeed, maxspeed]. The movement pattern of a MN who uses the RWaypointMM is similar to the RWalkMM if pause time is zero and [minspeed, maxspeed] = [speedmin, speedmax]. The Figure \ref{RandomWaypointFig} shows an example of the resulting pattern from the Random Waypoint Mobility Model.\\
+It includes pause times between changes in direction and/or speed. Once this pause expires, the MN chooses a random destination and a speed, that is uniformly distributed between [minspeed, maxspeed]. The movement pattern of a MN which uses the RWaypointMM is similar to the RWalkMM if pause time is zero and [minspeed, maxspeed] = [speedmin, speedmax]. The Figure \ref{RandomWaypointFig} shows an example of the resulting pattern from the Random Waypoint Mobility Model.\\
 
 \begin{figure}[h]
 \center
@@ -35,8 +35,8 @@ It includes pause times between changes in direction and/or speed.Once this time
 \caption{\label{RandomWaypointFig}Resulting pattern of a MN using the Random Waypoint Mobility Model}
 \end{figure}
 
-During a run, MNs are initially distributed randomly around the simulation area. Figure \ref{RandomWaypointFig2} shows the average MN neighbors percentage of the MNs. The average is the cumulative percentage of total MNs that are a given MN's neighbor. Therefore, if the network have 20 node and a node has 2 neighbors, then the node's current neighbors percentage is 10\%. Moreover, during the first 600 seconds, due to initially distributed randomly of the MNs around the simulation area, there is an high variability in the average MN neighbors percentage.\\
-In the paper, there is presented three possible solutions to avoid this initialization problem. The first is to save the location of the MNs after the initial high variability and use this position as the initial starting point of the MNs in the next simulations. Second is to change the initial distribution of the MNs in a specific area to be a distribution more common the model, like for example, initially placing the MNs in a triangle distribution. Lastly, the beginning of each simulation produce initialization problem due to the random distribution of the MNs around the simulation area. Throw out the initial 1000 seconds of simulation time in each simulation ensure that the initialization problem is removed even if the MNs move slowly. But if the MNs move fastly, we can discard fewer seconds of simulation time. This third solution ensures that each simulation has a random initial configuration.\\
+During a run, MNs are initially distributed randomly around the simulation area. Figure \ref{RandomWaypointFig2} shows the average MN neighbors percentage of the MNs. The average is the cumulative percentage of total MNs that are a given MN's neighbor. Therefore, if the network has 20 nodes and a node has 2 neighbors, then the node's current neighbors percentage is 10\%. Moreover, during the first 600 seconds, due to initially distributed randomness of the MNs around the simulation area, there is an high variability in the average MN neighbors percentage.\\
+In the paper, three possible solutions are presented to avoid this initialization problem. The first is to save the location of the MNs after the initial high variability and use this position as the initial starting point of the MNs in the next simulations. The second is to change the initial distribution of the MNs in a specific area to be a distribution more common the model, like for example, initially placing the MNs in a triangle distribution. Lastly, the beginning of each simulation produces initialization problems due to the random distribution of the MNs around the simulation area. Throwing out the initial 1000 seconds of simulation time in each simulation ensures that the initialization problem is removed even if the MNs moves fast. But if the MNs move fastly, we can discard fewer seconds of simulation time. This third solution ensures that each simulation has a random initial configuration.\\
 
 \begin{figure}[h]
 \center
@@ -49,8 +49,8 @@ In the paper, there is presented three possible solutions to avoid this initiali
 \subsubsection{Random Direction}
 
 The Random Waypoint Mobility Model produces a clustering of nodes near the center of the simulation area (see the figure \ref{RandomWaypointFig}). To overcome this problem, the Random Direction Mobility Model was created to ensure an almost constant number of nodes throughout the area simulation.\\ 
-In this model, a Mobility Nodes (MNs) chooses a random destination and he will travel to this in order to achieve the border of the simulation area. When a MN reaches a simulation boundary, he pauses for a time specified by the simulation. Then he chooses an other angular direction between 0 and 180 degrees and continues to travel.\\ 
-The figure \ref{RandomDirectionFig} shows us the resulting path of an MN using this mobility model. This MN begins to the center of the area(150,300). The dots in this figure illustrate the moment when a MN reached a border, paused and chosen a new direction to travel along.\\
+In this model, a Mobility Nodes (MNs) chooses a random destination and it will travel to this in order to achieve to reach the border of the simulation area. When a MN reaches a simulation boundary, it pauses for a time specified by the simulation. Then it chooses an other angular direction between 0 and 180 degrees and continues to travel.\\ 
+Figure \ref{RandomDirectionFig} shows us the resulting path of an MN using this mobility model. This MN begins at the center of the area(150,300). The dots in this figure illustrate the moment when a MN reached a border, paused and chose a new direction to travel along.\\
 
 \begin{figure}[h]
 \center
@@ -63,7 +63,7 @@ The figure \ref{RandomDirectionFig} shows us the resulting path of an MN using t
 \subsubsection{A Boundless Simulation Area}
 
 In this model, there is an important relationship between the old direction and velocity and the current direction and velocity. A velocity vector V = (v,theta with v a speed and theta an angular) is used to describe an MN's velocity and a position of an MN is represented as (x,y). The velocity vector and the position are updated in a regular time t.\\
-The Boundless Simulation Area Mobility Model is very different that other Mobility Models because here, an MN who reached a border of the simulation area continues his travel and reappears on the opposite side of the simulation area. It results from this that we can consider the simulation area like a torus-shaped, illustrated by the figure \ref{BoundlessFig}. The simulation area is transformed in two step. Firstly, the top border is connected to the bottom border to create a cylinder and then we connected the both open circular ends.\\
+The Boundless Simulation Area Mobility Model is very different from other Mobility Models because here, an MN that reached a border of the simulation area continues its travel and reappears on the opposite side of the simulation area. It results from this that we can consider the simulation area like a torus-shape, illustrated by figure \ref{BoundlessFig}. The simulation area is transformed in two steps. Firstly, the top border is connected to the bottom border to create a cylinder and then we connected the both open circular ends.\\
 
 \begin{figure}[h]
 \center
@@ -84,7 +84,7 @@ With a speed between 0 and 10 m/s, an angular between 0 and 90 degrees and a tim
 
 \subsection{City section}
 
-The aim of this model is to propose a realistic model. It bases on the vehicle's movement on road maps. The specificity of this model is the map depends on each geographical zone. Here, vehicles are mobile nodes.\\
+The aim of this model is to propose a realistic model. It is based on the vehicle's movement on road maps. The specificity of this model is the map which depends on each geographical zone. Here, vehicles are mobile nodes.\\
 
 The mapping data blocks are available from the office Americans of the census. The map information is retrieved from text files. These files are composed of several elements:
 
@@ -98,10 +98,10 @@ The mapping data blocks are available from the office Americans of the census. T
 \end{itemize}
 
 All the intersections of the map are represented by nodes not mobile.
-This model also considers the volume of traffic : more traffic, the more the line representing the road will be thick.
+This model also considers the volume of traffic : the more there is traffic, the thicker the line representing the road.
 This model is also sensitive at the speed of cars (depending in particular on the hour). For example, we can consider that the speed of vehicular traffic in the morning is much smaller than at the beginning of the afternoon.\\
 
-Here is the progress of this model. Every node begins in a point chosen randomly and its destination is chosen also randomly. The strategy of every node is to look for the shortest way until the destination. To achieve it, the algorithm of Dijkstra is used. Several parameters has to be considered in this algorithm as the speed or the traffic. This route can be dynamically changed. When a node reaches its destination, it begins again all the process described previously. Concerning the node's speed, it is limited to more or less 5\% of the speed registered in the file.\\
+Here is the progress of this model. Every node begins in a point chosen randomly and its destination is chosen also randomly. The strategy of every node is to look for the shortest up to the destination. To achieve it, the Dijsktra algorithm is used. Several parameters have to be considered in this algorithm as the speed or the traffic. This route can be dynamically changed. When a node reaches its destination, it begins again all the process described previously. Concerning the node's speed, it is limited to more or less 5\% of the speed registered in the file.\\
 For example, here is a representation of the model. We see here that the traffic is little sparse, but with very different speeds. The comparisons of these two regions base themselves on the inaccessible pairs, the length of the average route and to finish the changes of neighbors.\\
 
 This article proposes two situations.
@@ -123,7 +123,7 @@ Here are representations of these two regions:\\
 \begin{itemize}
 \item Transmission range : 250 meters.
 \item 200 nodes.
-\item 10\% of the pairs of nodes are incapable to communicate.
+\item 10\% of the pairs of nodes are unable to communicate.
 \item the connectivity of a network is poor
 \item New parameters : Transmission range : 500 meters.
 \item 50 nodes.
@@ -158,7 +158,7 @@ The evaluation of this protocol is made on 3 properties.
 \item Packet overhead
 \end{itemize}
 
-Here are the results obtained with the protocol DSR:\\
+Here are the results obtained with the DSR protocol:\\
 
 \begin{figure}[h]
 \center
@@ -173,18 +173,18 @@ Numerous improvements are possible so that the model is realistic :
 \begin{itemize}
 \item Changing settings depending on the time (lots of car in the morning for example).
 \item Possibility of introducing obstacles.
-\item Currently, each vehicle moves independently. But in the real life, it has to pay attention on his environment.
+\item Currently, each vehicle moves independently. But in real life, it has to pay attention to its environment.
 \item The model does not take into account the waiting time in the intersections.
 \end{itemize}
 
-To conclude, this model uses data of the real life. A called protocol DSR was used to test the model. We were able to notice that the model Waypoint is a good approximation of the model concerning streets.
+To conclude, this model uses real life data. A called  DSR protocol was used to test the model. We were able to notice that the Waypoint model is a good approximation of the model concerning streets.
 
 \newpage
 
 \subsection{Gauss-Markov}
 
 The aim of this model is to be able to adapt with one parameter to different levels of randomness.\\
-Each MN has a current speed and direction. The speed and direction of each MN are updating at a regular time t. At each time t, the next destination and speed are calculated based on the current position of the MN. The MNs are forced away from an edge when the location of a MN is near an border of the simulation area, by modifying the angular direction of the MN like illustrated in the figure \ref{Gauss-MarkovFig1}.\\
+Each MN has a current speed and direction. The speed and direction of each MN are updating at a regular time t. At each time t, the next destination and speed are calculated based on the current position of the MN. The MNs are forced away from an edge when the location of a MN is near a border of the simulation area, by modifying the angular direction of the MN as illustrated in the figure \ref{Gauss-MarkovFig1}.\\
 
 \begin{figure}[h]
 \center
@@ -204,9 +204,9 @@ In the figure \ref{Gauss-MarkovFig2}, an example of a resulting pattern of a MN 
 
 \subsection{Reference Point Group Mobility Model}
 
-Group movement are based on the movement of the center of the group. The movement of the group center completely characterizes the motion of the MNs of its group, including their direction and speed. Each MNs randomly and individually move about their own pre-defined reference points, where their movements depend on the group movement. Their position are regularly updated each time t and a new direction is calculated for every MN according to the center of the group.\\
-The figure \ref{RPGMMFig} shows us an illustration of a group of three MNs who move together. The Random Waypoint Mobility Model is used for the random motion of each individual MN in the group and the movement of the center of the group.\\
-In the paper, an application of this model is explained. The RPGMM can be used for example in an avalanche rescue scenario. In a scenario like this, the cooperation between human and canine is essential. We can see the human like the center of the group and the canines are the MNs of the group.\\
+Group movements are based on the movement at the center of the group. The movement of the group center completely characterizes the motion of the MNs of its group, including their direction and speed. Each MN randomly and individually moves about their own pre-defined reference points, where their movements depend on the group movement. Their position are regularly updated each time t and a new direction is calculated for every MN according to the center of the group.\\
+The figure \ref{RPGMMFig} shows us an illustration of a group of three MNs that move together. The Random Waypoint Mobility Model is used for the random motion of each individual MN in the group and the movement at the center of the group.\\
+In the paper, an application of this model is explained. The RPGMM can be used for example in an avalanche rescue scenario. In a scenario like this, the cooperation between human and canine is essential. We can see the human as the center of the group and the dogs are the MNs of the group.\\
 
 \begin{figure}[h]
 \center
@@ -218,8 +218,8 @@ In the paper, an application of this model is explained. The RPGMM can be used f
 
 \subsection{Social Network Theory}
 
-This model bases on the theory of the social networks and on the decisions and the social behavior of the human beings. For example, how the human beings move in a group, and between the groups. A notion of relation between the people is thus identified.\\
-In this model, the individuals and the groups of individuals are how considered entities of the first one classes. The second class represents the strength of the social links (probability of collocation).\\
+This model is based on the theory of the social networks and on the decisions and the social behavior of the human beings. For example, how human beings move in a group, and between the groups. A notion of relation between the people is thus identified.\\
+In this model, the individuals and the groups of individuals are considered as entities of the first one classes. The second class represents the strength of the social links (probability of collocation).\\
 
 Representation of social networks is made through weighted graphs, by defining the weights associated with each edge of the network to model the strength of direct interactions between individuals. The degree of interaction is a value between 0 and 1. 0 represents no interactions, 1 represents a strong interaction.
 The model assumes a level of interaction less than 0.25 represents a social interaction disconnection.\\
@@ -231,25 +231,25 @@ The model assumes a level of interaction less than 0.25 represents a social inte
 \label{MatricSN}
 \end{figure}
 
-The objective of this model is to use social relationships between the individuals to define groups of hosts who move together of the scenarios.
+The objective of this model is to use social relationships between the individuals to define groups of hosts who move together along with the scenarios.
 The first step is the generation of the social network. It is represented by a matrix of interaction \pageref{MatricSN}.\\
 
-People can be grouped according to their social links or compared with their geographical location. Dynamic mechanisms are present in this model. The people can belong to a group at the moment T, and change group afterward. The notion of distance goes in account into the parameters.\\
-A incalculable number of scenarios can be set up. Every groups move with a random speed and every host has a random speed of its own. A host, belonging to a group, moves inside this one. He can reach for example an aim which was fixed to its. Nodes not belonging to any group move randomly.\\
+People can be grouped according to their social links or compared with their geographical location. Dynamic mechanisms are present in this model. The people can belong to a group at the moment T, and change group afterward. The notion of distance is taken into in account in the parameters.\\
+An incalculable number of scenarios can be set up. Every group moves with a random speed and every host has a random speed of its own. A host, belonging to a group, moves inside this one. He can reach for example an aim which was fixed to its. Nodes not belonging to any group move randomly.\\
 
-When a node reached its aim, he has to make a choice:
-It is stay in the group to which it is up.
-It is chooses to be alone.
+When a node reached its aim, it has to make a choice:
+either it stays in the group to which it is up, or
+it chooses to be alone.
 This choice is made according to the rate of sociability of the group.The node will join the group which exercises most attraction.\\
 
-Two scenarios are presented for this model. They are characterized by a number of different node and a different number of groups.  The zone of simulation is a square of 1km on 1km, the zone of a group is of 200m. Every group has a speed between 1 and 2 m/s and every node has a speed between 1 and 3 m/s. The first scenario includes 30 computers (representing nodes) consisted in 5 geographically different groups. The second scenario includes 60 computers distributed in 5 groups. In both cases, 80\% of nodes are in a group. Thanks to these scenarios, we can obtain the average degree of connectivity of this model.\\
+Two scenarios are presented for this model. They are characterized by a number of different nodes and a different number of groups.  The zone of simulation is a square of 1km on 1km, the zone of a group is of 200m. Every group has a speed between 1 and 2 m/s and every node has a speed between 1 and 3 m/s. The first scenario includes 30 computers (representing nodes) consisted in 5 geographically different groups. The second scenario includes 60 computers distributed in 5 groups. In both cases, 80\% of nodes are in a group. Thanks to these scenarios, we can obtain the average degree of connectivity of this model.\\
 
 \begin{tabular}{cc}
    \includegraphics[scale=0.7]{../images/degreeConnectivitySocialNetwork30Nodes.png} &
    \includegraphics[scale=0.6]{../images/degreeConnectivitySocialNetwork60Nodes.png} \\
 \end{tabular}
 
-In conclusion of this model, we can say that generally, the models of existing mobility leans on random movements which are very simplistic and most of the time unrealistic. It is necessary to make models which base themselves on real elements. Here, it is the human socialization which is put forward. But this model can be again improved for example by adding obstacles.
+In conclusion, as regards this model, we can say that generally, the models of existing mobility leans on random movements which are very simplistic and most of the time unrealistic. It is necessary to make models which base themselves on real elements. Here, it is the human socialization which is put forward. But this model can still be improved for example by adding obstacles.
 
 \newpage
 
@@ -258,7 +258,7 @@ In conclusion of this model, we can say that generally, the models of existing m
 \subsubsection{Description of the model}
 
 This model is inspired by real pheromone. A pheromone is a chemical substance, secreted externally by certain animals, such as insects, affecting the behaviour or physiology of other animals of the same species.\footnote{\url{http://dictionary.reference.com/browse/pheromone?s=t}}\\
-This model use digital Pheromone.This pheromone have 3 properties :
+This model use digital Pheromone.This pheromone has 3 properties :
 
 \begin{itemize}
 \item  Deposited and withdrawn pheromone from an area. (Information fusion and aggregation).
@@ -266,7 +266,7 @@ This model use digital Pheromone.This pheromone have 3 properties :
 \item  Propagated from a place to its neighboring places. (Information diffusion and dissemination). 
 \end{itemize}
 
-A  digital  pheromone  represents  information  about  the  system. Different  "flavors"  of  pheromones convey different kinds of information.\\ We can have for example, attractive pheromone or repel pheromone. The attractive pheromone will attract other UAVs whereas the repel pheromone will repulse other UAVs.Digital pheromones exist within in an artificial space called a pheromone map.
+A  digital  pheromone  represents  information  about  the  system. Different  "flavors"  of  pheromones convey different kinds of information.\\ We can have for example, attractive pheromone or repellent pheromone. The attractive pheromone will attract other UAVs whereas the repellent pheromone will repulse other UAVs.Digital pheromones exist within in an artificial space called a pheromone map.
 
 \newpage
 
@@ -323,7 +323,7 @@ other UAVs,\\
 
 \subsubsection{Real scenario}
 
-We are going to see a real scenario wich demonstrate the use of pheromone model.\\
+We are going to see a real scenario which demonstrate the use of pheromone model.\\
 The demonstration used: 
 
 \begin{itemize}
@@ -344,19 +344,20 @@ The  robots  autonomously  configured themselves to determine which robot would 
 
 \subsection{Natural Agent}
 
-The basic idea of this article is the simulation of mobile model by basing itself on the animal behavior.
-Animals, called a mobile agent in the article, cannot be separated from the environment in which they are and through of whom(which) they interact and through which they interact. This idea is often ignored in the works on computer multi-agent systems, or the researchers consider the environment as a communication framework liabilities.\\
+The basic idea of this article is the simulation of mobile model by basing itself on animal behavior.
+Animals, called a mobile agent in the article, cannot be separated from the environment in which they are and through which they interact. This idea is often ignored in the works on computer multi-agent systems, or the researchers consider the environment as a communication framework liability.\\
 A multi-agent system is a three-tuple : 
 
 \begin{itemize}
 \item a set of agents,
-\item an envEach agent, which is a four-tuple constitued of : 
+Each agent, which is a four-tuple constitued of : 
 \begin{itemize}
 \item a set of agent,
 \item a state, 
 \item an input 
 \item and an output(subset of state)
 \end{itemize}
+\item an environment. 
 \item and a process which allows to change the state of the agent.
 \end{itemize}
 
@@ -376,8 +377,8 @@ Each ant who eat has the same program:
 \begin{itemize}
 \item It must avoid obstacles.
 \item If there is no pheromone on the map, it can go where it wants (random trajectory).
-\item If it find some food, it depose pheromone during a time t. These pheromones indicate to other ants the location of the food.
-\item If an ant find some food, it pick them up if it's not holding any and brings back the food to its nest.
+\item If it finds some food, it depose pheromone during a time t. These pheromones indicate to other ants the location of the food.
+\item If an ant finds some food, it pick them up if it's not holding any and brings back the food to its nest.
 \end{itemize}
 
 Ants can die. Either they don't find food enough rapidly, or predators kill them.\\
@@ -394,7 +395,7 @@ Here is a representation of the behavior of ants (This diagram is from \url{http
 
 \subsubsection{Ants: Brod Sorting}
 
-This model is similar to the model previously quoted. It's bases on a system of sorting concerning entities. A nest shelters various things inside, larvae, eggs, food. The ant colony keeps the entities sorted by kind.
+This model is similar to the model previously quoted. It is based on a system of sorting concerning entities. A nest shelters various things inside, larvae, eggs, food. The ant colony keeps the entities sorted by kind.
 The behavior of ants goes this way:
 
 \begin{itemize}
@@ -431,8 +432,8 @@ All the wasps are distributed in three groups.
 \item A group of nurses which care for the brood.
 \end{itemize}
 
-Every wasp gets three parameters. The first one concerns the strength of the wasp. It also represents the way it moves. The second parameter corresponds to a foraging threshold which determines the probability for a wasp to fetch of the food. The third parameter is associated with the brood. He allows to specify the demand in food. It allows to stimulate the foragers.\\
-When two wasps meet, they are engaged a fight.
+Every wasp gets three parameters. The first one concerns the strength of the wasp. It also represents the way it moves. The second parameter corresponds to a foraging threshold which determines the probability for a wasp to fetch of the food. The third parameter is associated with the brood. It allows to specify the demand in food. It allows to stimulate the foragers.\\
+When two wasps meet, they are engaged in a fight.
 The winner of the fight is designated according to the strength of each wasp. Moreover, the demand of broods in food decreases if they have recently received.
 
 \newpage
