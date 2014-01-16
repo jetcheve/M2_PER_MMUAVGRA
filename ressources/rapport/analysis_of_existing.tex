@@ -281,7 +281,7 @@ Pheromone logic  can  be  used  for  several  types  of  surveillance  and targe
 \center
 \includegraphics[scale=0.7]{../images/pheromone_surveillance.png}
 \caption{\label{surveillance}Attractive and repulsive pheromones for surveillance}
-\end{figure}\\
+\end{figure}
 
 In Figure \ref{surveillance}, each step mean :\\
  1. Surveillance area deposits attractive pheromone,\\
@@ -295,7 +295,7 @@ In Figure \ref{surveillance}, each step mean :\\
 \center
 \includegraphics[scale=0.7]{../images/pheromone_target_acquisition.png}
 \caption{\label{targetacquisition}Pheromones attracting confirming sensors}
-\end{figure}\\
+\end{figure}
 
 In Figure \ref{targetacquisition}, each step mean :\\
 1. UAVdet detects target and Red target is created,\\
@@ -310,7 +310,7 @@ In Figure \ref{targetacquisition}, each step mean :\\
 \center
 \includegraphics[scale=0.7]{../images/pheromone_tracking.png}
 \caption{\label{tracking} Pheromone tracking algorithm}
-\end{figure}\\
+\end{figure}
 
 In Figure \ref{tracking}, each step mean :\\
 1. UAV acquires target and large Visited pheromone deposit repelling 
@@ -346,9 +346,24 @@ The  robots  autonomously  configured themselves to determine which robot would 
 
 The basic idea of this article is the simulation of mobile model by basing itself on the animal behavior.
 Animals, called a mobile agent in the article, cannot be separated from the environment in which they are and through of whom(which) they interact and through which they interact. This idea is often ignored in the works on computer multi-agent systems, or the researchers consider the environment as a communication framework liabilities.\\
-A multi-agent system is a three-tuple : a set of agents, an envEach agent is a four-tuple constitued of a set of agent, a state, an input and an output(subset of state) and a process which allows to change the state of the agent. The presence of input and output shows that the agents are limited processes.
-ironment, and a coupling.
-The environment is a 2-tuple that is a subset of an agent. It consists of a state and a process. The environment is active. It has its own process which can change its state. The works on the artificial agents lean on the artificial intelligence. None agents only can predict the effect of its actions on the environment, because they do not depend on an agent but of a set of agent.\\
+A multi-agent system is a three-tuple : 
+
+\begin{itemize}
+\item a set of agents,
+\item an envEach agent, which is a four-tuple constitued of : 
+\begin{itemize}
+\item a set of agent,
+\item a state, 
+\item an input 
+\item and an output(subset of state)
+\end{itemize}
+\item and a process which allows to change the state of the agent.
+\end{itemize}
+
+The presence of input and output shows that the agents are limited processes : Environment, and a coupling.\\
+The environment is a 2-tuple which is a subset of an agent.\\
+It has a state and a process.\\ 
+The environment is active. It has its own process which can change its state. The works on the artificial agents lean on the artificial intelligence. None agents only can predict the effect of its actions on the environment, because they do not depend on an agent but of a set of agent.\\
 Thereafter, we are going to describe you the different mobile agents described in this article.
 
 \newpage
@@ -359,14 +374,14 @@ The ants model is based on the fact that ants build networks of paths. These pat
 Each ant who eat has the same program:
 
 \begin{itemize}
-\item She must avoid obstacles.
-\item If there is no pheromone on the map, she can go where she wants (random trajectory).
-\item If she find some food, she depose pheromone during a time t. These pheromones indicate to other ants the location of the food.
-\item If an ant find some food, she brings back the food to her nest.
+\item It must avoid obstacles.
+\item If there is no pheromone on the map, it can go where it wants (random trajectory).
+\item If it find some food, it depose pheromone during a time t. These pheromones indicate to other ants the location of the food.
+\item If an ant find some food, it pick them up if it's not holding any and brings back the food to its nest.
 \end{itemize}
 
 Ants can die. Either they don't find food enough rapidly, or predators kill them.\\
-All pheromone paths link to food. But the pheromones evaporate over time.  The rate of pheromone can be renforced if many ants come through the same path.\\
+All pheromone paths link to food. But the pheromones evaporate over time. The rate of pheromone can be reinforced if many ants come through the same path.\\
 Here is a representation of the behavior of ants (This diagram is from \url{http://pro.cleamax.fr/info-bioinspiree/?p=fourmis}) :
 
 \begin{figure}[h]
@@ -379,26 +394,26 @@ Here is a representation of the behavior of ants (This diagram is from \url{http
 
 \subsubsection{Ants: Brod Sorting}
 
-This model is similar to the model previously quoted. It bases on a system of sorting concerning entities. A nest shelters various things inside, larvae, eggs, food. The ant colony keeps the entities sorted by kind.
-The behavior of ants is it:
+This model is similar to the model previously quoted. It's bases on a system of sorting concerning entities. A nest shelters various things inside, larvae, eggs, food. The ant colony keeps the entities sorted by kind.
+The behavior of ants goes this way:
 
 \begin{itemize}
 \item Ants have a random behavior around the nest.
-\item Ants locate nearby objects and and memorize them.
-\item If an ant was carrying no elements, it has the choice to collect the object or to leave it. The probability to collect an object decreases if the ant recently met similar objects.
-\item If an ant carries something, she can decide at any time to release this element. The probability that it releases it increases if the ant recently met similar elements in the environment.
+\item Ants locate nearby objects and memorize them.
+\item If an ant was carrying no element, it has the choice to collect the object or to leave it. The probability to collect an object decreases if the ant recently met similar objects.
+\item If an ant carries something, it can decide at any time to release this element. The probability that it releases, increases if the ant has recently met similar elements in the environment.
 \end{itemize}
 
 \newpage
 
 \subsubsection{Termites}
 
-This model bases itself on the behavior of termites. These also use pheromones. Here are the rules(rulers) which follow termites:
+This model is based on the behavior of termites. These also use pheromones. Here are the rules followed by termites:
 
 \begin{itemize}
 \item Pheromones consist of physical waste.
 \item This waste is the material from which the termite mound is constructed.
-\item If there is no pheromone, ants move in a random way. If they detect pheromones, they will prefer to follow them.
+\item If there is no pheromone, ants move in a random way. If they detect pheromones, they will prefer to follow the strongest local pheromone concentration.
 \item At each time step, termites decides if they deposit pheromones.
 \item The rate of pheromone is decreasing according to time.
 \end{itemize} 
@@ -409,22 +424,37 @@ This model bases itself on the behavior of termites. These also use pheromones. 
 
 The model based on wasps consists of several characteristics:
 
+All the wasps are distributed in three groups.
 \begin{itemize}
-\item All the wasps is distributed in three groups.
-\item A single chief who distributes the various wasps in various groups.
-\item A group of foragers which have for mission to go hunting to obtain food.
-\item A group of nurses who care for the brood.
+\item A single chief which distributes the various wasps in various groups.
+\item A group of foragers which has the mission to go hunting in order to obtain food.
+\item A group of nurses which care for the brood.
 \end{itemize}
 
-Every wasp gets two parameters. The first one concerns the strength of the wasp. It also represents the way it moves. The second parameter corresponds to a foraging threshold which determines the probability of a wasp to fetch of the food. The third parameter is associated with the brood. He allows to specify the demand in food. It allows to stimulate the foragers.\\
+Every wasp gets three parameters. The first one concerns the strength of the wasp. It also represents the way it moves. The second parameter corresponds to a foraging threshold which determines the probability for a wasp to fetch of the food. The third parameter is associated with the brood. He allows to specify the demand in food. It allows to stimulate the foragers.\\
 When two wasps meet, they are engaged a fight.
 The winner of the fight is designated according to the strength of each wasp. Moreover, the demand of broods in food decreases if they have recently received.
-
-\textbf{A completer}
 
 \newpage
 
 \subsubsection{Birds and Fish}
+
+This model is based on flocks of birds and schools of fish, which present the same coordinated behavior.\\
+Indeed, they can turns together and avoid collisions with obstacles and between each others.\\
+
+The human societies address similar problems, in air-traffic control and convoys of ships, but the human solutions depend on sophisticated communication an central coordination structures not available to birds and fish.\\
+
+So, in order to answer to these troubles, the model follow three simple rules.
+\begin{itemize}
+\item maintain a specified minimum separation from the nearest object or neighbor,
+\item match magnitude and direction to nearby neighbor,
+\item and stay close to the center of the flock.
+\end{itemize}
+
+This model is a system as whole exhibits global coordination.\\
+Indeed, although each entity's senses only the movements of it's nearest peers, its responses to these movements propagate to others.\\
+
+
 
 \newpage
 

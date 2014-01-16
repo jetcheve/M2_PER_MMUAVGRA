@@ -1,0 +1,55 @@
+\select@language {english}
+\contentsline {chapter}{\numberline {1}Context}{6}{chapter.1}
+\contentsline {chapter}{\numberline {2}Analysis Of Existing}{7}{chapter.2}
+\contentsline {section}{\numberline {2.1}Summary of the problem}{7}{section.2.1}
+\contentsline {section}{\numberline {2.2}Existing models}{7}{section.2.2}
+\contentsline {subsection}{\numberline {2.2.1}Random Walk}{8}{subsection.2.2.1}
+\contentsline {subsection}{\numberline {2.2.2}Random Waypoint}{9}{subsection.2.2.2}
+\contentsline {subsubsection}{Random Direction}{10}{section*.5}
+\contentsline {subsubsection}{A Boundless Simulation Area}{11}{section*.6}
+\contentsline {subsection}{\numberline {2.2.3}City section}{12}{subsection.2.2.3}
+\contentsline {subsection}{\numberline {2.2.4}Gauss-Markov}{16}{subsection.2.2.4}
+\contentsline {subsection}{\numberline {2.2.5}Reference Point Group Mobility Model}{17}{subsection.2.2.5}
+\contentsline {subsection}{\numberline {2.2.6}Social Network Theory}{18}{subsection.2.2.6}
+\contentsline {subsection}{\numberline {2.2.7}Pheromone}{20}{subsection.2.2.7}
+\contentsline {subsubsection}{Description of the model}{20}{section*.7}
+\contentsline {subsubsection}{Scenario possible}{21}{section*.8}
+\contentsline {subsubsection}{Real scenario}{23}{section*.9}
+\contentsline {subsection}{\numberline {2.2.8}Natural Agent}{24}{subsection.2.2.8}
+\contentsline {subsubsection}{Ants}{25}{section*.10}
+\contentsline {subsubsection}{Ants: Brod Sorting}{26}{section*.11}
+\contentsline {subsubsection}{Termites}{27}{section*.12}
+\contentsline {subsubsection}{Wasps}{28}{section*.13}
+\contentsline {subsubsection}{Birds and Fish}{29}{section*.14}
+\contentsline {subsubsection}{Wolves}{30}{section*.15}
+\contentsline {chapter}{\numberline {3}Scenarios}{31}{chapter.3}
+\contentsline {chapter}{\numberline {4}Needs Analysis}{32}{chapter.4}
+\contentsline {section}{\numberline {4.1}Functional Requirements}{32}{section.4.1}
+\contentsline {section}{\numberline {4.2}Non-Functional Requirements}{32}{section.4.2}
+\contentsline {chapter}{\numberline {5}Schedule}{33}{chapter.5}
+\contentsline {section}{\numberline {5.1}Tasks List}{33}{section.5.1}
+\contentsline {section}{\numberline {5.2}GANTT}{34}{section.5.2}
+\contentsline {chapter}{\numberline {6}Works Done}{35}{chapter.6}
+\contentsline {section}{\numberline {6.1}What we implemented}{35}{section.6.1}
+\contentsline {subsection}{\numberline {6.1.1}Architecture}{35}{subsection.6.1.1}
+\contentsline {subsubsection}{Random Model}{35}{section*.16}
+\contentsline {subsubsection}{Pheromone model}{36}{section*.17}
+\contentsline {subsection}{\numberline {6.1.2}Random model}{37}{subsection.6.1.2}
+\contentsline {subsection}{\numberline {6.1.3}Random Waypoint Model}{38}{subsection.6.1.3}
+\contentsline {subsection}{\numberline {6.1.4}Pheromone model}{38}{subsection.6.1.4}
+\contentsline {section}{\numberline {6.2}Difficulties Encountered \& Solutions}{41}{section.6.2}
+\contentsline {chapter}{\numberline {7}Results}{42}{chapter.7}
+\contentsline {section}{\numberline {7.1}The article}{42}{section.7.1}
+\contentsline {subsection}{\numberline {7.1.1}Scan Coverage}{42}{subsection.7.1.1}
+\contentsline {subsection}{\numberline {7.1.2}Scan Characteristic}{43}{subsection.7.1.2}
+\contentsline {subsection}{\numberline {7.1.3}Never scanned area}{44}{subsection.7.1.3}
+\contentsline {subsection}{\numberline {7.1.4}Connectivity}{46}{subsection.7.1.4}
+\contentsline {chapter}{\numberline {8}Tests}{48}{chapter.8}
+\contentsline {chapter}{\numberline {9}Improvements}{49}{chapter.9}
+\contentsline {section}{\numberline {9.1}Mobility models}{49}{section.9.1}
+\contentsline {chapter}{\numberline {10}Development Environment and Conventions}{50}{chapter.10}
+\contentsline {section}{\numberline {10.1}Development Environment}{50}{section.10.1}
+\contentsline {subsection}{\numberline {10.1.1}github}{50}{subsection.10.1.1}
+\contentsline {subsection}{\numberline {10.1.2}Eclipse}{50}{subsection.10.1.2}
+\contentsline {section}{\numberline {10.2}Programming Conventions}{51}{section.10.2}
+\contentsline {chapter}{\numberline {11}Conclusion}{53}{chapter.11}
