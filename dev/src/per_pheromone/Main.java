@@ -23,6 +23,7 @@ public class Main {
         public static JViewer _jv;                                        /**< An instance of a JViewer */
         public static int[][] _map_scan = new int[_dimension][_dimension]; /**< Matrix of scan */
         public static int _UAV_number = 10;                        /**< Number of UAV */
+        public static boolean usingCandC = false;
         
         /**
          * @brief 
@@ -40,7 +41,8 @@ public class Main {
                  * 
                  * 
                  */
-                topo.addNode(_dimension / 2 - 10, _dimension - 50, new CandC());;
+                if(usingCandC)
+                	topo.addNode(_dimension / 2 - 10, _dimension - 50, new CandC());;
                 for(int i = 0; i < _UAV_number; i++)
                         topo.addNode(_dimension / 2 - 10, _dimension - 50);
         }

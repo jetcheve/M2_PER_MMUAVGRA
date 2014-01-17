@@ -40,6 +40,9 @@ public class MovingNode extends Node implements ClockListener, MessageListener{
 	private static int _margin = 5;
 	private static int posx;
 	private static int posy;
+	private static double _total_potential_scan = ((_dimension - (2*_margin)) * (_dimension- (2*_margin)));
+	private boolean display_pheromone = false;
+
 
 	/**
 	 * @brief Constructor ...
@@ -91,6 +94,15 @@ public class MovingNode extends Node implements ClockListener, MessageListener{
 			int [][] tmp = (int[][]) getProperty("map");
 			tmp[x][y] += 1;
 			setProperty("map", tmp);
+			if(!Main.usingCandC){
+				if(Main._map_scan[x][y]==0){
+					Main._map_scan[x][y] = 1;
+					if(display_pheromone){
+						Main._jtopo.addPoint(x, y);
+					}
+					Main._totalscan++;
+				}
+			}
 		}
 		//***************************************************************************
 		//******************** CALCULATION OF THE NEW DIRECTION AND MOVING *******
@@ -107,6 +119,8 @@ public class MovingNode extends Node implements ClockListener, MessageListener{
 			_time=0;
 			send(null,getProperty("map"));
 		}
+		if(!Main.usingCandC)
+			displayScanPercentage();
 		//***************************************************************************
 	}
 
@@ -398,5 +412,22 @@ public class MovingNode extends Node implements ClockListener, MessageListener{
 	 */
 	public static void set_start(long _start) {
 		MovingNode._start = _start;
+	}
+
+	/**
+	 * @brief 
+	 * @param 
+	 * @return
+	 */
+	public void displayScanPercentage()
+	{
+		long s = (System.currentTimeMillis()-_start)/1000;
+		long min = 0;
+		if(s > 60){
+			min = (s-(s%60))/60;
+			s = s%60;
+		}
+
+		System.out.println("Scan : "+ (Main._totalscan/_total_potential_scan*100) + "% during " + min + " min " + s + " sec");
 	}
 }

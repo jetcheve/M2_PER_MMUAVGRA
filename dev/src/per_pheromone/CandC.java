@@ -6,7 +6,7 @@ import jbotsim.event.MessageListener;
 
 
 public class CandC extends Node implements ClockListener, MessageListener{
-	private boolean display_pheromone = false;
+	private boolean display_pheromone = true;
 
 	private static long _start;
 	private boolean _first_launch = true;
