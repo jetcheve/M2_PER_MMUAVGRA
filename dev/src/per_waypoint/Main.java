@@ -1,4 +1,33 @@
-package waypoint;
+/**
+ * M2_PER_MMUAVGRA  Copyright (C) 2013
+ * Development of Mobility Models for UAV Group Reconnaissance Applications
+ * (RandomWalk, RandomWaypoint & Pheromone) on JBotSim.
+ * By CASTAGNET Florian, ETCHEVERRY Jérémy, PAZIEWSKI Hayley, 
+ * TESSIER Alexis & TESTA Mickaël.
+ * 
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ * 
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ * 
+ * You should have received a copy of the GNU General Public License
+ * along with this program (The other file named LICENCE).
+ * If not, see {http://www.gnu.org/licenses/}.
+ */
+ 
+ /**
+ * @file Main.java
+ * @author atessie, fcastagn, hpaziews, jetcheve & mtesta
+ * @version 1.0
+ * @date 
+ */ 
+package per_waypoint;
+
 import jbotsim.Node;
 import jbotsim.Topology;
 import jbotsim.ui.JViewer;
