@@ -1,0 +1,24 @@
+M2_PER_MMUAVGRA  Copyright (C) 2013
+
+Development of Mobility Models for UAV Group Reconnaissance Applications
+(RandomWalk, RandomWaypoint & Pheromone) on JBotSim.
+
+TREE STRUCTURE :
+
+/M2_PER_MMUAVGRA
+|  /dev                     </ Development Part
+|  |  /images               </ Pictures used for the development
+|  |  /lib                  </ The library (JBotsim) required in order to compile models.
+|  |  /src
+|  |  |  /per_pheromone     </ Implementation of Pheromone Mobility Model
+|  |  |  /per_waypoint      </ Implementation of Random WayPoint Mobility Model 
+|  |  |  /random_mobility   </ Implementation of Random Walk Mobility Model
+|  |    
+|  /ressources              </ Ressources Part
+|  |  /docs                 </ All of our documents used
+|  |  |  /debriefing        </ Notes of our debrief
+|  |  |  /mainFiles         </ PDF of the subject and many Mobility Models
+|  |  |  /secondaryFiles    </ Other Mobility Models
+|  |  /images               </ Pictures used for the memory
+|  |  /presentation         </ Slides for our presentation
+|  |  /rapport              </ Our memory
