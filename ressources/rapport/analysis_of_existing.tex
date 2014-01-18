@@ -452,12 +452,41 @@ So, in order to answer to these troubles, the model follow three simple rules.
 \item and stay close to the center of the flock.
 \end{itemize}
 
-This model is a system as whole exhibits global coordination.\\
-Indeed, although each entity's senses only the movements of it's nearest peers, its responses to these movements propagate to others.\\
-
-
+The flock or school is a self-constraining structure in which each entity’s individual
+actions simultaneously respond to and change the overall structure of the flock. Although each bird or
+fish senses only the movements of its nearest peers, its responses to these movements propagate to
+others, so that the system as a whole exhibits global coordination.\\
 
 \newpage
 
 \subsubsection{Wolves}
 
+This model is based on the communication of wolves in order to hunt mooses.\\
+The system behavior is simple. A single wolf, cannot kill a moose, because of his larger and powerful hooves.\\
+So, in order to hunt him, pack of wolves, must first surround the moose, so that one can jump on it's backs, while it is occupied with the others.\\
+
+The problem is how to modelized this behavior ?\\
+In fact, it's seems simple for us. For example, Human SWAT teams use radio to coordinate such surrounding maneuvers, but wolves don’t have walkie-talkies or similar long-range communication mechanisms.\\
+
+So, this model was for many years a major problem in the field of distributed artificial intelligence, known as "predator-prey" problem.\\
+
+Many of the proposed solutions assumed reasoning and communication capabilities whose existence in wolves is doubtful at best. For example, the emulated wolves would communicate and negotiate their strategies with one another (“I’ll head for the north side; why don’t you go to the south?”).\\
+Finally, a simpler solution requires only rudimentary sensing and action on the part of both moose and wolves.\\
+These actions are emulated on a hexagonal grid, six wolves will always capture the moose (with one wolf on each cell adjacent to the moose’s cell) as long as it cannot run faster than them.\\
+
+The solution follow two points :
+\begin{itemize}
+\item The Moose move to the neighboring cell that is farthest away from the nearest wolf. As long as its rate of movement is faster than that of the wolves, this strategy permits it to escape.
+\item Wolves move to the neighboring cell with the highest score
+\end{itemize}
+
+The score of a cell is compute with this equation :
+\begin{lstlisting}[frame=trBL, title=Score calculation]
+			S = d(moose)-k*d(wolf)
+\end{lstlisting}
+~\\
+where d(moose) is the distance to the moose, d(wolf) is the distance to the nearest other wolf, and k is a
+tuning constant, modeling a repulsive force between wolves.\\
+
+As in the example of birds and fish, each entity in the wolf-moose system both influences and is influenced by the entire system.\\
+Behavior of the overall system depends critically on the relative speeds of moose and wolves, and on the value of the parameter k that establishes the repulsion among wolves. When repulsion and attraction are suitably balanced, the wolves inevitably surround the moose, without any explicit communication or negotiation of strategies.
