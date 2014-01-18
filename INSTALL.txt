@@ -5,4 +5,10 @@ Development of Mobility Models for UAV Group Reconnaissance Applications
 
 INSTALLATION INSTRUCTIONS :
 
-...
+You just have to create a new Project under eclipse, and then, replace the "src/" 
+folder by our, and add the other folder "/lib" and "images".
+
+In order to use the library JBotsim, you have to right clic on your project, 
+choose properties, then "Java Build Path", go on the tab "Libraries" and finally 
+click on "Add Jars ..." and go to search the jar file "jbotsim.jar" in the 
+"/lib" folder.
