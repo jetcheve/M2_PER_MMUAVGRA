@@ -4,19 +4,19 @@ In this part, we will see the development environment we used, and the programmi
 
 \section{Development Environment}
 
-\subsection{github}
+\subsection{GitHub}
 
 To write this report and to be able to implement both models most effectively possible, we used a tool of hosting and management of program which is called Github. It is a tools of versionning which allows the collaborative work and allows a simplification of the methods of work.\\
-We used it throughout the project to put the summaries of articles that we read, the tasks which we had to make, this report or still the implementation.\\
+We used it throughout the project to put the summaries of articles that we read, the result og our meeting, this report or still implementations.\\
 Our Git repository is located at the following address : \\
 \url{https://github.com/jetcheve/M2\_PER\_MMUAVGRA}.\\
 
-Our deposit decomposes into three branches :
+Our deposit is decomposes into three branches :
 
 \begin{itemize}
 \item A master branch which is general to the whole deposit.
-\item A branch called Develop. It is in this branch that there will be all the code for implementing different models. It also contains a test folder. 
-\item An branch report, which as its name suggests, contain all the parts of our report and the pictures have inside it.
+\item A branch called Develop. It's in this branch that there will be all the code for implementing different models.
+\item An branch report, which as its name suggests, contain all the parts of our report and his pictures.
 \end{itemize}
 
 \subsection{Eclipse}
@@ -71,20 +71,42 @@ For example, when a part of a code, was not finished yet, we put the following l
 \end{lstlisting}
 ~\\
 
-We've also used a convention for the bugs found and wrote these protocoles, depending on whether the bug was resolved or not.\\
-We used it, in line with the Bug Tracking of GitHub.\\
+We've also used a convention for the bugs found and wrote these lines.\\
 
 \lstset{language=Java,basicstyle=\footnotesize,commentstyle=\color{blue}}
 \begin{lstlisting}[frame=trBL, title=Programming convention for bugs]
 /**
 * @BUG
-* @Unfinished/finished
 * Description
 */
 \end{lstlisting}
 ~\\
 
-To finish, we've created the five essential files for a project :\\
+We've also used GitHub, in order to manage us.\\
+Indeed, it allows us :\\
+
+\begin{itemize}
+\item to create tasks, 
+\item assign somebody to a task, 
+\item see if a task is finish or not,
+\item create Milestones, which is a set of tasks to do in a specific time, 
+\item and see the state of our progress,
+\item define kinds of tasks (development, bug, report ...)
+\end{itemize}
+~\\
+
+\begin{figure}[!h]
+\caption{\label{Milestones}Progress state of Milestones}
+   \includegraphics[scale=0.7]{../images/Milestones.png}
+\end{figure}
+
+\begin{figure}[!h]
+\caption{\label{Tasks}Example of Tasks}
+   \includegraphics[scale=0.7]{../images/tasks.png}
+\end{figure}
+
+
+To finish, we've created the five essential files for a project :
 
 \begin{itemize}
 \item INSTALL.txt  : Installation instructions for the project,
