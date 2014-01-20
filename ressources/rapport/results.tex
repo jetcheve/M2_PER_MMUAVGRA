@@ -46,7 +46,7 @@ So to meet with the requirement of one scan of the map per hour, the curve must 
 
 \subsection{Never scanned area}
 
-In this tableau below, we can see the results about the percentage of the map never scanned.\\
+In this table below, we can see the results about the percentage of the map never scanned.\\
 
 \begin{center}
 \begin{tabular}{|c|c|c|c|}
@@ -79,3 +79,15 @@ It represents the maximum, median and minimum uncovered area for the ten runs. T
 \end{figure}
 
 In Figure \ref{randomconnect} and Figure \ref{pheromoneconnect},we can see the number of UAV wich can communicate with the C\&C.  The  graphs  show the maximum, average, and minimum of this number for the ten runs. We saw that both models don't provide good connectivity. There are not enough UAV to have a fully connected communication graph. Because of the pheromone logic that pushes the UAVs away from each other, this model have low connectivity. Whereas the random model have a high connectivity at the beginning of the run. Then with the random trajectory of each UAV, they move away from each others and finally this model finishes to have the same poor connectivity as the pheromone model.
+
+\section{Our Implementation}
+
+\subsection{Scan coverage}
+
+
+\begin{figure}[!h]
+   \includegraphics{../images/ScanCoverageResult.png}
+\caption{\label{randomconnect} Scan coverage resulting of our implementation}
+\end{figure}
+
+
