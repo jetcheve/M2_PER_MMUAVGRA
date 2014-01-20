@@ -24,7 +24,7 @@
  * @file Jtopology_waypoint.java
  * @author atessie, fcastagn, hpaziews, jetcheve & mtesta
  * @version 1.0
- * @date 
+ * @date january 2014
  */ 
 package per_waypoint;
 
@@ -36,17 +36,32 @@ import java.util.ArrayList;
 import jbotsim.Topology;
 import jbotsim.ui.JTopology;
 
+/**
+ * @class Jtopology_waypoint
+ * @brief Description
+ * @details 
+ */
 @SuppressWarnings("serial")
 public class Jtopology_waypoint extends JTopology{
 
-	private ArrayList<Point> _list;
+	private ArrayList<Point> _list;  /**< list of scanned area */
 
+	/**
+         * @brief Constructor
+         * @param a topology
+         * @return an instance of Jtopology
+         */
 	public Jtopology_waypoint(Topology topo) {
 
 		super(topo);
 		_list = new ArrayList<>();
 	}
 
+	/**
+         * @brief draw green point on the frame to show the pheromone
+         * @param a graphic
+         * @return None
+         */
 	public void paint(Graphics g){
 		super.paint(g);
 		for(Point s : _list)
@@ -56,7 +71,11 @@ public class Jtopology_waypoint extends JTopology{
 		}
 	}
 	
-
+	 /**
+         * @brief add the position scanned by an UAV to the list of scanned area
+         * @param a point
+         * @return None
+         */
 	public void addPoint(int x,int y)
 	{
 		_list.add(new Point(x, y));

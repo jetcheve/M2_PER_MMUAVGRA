@@ -24,7 +24,7 @@
  * @file Main.java
  * @author atessie, fcastagn, hpaziews, jetcheve & mtesta
  * @version 1.0
- * @date 
+ * @date january 2014
  */ 
 package per_waypoint;
 
@@ -32,14 +32,25 @@ import jbotsim.Node;
 import jbotsim.Topology;
 import jbotsim.ui.JViewer;
 
+/**
+ * @class Main
+ * @brief Description
+ * @details 
+ */
 public class Main {
 
-	private static int _dimension = 480;
-	public static double _totalscan = 0;
-	public static Jtopology_waypoint _jtopo;
-	public static int[][] _map = new int[_dimension][_dimension];
-	public static int _UAV_number = 10;
+	private static int _dimension = 480;   /**< Dimension of the topology */
+	public static double _totalscan = 0;   /**< The percentage of the total scan */
+	public static Jtopology_waypoint _jtopo;  /**< An instance of our topology */
+	public static int[][] _map = new int[_dimension][_dimension];  /**< Matrix of scan */
+	public static int _UAV_number = 10; /**< Number of UAV */
 	
+
+	 /**
+         * @brief execute the main program
+         * @param None
+         * @return None
+         */
 	public static void main(String[] args)
 	{
 		Topology topo = new Topology();

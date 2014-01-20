@@ -19,15 +19,14 @@
  * along with this program (The other file named LICENCE).
  * If not, see {http://www.gnu.org/licenses/}.
  */
-
-/**
- *
- * @file JtopologyWalk.java
+ 
+ /**
+ * @file Jtopology_waypoint.java
  * @author atessie, fcastagn, hpaziews, jetcheve & mtesta
  * @version 1.0
- * @date january 2014
- */
-package random_mobility;
+ * @date 
+ */ 
+package per_waypoint;
 
 import java.awt.Color;
 import java.awt.Graphics;
@@ -38,20 +37,22 @@ import jbotsim.Topology;
 import jbotsim.ui.JTopology;
 
 /**
- * @class JtopologyWalk
+ * @class Jtopology_waypoint
  * @brief Description
  * @details 
  */
 @SuppressWarnings("serial")
-public class JtopologyWalk extends JTopology {
-	private ArrayList<Point> _list;	 /**< list of scanned area */
+public class Jtopology_waypoint extends JTopology{
+
+	private ArrayList<Point> _list;  /**< list of scanned area */
 
 	/**
          * @brief Constructor
          * @param a topology
          * @return an instance of Jtopology
          */
-	public JtopologyWalk(Topology topo) {
+	public Jtopology_waypoint(Topology topo) {
+
 		super(topo);
 		_list = new ArrayList<>();
 	}
@@ -61,20 +62,22 @@ public class JtopologyWalk extends JTopology {
          * @param a graphic
          * @return None
          */
-	public void paint(Graphics g) {
+	public void paint(Graphics g){
 		super.paint(g);
-		for(Point s : _list) {
+		for(Point s : _list)
+		{
 			g.drawOval(s.x, s.y, 1, 1);
 			g.setColor(new Color(0, 250, 0));
 		}
 	}
-
+	
 	 /**
          * @brief add the position scanned by an UAV to the list of scanned area
          * @param a point
          * @return None
          */
-	public void addPoint(int x,int y) {
+	public void addPoint(int x,int y)
+	{
 		_list.add(new Point(x, y));
 	}
 }

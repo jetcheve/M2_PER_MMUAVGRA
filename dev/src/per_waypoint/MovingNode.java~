@@ -43,10 +43,10 @@ import jbotsim.event.ClockListener;
  * @details 
  */
 public class MovingNode extends Node implements ClockListener{
-	private static long _start;    /**< used to calculate the time of the experiment*/
+	private static long _start;    /* used to calculate the time of the experiment*/
 	private static boolean display_trajectory = false;	
-	private static int _dimension = 480;  /**< dimension of the side of the frame */
-	private static double _totalscanpossible = _dimension * _dimension;  /**< number of the total point that can be scanned */
+	private static int _dimension = 480;  /* dimension of the side of the frame */
+	private static double _totalscanpossible = _dimension * _dimension;  /* number of the total point that can be scanned */
 	private Point2D _destination = new Point(0,0);
 	
 	/**

@@ -24,7 +24,7 @@
  * @file JtopologyPheromone.java
  * @author atessie, fcastagn, hpaziews, jetcheve & mtesta
  * @version 1.0
- * @date 
+ * @date january 2014
  */
 package per_pheromone;
  
@@ -43,12 +43,12 @@ import jbotsim.ui.JTopology;
  */
 @SuppressWarnings("serial")
 public class JtopologyPheromone extends JTopology {
-        private ArrayList<Point> _list;        /**< Description */
+        private ArrayList<Point> _list;        /**< list of scanned area */
 
         /**
-         * @brief Constructor ...
-         * @param topo
-         * @return
+         * @brief Constructor
+         * @param a topology
+         * @return an instance of Jtopology
          */
         public JtopologyPheromone(Topology topo) {
                 super(topo);
@@ -56,9 +56,9 @@ public class JtopologyPheromone extends JTopology {
         }
 
         /**
-         * @brief 
-         * @param 
-         * @return
+         * @brief draw green point on the frame to show the pheromone
+         * @param a graphic
+         * @return None
          */
         public void paint(Graphics g) {
                 super.paint(g);
@@ -69,14 +69,19 @@ public class JtopologyPheromone extends JTopology {
         }
 
         /**
-         * @brief 
-         * @param 
-         * @return
+         * @brief add the position scanned by an UAV to the list of scanned area
+         * @param a point
+         * @return None
          */
         public void addPoint(int x,int y) {
                 _list.add(new Point(x, y));
         }
 
+		/**
+         * @brief clear the liste of scanned area
+         * @param None
+         * @return None
+         */
 		public void clearListe() {
 			_list.clear();			
 		}

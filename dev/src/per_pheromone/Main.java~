@@ -59,6 +59,10 @@ public class Main {
                 _jtopo = new JtopologyPheromone(topo);
                 _jv = new JViewer(_jtopo);
 
+                /** 
+                 * 
+                 * 
+                 */
                 if(usingCandC)
                 	topo.addNode(_dimension / 2 - 10, _dimension - 50, new CandC());;
                 for(int i = 0; i < _UAV_number; i++)

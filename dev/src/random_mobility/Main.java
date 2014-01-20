@@ -25,7 +25,7 @@
  * @file Main.java
  * @author atessie, fcastagn, hpaziews, jetcheve & mtesta
  * @version 1.0
- * @date 
+ * @date january 2014
  */
 package random_mobility;
 
@@ -33,15 +33,26 @@ import jbotsim.ui.JViewer;
 import jbotsim.Topology;
 import jbotsim.Node;
 
+/**
+ * @class Main
+ * @brief Description
+ * @details 
+ */
 public class Main{
 
-	private static int _dimension = 500;
-	public  static int[][] _map = new int[_dimension][_dimension];
-	public static double _totalscan = 0;
-	public static JtopologyWalk _jtopo;	/**< An instance of our toopology */
+	private static int _dimension = 500;   /**< Dimension of the topology */
+	public  static int[][] _map = new int[_dimension][_dimension];  /**< Matrix of scan */
+	public static double _totalscan = 0; /**< The percentage of the total scan */
+	public static JtopologyWalk _jtopo;	/**< An instance of our topology */
 	public static JViewer _jv;					/**< An instance of a JViewer */
 	static long _time;
-	public static int _UAV_number = 10;
+	public static int _UAV_number = 10; /**< Number of UAV */
+
+	 /**
+         * @brief execute the main program
+         * @param None
+         * @return None
+         */
 	public static void main(String[] args)
 	{
 		Topology topo = new Topology();

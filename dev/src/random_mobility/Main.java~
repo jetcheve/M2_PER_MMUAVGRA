@@ -22,59 +22,46 @@
 
 /**
  *
- * @file JtopologyWalk.java
+ * @file Main.java
  * @author atessie, fcastagn, hpaziews, jetcheve & mtesta
  * @version 1.0
  * @date january 2014
  */
 package random_mobility;
 
-import java.awt.Color;
-import java.awt.Graphics;
-import java.awt.Point;
-import java.util.ArrayList;
-
+import jbotsim.ui.JViewer;
 import jbotsim.Topology;
-import jbotsim.ui.JTopology;
+import jbotsim.Node;
 
 /**
- * @class JtopologyWalk
+ * @class Main
  * @brief Description
  * @details 
  */
-@SuppressWarnings("serial")
-public class JtopologyWalk extends JTopology {
-	private ArrayList<Point> _list;	 /**< list of scanned area */
+public class Main{
 
-	/**
-         * @brief Constructor
-         * @param a topology
-         * @return an instance of Jtopology
-         */
-	public JtopologyWalk(Topology topo) {
-		super(topo);
-		_list = new ArrayList<>();
-	}
-
-	/**
-         * @brief draw green point on the frame to show the pheromone
-         * @param a graphic
-         * @return None
-         */
-	public void paint(Graphics g) {
-		super.paint(g);
-		for(Point s : _list) {
-			g.drawOval(s.x, s.y, 1, 1);
-			g.setColor(new Color(0, 250, 0));
-		}
-	}
+	private static int _dimension = 500;   /**< Dimension of the topology */
+	public  static int[][] _map = new int[_dimension][_dimension];  /**< Matrix of scan */
+	public static double _totalscan = 0; /**< The percentage of the total scan */
+	public static JtopologyWalk _jtopo;	/**< An instance of our toopology */
+	public static JViewer _jv;					/**< An instance of a JViewer */
+	static long _time;
+	public static int _UAV_number = 10; /**< Number of UAV */
 
 	 /**
-         * @brief add the position scanned by an UAV to the list of scanned area
-         * @param a point
-         * @return None
+         * @brief 
+         * @param 
+         * @return
          */
-	public void addPoint(int x,int y) {
-		_list.add(new Point(x, y));
+	public static void main(String[] args)
+	{
+		Topology topo = new Topology();
+		topo.setDimensions(_dimension, _dimension);
+		Node.setModel("default", new MovingNode());
+		_jtopo = new JtopologyWalk(topo);
+		_jv = new JViewer(_jtopo);   
+		for(int i= 0;i<_UAV_number;i++)
+			topo.addNode(_dimension/2-10, _dimension-50);
+		
 	}
 }

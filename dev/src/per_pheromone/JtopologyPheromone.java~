@@ -19,16 +19,15 @@
  * along with this program (The other file named LICENCE).
  * If not, see {http://www.gnu.org/licenses/}.
  */
-
+ 
 /**
- *
- * @file JtopologyWalk.java
+ * @file JtopologyPheromone.java
  * @author atessie, fcastagn, hpaziews, jetcheve & mtesta
  * @version 1.0
- * @date january 2014
+ * @date 
  */
-package random_mobility;
-
+package per_pheromone;
+ 
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Point;
@@ -38,43 +37,52 @@ import jbotsim.Topology;
 import jbotsim.ui.JTopology;
 
 /**
- * @class JtopologyWalk
+ * @class JtopologyPheromone
  * @brief Description
  * @details 
  */
 @SuppressWarnings("serial")
-public class JtopologyWalk extends JTopology {
-	private ArrayList<Point> _list;	 /**< list of scanned area */
+public class JtopologyPheromone extends JTopology {
+        private ArrayList<Point> _list;        /**< list of scanned area */
 
-	/**
+        /**
          * @brief Constructor
          * @param a topology
          * @return an instance of Jtopology
          */
-	public JtopologyWalk(Topology topo) {
-		super(topo);
-		_list = new ArrayList<>();
-	}
+        public JtopologyPheromone(Topology topo) {
+                super(topo);
+                _list = new ArrayList<>();
+        }
 
-	/**
+        /**
          * @brief draw green point on the frame to show the pheromone
          * @param a graphic
          * @return None
          */
-	public void paint(Graphics g) {
-		super.paint(g);
-		for(Point s : _list) {
-			g.drawOval(s.x, s.y, 1, 1);
-			g.setColor(new Color(0, 250, 0));
-		}
-	}
+        public void paint(Graphics g) {
+                super.paint(g);
+                for(Point s : _list) {
+                        g.drawOval(s.x, s.y, 1, 1);
+                        g.setColor(new Color(0, 250, 0));
+                }
+        }
 
-	 /**
+        /**
          * @brief add the position scanned by an UAV to the list of scanned area
          * @param a point
          * @return None
          */
-	public void addPoint(int x,int y) {
-		_list.add(new Point(x, y));
-	}
+        public void addPoint(int x,int y) {
+                _list.add(new Point(x, y));
+        }
+
+		/**
+         * @brief clear the liste of scanned area
+         * @param None
+         * @return None
+         */
+		public void clearListe() {
+			_list.clear();			
+		}
 }
