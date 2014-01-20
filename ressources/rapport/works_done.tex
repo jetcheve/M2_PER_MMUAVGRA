@@ -13,7 +13,6 @@ During two and a half months of this project, we implemented both models which w
 \subsubsection{Random Model}
 
 \begin{figure}[h]
-\center
 \includegraphics[scale=0.7]{../images/DiagrammedeclassesRandom.png}
 \caption{\label{RandomWalkDIA}Diagram of class Random model}
 \end{figure}
@@ -25,7 +24,6 @@ The description of all the classes will be made in the next section of this chap
 \subsubsection{Pheromone model}
 
 \begin{figure}[h]
-\center
 \includegraphics[scale=0.6]{../images/DiagrammedeclassesPheromone.png}
 \caption{\label{RandomWalkDIA}Diagram of class Pheromone model}
 \end{figure}
@@ -49,8 +47,8 @@ As indicated in the article, the nodes of the random model change actions every 
 
 \begin{figure}[h]
 \center
-\includegraphics{../images/table_random.png}
-\caption{Random model}
+\includegraphics[width=15cm]{../images/table_random.png}
+\caption{UAV random action table\cite{UAV}}
 \end{figure}
 
 In our implementation, we have a variable \textit{lastdirection} allowing to know the last action which was made. We associated figures with the last actions. If the last direction was the left, then the variable \textit {lastdirection} takes the value 1, if it was straight, then we associate the value 2, and if it was to the right, we associate the value 3.\\
@@ -80,7 +78,13 @@ The method which is going to change compared with the random model is the method
 \begin{figure}[!h]
 \center
 \includegraphics{../images/pheromon_model.png}
-\caption{Pheromone model}
+\caption{Pheromone search pattern\cite{UAV}}
+\end{figure}
+
+\begin{figure}[!h]
+\center
+\includegraphics{../images/pheromone_table.png}
+\caption{UAV pheromone action table\cite{UAV}}
 \end{figure}
 
 We handled all the cases described in the article, meaning node looks at the values of pheromones in its left diagonal, in front of him and in its right diagonal.
