@@ -111,12 +111,18 @@ The comparisons of these two regions base themselves on the inaccessible pairs, 
 
 Here are representations of these two regions:\\
 
-\begin{tabular}{cc}
-   \includegraphics{../images/cityA.png} &
-   \includegraphics{../images/cityB.png} \\
-   \textbf{Region A : Street scenario corresponding to a square area of size 2400x2400 m\cite{EfficientDataMobileSensor4}} &
-   \textbf{Region B : Street scenario corresponding to a square area of size 1900x1900 m\cite{EfficientDataMobileSensor4}}   
-\end{tabular}
+\begin{figure}[h!]
+    \begin{minipage}[b]{0.4\linewidth}
+        \centering \includegraphics[scale=1]{../images/cityA.png}
+%la commande \centering permet de centre juste la ligne
+        \caption{Region A : Street scenario corresponding to a square area of size 2400x2400 m\cite{VehicularAdHocNetworks9}}
+%\caption sert à inserer une légende
+    \end{minipage}\hfill
+    \begin{minipage}[b]{0.48\linewidth}
+        \centering \includegraphics[scale=1]{../images/cityB.png}
+        \caption{Region B : Street scenario corresponding to a square area of size 1900x1900 m\cite{VehicularAdHocNetworks9}}
+    \end{minipage}
+\end{figure}
 
 \newpage
 
@@ -165,7 +171,7 @@ Here are the results obtained with the DSR protocol:\\
 \begin{figure}[h]
 \center
 \includegraphics{../images/protocoleDSR.png}
-\caption{\label{ProtDSR}DSR Performance}
+\caption{\label{ProtDSR}DSR Performance\cite{VehicularAdHocNetworks9}}
 \end{figure}
 
 We see that the obtained results are very similar in the Waypoint model. The average path length does not differ much.\\
@@ -191,7 +197,7 @@ Each MN has a current speed and direction. The speed and direction of each MN ar
 \begin{figure}[h]
 \center
 \includegraphics[width=10cm,height=55mm]{../images/gauss-markovmodel1.png}
-\caption{\label{Gauss-MarkovFig1} Change of angular direction near a border}
+\caption{\label{Gauss-MarkovFig1} Change of angular direction near a border\cite{SurveyMobilityModelsAdHoc1}}
 \end{figure}
 
 In figure \ref{Gauss-MarkovFig2}, an example of a resulting pattern of a MN using the Gauss-Markov Mobility Model is illustrated. The run takes 1000 seconds and the MN beings at the center of the simulation area. The parameter t is 1 second, the initial angular is 90 degrees and the speed is between 0 and 10 m/s. The Gauss-Markov MM can eliminate the sudden stops and sharp turns encountered in the Random Walk Mobility Model by saved past velocities and directions in order to be able to influence future velocities and directions.\\
@@ -199,7 +205,7 @@ In figure \ref{Gauss-MarkovFig2}, an example of a resulting pattern of a MN usin
 \begin{figure}[h]
 \center
 \includegraphics[width=10cm,height=55mm]{../images/gauss-markovmodel2.png}
-\caption{\label{Gauss-MarkovFig2} Traveling pattern of an MN using the Gauss-Markov Mobility Model}
+\caption{\label{Gauss-MarkovFig2} Traveling pattern of an MN using the Gauss-Markov Mobility Model\cite{SurveyMobilityModelsAdHoc1}}
 \end{figure}
 
 \newpage
@@ -213,7 +219,7 @@ In the paper, an application of this model is explained. The RPGMM can be used f
 \begin{figure}[h]
 \center
 \includegraphics[width=10cm,height=55mm]{../images/rpgmmodel1.png}
-\caption{\label{RPGMMFig}Resulting pattern of a MN using the Boundless Simulation Area Mobility Model}
+\caption{\label{RPGMMFig}Resulting pattern of a MN using the Boundless Simulation Area Mobility Model\cite{SurveyMobilityModelsAdHoc1}}
 \end{figure}
 
 \newpage
@@ -229,7 +235,7 @@ The model assumes a level of interaction less than 0.25 represents a social inte
 \begin{figure}[h]
 \center
 \includegraphics{../images/MatrixInteractionSocialNetwork.png}
-\caption{\label{MatricSN}Matrix of interactions between nodes}
+\caption{\label{MatricSN}Matrix of interactions between nodes\cite{networkTheory5}}
 \label{MatricSN}
 \end{figure}
 
@@ -246,10 +252,18 @@ This choice is made according to the rate of sociability of the group.The node w
 
 Two scenarios are presented for this model. They are characterized by a number of different nodes and a different number of groups.  The zone of simulation is a square of 1km on 1km, the zone of a group is of 200m. Every group has a speed between 1 and 2 m/s and every node has a speed between 1 and 3 m/s. The first scenario includes 30 computers (representing nodes) consisted in 5 geographically different groups. The second scenario includes 60 computers distributed in 5 groups. In both cases, 80\% of nodes are in a group. Thanks to these scenarios, we can obtain the average degree of connectivity of this model.\\
 
-\begin{tabular}{cc}
-   \includegraphics[scale=0.7]{../images/degreeConnectivitySocialNetwork30Nodes.png} &
-   \includegraphics[scale=0.6]{../images/degreeConnectivitySocialNetwork60Nodes.png} \\
-\end{tabular}
+\begin{figure}[h!]
+    \begin{minipage}[b]{0.4\linewidth}
+        \centering \includegraphics[scale=1]{../images/degreeConnectivitySocialNetwork30Nodes.png}
+%la commande \centering permet de centre juste la ligne
+        \caption{Distribution of degree of connectivity (scenario with 30 hosts grouped into 5 groups\cite{networkTheory5}}
+%\caption sert à inserer une légende
+    \end{minipage}\hfill
+    \begin{minipage}[b]{0.48\linewidth}
+        \centering \includegraphics[scale=1]{../images/degreeConnectivitySocialNetwork60Nodes.png}
+        \caption{Distribution of degree of connectivity (scenario with 60 hosts grouped into 5 groups\cite{networkTheory5}}
+    \end{minipage}
+\end{figure}
 
 In conclusion, as regards this model, we can say that generally, the models of existing mobility leans on random movements which are very simplistic and most of the time unrealistic. It is necessary to make models which base themselves on real elements. Here, it is human socialization which is put forward. But this model can still be improved for example by adding obstacles.
 
@@ -282,7 +296,7 @@ Pheromone logic  can  be  used  for  several  types  of  surveillance  and targe
 \begin{figure}[h]
 \center
 \includegraphics[scale=0.7]{../images/pheromone_surveillance.png}
-\caption{\label{surveillance}Attractive and repulsive pheromones for surveillance}
+\caption{\label{surveillance}Attractive and repulsive pheromones for surveillance\cite{PerformanceOfDigitalPheromones10}}
 \end{figure}
 
 In Figure \ref{surveillance}, each step mean :\\
@@ -296,7 +310,7 @@ In Figure \ref{surveillance}, each step mean :\\
 \begin{figure}[h]
 \center
 \includegraphics[scale=0.7]{../images/pheromone_target_acquisition.png}
-\caption{\label{targetacquisition}Pheromones attracting confirming sensors}
+\caption{\label{targetacquisition}Pheromones attracting confirming sensors\cite{PerformanceOfDigitalPheromones10}}
 \end{figure}
 
 In Figure \ref{targetacquisition}, each step mean :\\
@@ -311,7 +325,7 @@ In Figure \ref{targetacquisition}, each step mean :\\
 \begin{figure}[h]
 \center
 \includegraphics[scale=0.7]{../images/pheromone_tracking.png}
-\caption{\label{tracking} Pheromone tracking algorithm}
+\caption{\label{tracking} Pheromone tracking algorithm\cite{PerformanceOfDigitalPheromones10}}
 \end{figure}
 
 In Figure \ref{tracking}, each step mean :\\
@@ -385,12 +399,12 @@ Each ant who eat has the same program:
 
 Ants can die. Either they don't find food enough rapidly, or predators kill them.\\
 All pheromone paths link to food. But the pheromones evaporate over time. The rate of pheromone can be reinforced if many ants come through the same path.\\
-Here is a representation of the behavior of ants (This diagram is from \url{http://pro.cleamax.fr/info-bioinspiree/?p=fourmis}) :
+Here is a representation of the behavior of ants :
 
 \begin{figure}[h]
 \center
 \includegraphics{../images/SchemaFourmi.png}
-\caption{\label{AntsRepresentation}Representation of ants}
+\caption{\label{AntsRepresentation} Representation of ants\cite{RepresentationOfAnts}}
 \end{figure}
 
 \newpage
