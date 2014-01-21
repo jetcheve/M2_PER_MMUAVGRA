@@ -84,6 +84,8 @@ In Figure \ref{randomconnect} and Figure \ref{pheromoneconnect},we can see the n
 
 \subsection{Scan coverage}
 
+\subsubsection{Without C\&C}
+
 The graphic \ref{scancoverage} is the result of our experiments using our implementation of the random walk and waypoint mobility model and the pheromone mobility model. Each run lasts 20 minutes and uses 10 UAVs per model.
 
 \newpage
@@ -91,7 +93,7 @@ The graphic \ref{scancoverage} is the result of our experiments using our implem
 \begin{figure}[!hbtf]
 \centering
    \includegraphics{../images/ScanCoverageResult.png}
-\caption{\label{scancoverage} Scan coverage resulting of our implementation}
+\caption{\label{scancoverage} Scan coverage resulting of our implementation (without C\&C)}
 \end{figure}
 
 \begin{itemize}
@@ -110,6 +112,34 @@ The pheromone model quickly distributes all the UAVs over the map because the UA
 
 \item Conclusion
 
-The pheromone mobility model is the better model to reach quickly the most percentage of scanned area. Indeed, the random mobility models aren't appropriate to scan the entire area.
+The pheromone mobility model is the better model to reach quickly the 100\% percentage of scanned area. Indeed, the random mobility models aren't appropriate to scan the entire area.
 
+\end{itemize}
+
+\subsubsection{With C\&C}
+
+\begin{figure}[!hbtf]
+\centering
+   \includegraphics{../images/ScanCoverageResultCandC.png}
+\caption{\label{scancoverage} Scan coverage resulting of our implementation (with C\&C)}
+\end{figure}
+
+\begin{itemize}
+
+\item Observation
+
+We can see that the random walk mobility model is very slow at the beginning. Between 7 and 14, the percentage of scanned area increases sharply. After that, it keeps going slightly.
+
+In the random waypoint mobility model, during the 9 first minutes, the percentage of scanned area increases faster than the random walk mobility model. Then, it raises slowly until 90\%.
+
+Like the pheromone model without C\&C, the percentage of scan is similar over the time.
+ 
+\item Interpretation
+
+We get the same results found in the article. The explanation is the same that the experience without C\&C.
+
+\item Conclusion
+
+Like before, pheromone model is better to scan the entire area, but in the other side, the random waypoint can reach 90\% more quickly, but then he remains steady.
+To finish, the random walk is bad in comparison to the others, but it's usual because this model is not usefull for coverage area.
 \end{itemize}
