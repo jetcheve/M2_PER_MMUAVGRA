@@ -46,7 +46,7 @@ public class CandC extends Node implements ClockListener, MessageListener{
 	private boolean _first_launch = true;
 	private static int _dimension = 480;  /**< dimension of the side of the frame */
 	private static int _margin = 5;
-	private static double _total_potential_scan = _dimension * _dimension;  /**< number of the total point that can be scanned */
+	private static double _total_potential_scan = ((_dimension - (2*_margin)) * (_dimension- (2*_margin)));  /**< number of the total point that can be scanned */
 
 	/**
 	 * @brief Constructor of the C&C
