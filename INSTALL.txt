@@ -5,10 +5,22 @@ Development of Mobility Models for UAV Group Reconnaissance Applications
 
 INSTALLATION INSTRUCTIONS :
 
-You just have to create a new Project under eclipse, and then, replace the "src/" 
-folder by our, and add the other folder "/lib" and "images".
+You just have to create a new Project under the eclipse IDE, and then, 
+replace the "src/" folder by our, 
+and add the other folder "/lib" and "/image".
 
-In order to use the library JBotsim, you have to right clic on your project, 
-choose properties, then "Java Build Path", go on the tab "Libraries" and finally 
+In order to use the library JBotsim, you have to right click on your project, 
+choose properties (or on your keyboard, press "Alt+Enter"), 
+then choose "Java Build Path", go on the "Libraries" tab and finally 
 click on "Add Jars ..." and go to search the jar file "jbotsim.jar" in the 
 "/lib" folder.
+
+Finally, to see the pictures of the UAVs, you have to add the folder "/image" to 
+the "Java Build Path" too. So like before, right click on your project, 
+choose properties (or press "Alt+Enter"), then "Java Build Path", 
+go on the "Source" tab and to finish, click on "Add Folder ..." 
+and check the folder.
+
+Now you can run any models.
+
+Enjoy !
