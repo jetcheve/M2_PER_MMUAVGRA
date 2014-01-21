@@ -56,7 +56,7 @@ public class CandC extends Node implements ClockListener, MessageListener{
 		setProperty("icon", "/tower.png");
 		setState("C&C");
 		setProperty("size", 20);
-		setCommunicationRange(_dimension*Math.sqrt(2));
+		setCommunicationRange(133);
 		addMessageListener(this);
 		setProperty("visited", true);
 		Clock.addClockListener(this, 1);

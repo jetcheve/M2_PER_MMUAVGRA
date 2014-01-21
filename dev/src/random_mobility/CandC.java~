@@ -26,8 +26,7 @@
  * @version 1.0
  * @date january 2014
  */ 
-package per_waypoint;
-
+package random_mobility;
 import jbotsim.Clock;
 import jbotsim.Message;
 import jbotsim.Node;
@@ -44,7 +43,7 @@ public class CandC extends Node implements ClockListener, MessageListener{
 
 	private static long _start;           /**< used to calculate the time of the experiment*/
 	private boolean _first_launch = true;
-	private static int _dimension = 480;  /**< dimension of the side of the frame */
+	private static int _dimension = 500;  /**< dimension of the side of the frame */
 	private static int _margin = 5;
 	private static double _total_potential_scan = ((_dimension - (2*_margin)) * (_dimension- (2*_margin)));  /**< number of the total point that can be scanned */
 
@@ -57,9 +56,9 @@ public class CandC extends Node implements ClockListener, MessageListener{
 		setProperty("icon", "/tower.png");
 		setState("C&C");
 		setProperty("size", 20);
-		setProperty("visited", true);
-		setCommunicationRange(133);
+		setCommunicationRange(_dimension*Math.sqrt(2));
 		addMessageListener(this);
+		setProperty("visited", true);
 		Clock.addClockListener(this, 1);
 		_start = System.currentTimeMillis();
 	}
@@ -82,6 +81,7 @@ public class CandC extends Node implements ClockListener, MessageListener{
 			}
 			_first_launch = false;
 		}
+		//System.out.println("CandC communication range :  "+getCommunicationRange());
 		//***********************************************************************
 		displayScanPercentage();
 	}
