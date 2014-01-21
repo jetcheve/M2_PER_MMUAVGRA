@@ -6,7 +6,7 @@
 
 \subsection{Scan Coverage}
 
-The goal of the UAVs is to scan the full map once per hour. In theory, with a speed of 150 km/h, the maximum scan speed is 0.083 km\textsuperscript{2}/second/UAV. So with an area of 900 km\textsuperscript{2}, the fastest time to cover the full area is 18 minutes. The figure \ref{randomcoverage} and the figure \ref{pheromonecoverage} represents the coverage data from the mobility models.
+The goal of the UAVs is to scan the full map once per hour. In theory, with a speed of 150 km/h, the maximum scan speed is 0.083 km\textsuperscript{2}/second/UAV. So with an area of 900 km\textsuperscript{2}, the fastest time to cover the full area is 18 minutes. The figure \ref{randomcoverage} and the figure \ref{pheromonecoverage} represent the coverage data from the mobility models.
 
 \begin{figure}[h]
 \centering
@@ -22,7 +22,7 @@ The goal of the UAVs is to scan the full map once per hour. In theory, with a sp
    \caption{\label{pheromonecoverage} Pheromone mobility coverag\cite{UAV}}
 \end{figure}
 
-For the random model, we see that it needs more than 83 minutes to reach 80 percents of coverage. Whereas the pheromone model reach the 90 percents in 60 minutes. Comparing the two models, the pheromone model has a much higher coverage rate.
+For the random model, we see that it need more than 83 minutes to reach 80 percents of coverage. Whereas the pheromone model reach the 90 percents in 60 minutes. Comparing the two models, the pheromone model has a much higher coverage rate.
 
 \subsection{Scan Characteristic}
 
@@ -84,7 +84,7 @@ In Figure \ref{randomconnect} and Figure \ref{pheromoneconnect},we can see the n
 
 \subsection{Scan coverage}
 
-The graphic \ref{scancoverage} is the result of our experiments using our implementation of the random walk and waypoint mobility model and the pheromone mobility model. Each run lasts 20 minutes and uses 10 UAVs per model. (compléter éventuellement avec le C and C).
+The graphic \ref{scancoverage} is the result of our experiments using our implementation of the random walk and waypoint mobility model and the pheromone mobility model. Each run lasts 20 minutes and uses 10 UAVs per model.
 
 \begin{figure}[!hbtf]
 \centering
@@ -96,11 +96,11 @@ The graphic \ref{scancoverage} is the result of our experiments using our implem
 
 \item Observation
 
-We can see that the random waypoint mobility model covers a higher scan area until 7 minutes than the others mobility models. From 7 minutes to the end, the better mobility model is the pheromone one. The random walk is in third position until 13 minutes, at this time, it is the random waypoint which becomes the third. At the end of the run, the random waypoint doesn't exceed 90\%, the random walk rises approximatly to 95 \% and the pheronome model a little bit more.
+We can see that the random waypoint mobility model covers a higher scan area until 7 minutes than the others mobility models. From 7 minutes to the end, the better mobility model is the pheromone one. The random walk is in third position until 13 minutes, at this time, this is the random waypoint becomes the third. At the end of the run, the random waypoint doesn't exceed 90\%, the random walk rises approximatly to 95 \% and the pheronome model a little bit.
 
 \item Interpretation
 
-At the beginning, the random waypoint is better to reach a higher percent of scanned area because each UAV chooses a destination and travels to it. But after a while, the UAVs pass again on an already scanned area. Hence the random waypoint can't target 100\% in a reasonable time.
+The random waypoint is better to reach a higher percent of scanned area because each UAV chooses a destination and travels to. But at a moment, the most part of the time, the UAVs pass again on an area already scanned. Hence the random waypoint can't target 100\% in a reasonable time.
 
 The random walk is slower than the others models because each UAV changes its destination each second. But at the end of the simulation, this model reaches over 90\% like the pheromone model. Indeed, this model takes a long time to disperse each UAV all over the map.
 
@@ -110,10 +110,5 @@ The pheromone model quickly distributes all the UAVs over the map because the UA
 
 The pheromone mobility model is the better model to reach quickly the most percentage of scanned area. Indeed, the random mobility models aren't appropriate to scan the entire area.
 
-
 \end{itemize}
-
-
-\subsection{Connectivity}
-
 
