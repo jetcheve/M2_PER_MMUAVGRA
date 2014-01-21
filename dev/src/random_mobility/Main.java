@@ -39,34 +39,35 @@ import jbotsim.Node;
  * @details 
  */
 public class Main{
-
 	private static int _dimension = 500;   /**< Dimension of the topology */
 	public  static int[][] _map = new int[_dimension][_dimension];  /**< Matrix of scan */
 	public static double _totalscan = 0; /**< The percentage of the total scan */
 	public static JtopologyWalk _jtopo;	/**< An instance of our topology */
 	public static JViewer _jv;					/**< An instance of a JViewer */
-	static long _time;
 	public static int _UAV_number = 10; /**< Number of UAV */
-    public static boolean usingCandC = true;   /**< boolean that permit to use C&C with the UAV or not */
+	public static boolean usingCandC = false;   /**< boolean that permit to use C&C with the UAV or not */
+	public static CandC nodeCandC;
 
 
-	 /**
-         * @brief execute the main program
-         * @param None
-         * @return None
-         */
+	/**
+	 * @brief execute the main program
+	 * @param None
+	 * @return None
+	 */
 	public static void main(String[] args)
 	{
 		Topology topo = new Topology();
 		topo.setDimensions(_dimension, _dimension);
-		Node.setModel("default", new MovingNode());
+		Node.setModel("default", new MovingNode(42));
 		_jtopo = new JtopologyWalk(topo);
 		_jv = new JViewer(_jtopo);   
-		
-		if(usingCandC)
-        	topo.addNode(_dimension / 2 - 10, _dimension - 50, new CandC());;
+
+		if(usingCandC){
+			nodeCandC = new CandC();
+			topo.addNode(_dimension / 2 - 10, _dimension - 50, nodeCandC);
+		}
 		for(int i= 0;i<_UAV_number;i++)
-			topo.addNode(_dimension/2-10, _dimension-50);
-		
+			topo.addNode(_dimension/2-10, _dimension-50,new MovingNode(i));
+
 	}
 }

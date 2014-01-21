@@ -29,7 +29,11 @@
  */
 package random_mobility;
 
+import java.awt.List;
 import java.awt.geom.Point2D;
+import java.util.HashSet;
+
+import javax.rmi.CORBA.Util;
 
 import jbotsim.Clock;
 import jbotsim.Message;
@@ -43,13 +47,13 @@ import jbotsim.event.MessageListener;
  * @details 
  */
 public class MovingNode extends Node implements ClockListener, MessageListener{
-	private static boolean display_trajectory = false;
+	private static boolean _display_trajectory = false;
 	private int _lastdirection; //  1 -> left , 2-> straight ahead, 3 -> right
 	private static double _angle_towards; /**<direction of an UAV */
 	private static double _amplitude_variation_towards = Math.PI/4;
 	private static int _dimension = 500;  /**< dimension of the side of the frame */
 	private static long _start;	/**< used to calculate the time of the experiment*/
-	private static int _time;
+	//private static int _time;
 	private static int _margin = 5;
 	private static double _totalscanpossible= ((_dimension - (2*_margin)) * (_dimension- (2*_margin)));  /**< number of the total point that can be scanned */
 	private boolean _first_launch = true;
@@ -60,21 +64,22 @@ public class MovingNode extends Node implements ClockListener, MessageListener{
 	 * @param None
 	 * @return an instance of Moving Node
 	 */
-	public MovingNode(){
+	public MovingNode(int i){
 		setProperty("icon", "/avion.png");
 		setProperty("size", 20);
+		setProperty("name",i);
+		setState("UAV");
 		if(Main.usingCandC)
 			setCommunicationRange(133);
 		else
 			setCommunicationRange(-1);
-		Clock.addClockListener(this, 1);
 		Clock.addClockListener(this, 1);
 		addMessageListener(this);
 		_angle_towards = 3*Math.PI/2;  //direction : upward.
 		setDirection(_angle_towards);
 		_lastdirection = 2;
 		_start = System.currentTimeMillis();
-		_time = 0;
+		//_time = 0;
 
 	}
 
@@ -108,18 +113,53 @@ public class MovingNode extends Node implements ClockListener, MessageListener{
 		_pos = getLocation();
 		_x = (int)_pos.getX();
 		_y = (int)_pos.getY();
-		_time++;
-		if(_time > 50)
+		/*_time++;
+		if(_time > 5)
 		{
 			_time=0;
-			send(null,getProperty("map"));  /* broadcast the pheromone map of the UAV */
-		}
+		}*/
+		//setCommunicationRange(133);
+	 //	if(isOnCommunicationWithCandC())
+	//	{
+		//	setCommunicationRange(133);
+			//for(int i=0; i<100000000; i++);
+			//System.out.println("Node communniction range        "+getCommunicationRange());
+		if(Main.usingCandC)
+			send(Main.nodeCandC,getProperty("map"));  /* broadcast the pheromone map of the UAV */
+	//	}
 		if(_x < (_dimension - _margin) && _x >= _margin && _y >= _margin && _y < (_dimension - _margin))
 			scan((int)_pos.getX(), (int)_pos.getY());
 		if(!Main.usingCandC){
 			display_percentage_scan();
 		}
 	}
+
+
+	/**
+	 * @brief analyse if there are a path between the UAV and C&C
+	 * @param None
+	 * @return true if there are a path,else false
+	 */
+	/*private boolean isOnCommunicationWithCandC() {
+		java.util.List<Node> neighbors = this.getNeighbors();
+		HashSet<Node> listeNode = new HashSet<Node>();
+		String res = "< "+this.getProperty("name")+" > ";
+		for(Node n : neighbors){//TODO
+			listeNode.add(n);
+			//System.out.println(n.getState().toString());
+			res += n.getState().toString() + " Node "+ n.getProperty("name");
+
+			if(n.getState().toString().compareTo("C&C") == 0)
+			{
+				//parcoursgraphe(this);//TODO
+				System.out.println(listeNode.toString());
+				System.out.println(res);
+				return true;
+
+			}
+		}
+		return false;
+	}*/
 
 	/**
 	 * @brief analyse the pheromone map and change the current direction of the UAV
@@ -190,7 +230,7 @@ public class MovingNode extends Node implements ClockListener, MessageListener{
 			{
 				Main._map[x][y]=1;
 				Main._totalscan++;
-				if(display_trajectory)
+				if(_display_trajectory)
 					Main._jtopo.addPoint(x, y);
 			}
 		}

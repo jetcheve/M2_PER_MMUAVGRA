@@ -26,7 +26,6 @@
  * @version 1.0
  * @date january 2014
  */
-package per_pheromone;
 
 import jbotsim.Node;
 import jbotsim.Topology;

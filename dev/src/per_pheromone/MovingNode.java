@@ -26,12 +26,11 @@
  * @version 1.0
  * @date january 2014
  */
-package per_pheromone;
 
 import java.awt.Point;
 import java.awt.geom.Point2D;
-
-import javax.swing.plaf.basic.BasicBorders.MarginBorder;
+import java.util.ArrayList;
+import java.util.List;
 
 import jbotsim.Clock;
 import jbotsim.Message;
@@ -64,7 +63,7 @@ public class MovingNode extends Node implements ClockListener, MessageListener{
 	private static int posx;
 	private static int posy;
 	private static double _total_potential_scan = ((_dimension - (2*_margin)) * (_dimension- (2*_margin)));  /**< number of the total point that can be scanned */
-	private boolean display_pheromone = false;
+	private boolean _display_pheromone = false;
 
 
 	/**
@@ -122,7 +121,7 @@ public class MovingNode extends Node implements ClockListener, MessageListener{
 			if(!Main.usingCandC){
 				if(Main._map_scan[x][y]==0){
 					Main._map_scan[x][y] = 1;
-					if(display_pheromone){
+					if(_display_pheromone){
 						Main._jtopo.addPoint(x, y);
 					}
 					Main._totalscan++;
@@ -148,6 +147,7 @@ public class MovingNode extends Node implements ClockListener, MessageListener{
 			displayScanPercentage();
 		//***************************************************************************
 	}
+
 
 	/**
 	 * @brief analyse the pheromone map

@@ -46,7 +46,7 @@ import jbotsim.event.MessageListener;
  */
 public class MovingNode extends Node implements ClockListener, MessageListener{
 	private static long _start;    /**< used to calculate the time of the experiment*/
-	private static boolean display_trajectory = false;	
+	private static boolean _display_trajectory = false;	
 	private static int _dimension = 480;  /**< dimension of the side of the frame */
 	private static double _totalscanpossible = _dimension * _dimension;  /**< number of the total point that can be scanned */
 	private Point2D _destination = new Point(0,0);
@@ -62,6 +62,7 @@ public class MovingNode extends Node implements ClockListener, MessageListener{
 	public MovingNode(){
 		setProperty("icon", "/avion.png");
 		setProperty("size", 20);
+		setState("UAV");
 		if(Main.usingCandC)
 			setCommunicationRange(133);
 		else
@@ -116,12 +117,26 @@ public class MovingNode extends Node implements ClockListener, MessageListener{
 		if(_time > 50)
 		{
 			_time=0;
-			send(null,getProperty("map"));  /* broadcast the pheromone map of the UAV */
+			if(isOnCommunicationWithCandC())
+				send(null,getProperty("map"));  /* broadcast the pheromone map of the UAV */
 		}
 		scan((int)pos.getX(), (int)pos.getY());
 		if(!Main.usingCandC){
 			displayScanPercentage();
 		}
+	}
+
+	/**
+	 * @brief analyse if there are a path between the UAV and C&C
+	 * @param None
+	 * @return true if there are a path,else false
+	 */
+	private boolean isOnCommunicationWithCandC() {
+		java.util.List<Node> neighbors = this.getNeighbors();
+		for(Node n : neighbors)
+			if(n.getState().toString().compareTo("C&C") == 0)
+				return true;
+		return false;
 	}
 
 	/**
@@ -135,7 +150,7 @@ public class MovingNode extends Node implements ClockListener, MessageListener{
 			{
 				Main._map[x][y]=1;
 				Main._totalscan++;
-				if(display_trajectory)
+				if(_display_trajectory)
 					Main._jtopo.addPoint(x, y);
 			}
 		}

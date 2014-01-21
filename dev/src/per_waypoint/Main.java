@@ -44,7 +44,7 @@ public class Main {
 	public static Jtopology_waypoint _jtopo;  /**< An instance of our topology */
 	public static int[][] _map = new int[_dimension][_dimension];  /**< Matrix of scan */
 	public static int _UAV_number = 10; /**< Number of UAV */
-    public static boolean usingCandC = true;   /**< boolean that permit to use C&C with the UAV or not */
+    public static boolean usingCandC = false;   /**< boolean that permit to use C&C with the UAV or not */
 
 	
 

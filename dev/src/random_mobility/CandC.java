@@ -39,7 +39,7 @@ import jbotsim.event.MessageListener;
  * @details 
  */
 public class CandC extends Node implements ClockListener, MessageListener{
-	private boolean display_pheromone = false; 
+	private boolean _display_pheromone = false; 
 
 	private static long _start;           /**< used to calculate the time of the experiment*/
 	private boolean _first_launch = true;
@@ -56,7 +56,7 @@ public class CandC extends Node implements ClockListener, MessageListener{
 		setProperty("icon", "/tower.png");
 		setState("C&C");
 		setProperty("size", 20);
-		setCommunicationRange(133);
+		setCommunicationRange(_dimension*Math.sqrt(2));
 		addMessageListener(this);
 		Clock.addClockListener(this, 1);
 		_start = System.currentTimeMillis();
@@ -80,6 +80,7 @@ public class CandC extends Node implements ClockListener, MessageListener{
 			}
 			_first_launch = false;
 		}
+		//System.out.println("CandC communication range :  "+getCommunicationRange());
 		//***********************************************************************
 		displayScanPercentage();
 	}
@@ -107,7 +108,7 @@ public class CandC extends Node implements ClockListener, MessageListener{
 				if(Main._map[i][j] < content[i][j])
 					Main._map[i][j] = content[i][j];
 				if(Main._map[i][j] > 0){
-					if(display_pheromone){
+					if(_display_pheromone){
 						Main._jtopo.addPoint(i, j);
 					}
 					Main._totalscan++;
