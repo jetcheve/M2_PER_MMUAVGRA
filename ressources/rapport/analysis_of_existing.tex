@@ -25,6 +25,7 @@ It's a memory-less mobility pattern because it retains no knowledge of its old l
 
 \noindent\textbf{Pros :} This model can cover a large part of the area.\\
 \textbf{Cons :} It's a random model, so sometimes it could be good but also bad, and it is unrealistic. It leaves many holes too.\\
+
 \textbf{The article choose this model to compare it with others (that will see later), so we implement it.}\\
 
 \subsection{Random Waypoint}
@@ -294,12 +295,12 @@ This model use digital Pheromone.This pheromone has 3 properties :
 
 A  digital  pheromone  represents  information  about  the  system. Different  "flavors"  of  pheromones convey different kinds of information.\\ We can have for example, attractive pheromone or repellent pheromone. The attractive pheromone will attract other UAVs whereas the repellent pheromone will repulse other UAVs. Digital pheromones exist within in an artificial space called a pheromone map.
 
-\subsubsection{Scenario possible}
+\subsubsection{Possibles scenarios}
 
 Pheromone logic  can  be  used  for  several  types  of  surveillance  and target  acquisition  and  tracking scenarios.
 
 \begin{itemize}
-\item Surveillance and Patrol
+\item Surveillance and patrol
 
 \begin{figure}[h]
 \center
@@ -315,7 +316,7 @@ In Figure \ref{surveillance}, each step mean :\\
  
 \newpage
  
-\item Target Acquisition
+\item Target acquisition
 
 \begin{figure}[h]
 \center
@@ -328,7 +329,7 @@ In Figure \ref{targetacquisition}, each step mean :\\
 2. Red target deposits “NeedsID” pheromone, \\
 3. UAVid is more attracted to NeedsID pheromone than lawn pheromone and climbs gradient to ID target.
 
-\item Target Tracking
+\item Target tracking
 
 \begin{figure}[h]
 \center
@@ -366,11 +367,14 @@ The  robots  autonomously  configured themselves to determine which robot would 
 
 \section{Multi-Agent System}
 
-The basic idea of this part is the simulation of mobile model by basing itself on animal behavior. It exists two kind of agents, the cognitive agents and the active agents.\\
-Basically, the difference  between them is based on the representation of the environment they have. If an entity can reasoning according to its environnment, then it's a cognitive agent, otherwise, if the representation of the environment is limited to the perception of the entity, then it's an active agent. The advantages of the natural agents are that they give solutions to problems well known in computing but it is difficult to prove that these solutions are optimal. The disadvantages of the natural agents are that takes a lot of agents to have a realistic model, calculation time who can be very long.  It is not also always easy to simulate an environment.\\
-We speak in our report of the models of animals because it is social agents who communicate between them. For example, pheromones are ways of communication between animals.
+The basic idea of this part is the simulation of mobile model by basing itself on animal behavior.\\
+It exists two kind of agents, the cognitive agents and the active agents.\\
+Basically, the difference  between them is based on the representation of the environment they have. If an entity can reasoning according to its environnment, then it's a cognitive agent, otherwise, if the representation of the environment is limited to the perception of the entity, then it's an active agent.\\
+In this part, we will present you, only the active agent.\\
 
-\noindent In this part, we will present you, only the active agent.\\\textbf{None of these models were implement because they are not usefull for area coverage, but some of their behaviors and specificities have inspired other models. For example, use pheromones like we see previously.}
+The benefits of the natural agents are that they give solutions to problems well known in computing but it is difficult to prove that these solutions are optimal. The drawdacks of the natural agents are that they takes a lot of agents to have a realistic model so calculation time can be very long. And it's not always easy to simulate an environment too.\\
+
+\textbf{None of these models were implement because they are not usefull for area coverage, but some of their behaviors and specificities have inspired other models. For example, use pheromones like we see previously.}
 
 \subsection{Ants}
 
