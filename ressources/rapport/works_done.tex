@@ -36,7 +36,9 @@ Each time a node scans a zone, it looks in the matrix if this position was alrea
 
 The third class of our architecture is called \textit{Jtopology\_Random}. It inherits from JTopology and is going to draw the scans footprint on the map. This class JTopology inherits from JPanel, and is situated in fact between a JViewer and a Topology.
 
-The last class 
+The last class represent the Command and control center (C\&C). all UAV need to transmit their data to it. The C\&C is a static point located at the UAVs' starting point. We can easyly remove it thanks to the boolean present on the main. When it is present, the display of the data represent the data from it. So the UAVs transmit their map and the C\&C udpate its own map with them. It manage the percentage of scan and the time of the experiment.
+
+
 \subsection{Random Waypoint Model}
 
 This model is very similar to the previous. The only difference is their way to move.\\
@@ -47,7 +49,7 @@ In this model, we don't manage the edge of the window because all destination po
 
 \subsection{Pheromone model}
 
-Concerning the architecture, the implementation of the model of pheromones is very similar. We find practically 3 even classy. Only the class \textit{MovingNode} is really going to be different because the movements of nodes are going to depend on a lot of parameter. First of all, this class implements a new interface which is \textit{MessageListener}. Indeed, in this model, nodes have to sent data each others (in this particular case their respective map).\\
+Concerning the architecture, the implementation of the model of pheromones is very similar. We find practically 4 even classy. The C\&C class is similar to others models. Only the class \textit{MovingNode} is really going to be different because the movements of nodes are going to depend on a lot of parameter. First of all, this class implements a new interface which is \textit{MessageListener}. Indeed, in this model, nodes have to sent data each others (in this particular case their respective map).\\
 
 The method which is going to change compared with the random model is the method \textit{onClock}. Indeed, it is here that we are going to apply rules as described on the following image:
 
