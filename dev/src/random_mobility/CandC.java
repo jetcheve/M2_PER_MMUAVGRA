@@ -58,6 +58,7 @@ public class CandC extends Node implements ClockListener, MessageListener{
 		setProperty("size", 20);
 		setCommunicationRange(_dimension*Math.sqrt(2));
 		addMessageListener(this);
+		setProperty("visited", true);
 		Clock.addClockListener(this, 1);
 		_start = System.currentTimeMillis();
 	}

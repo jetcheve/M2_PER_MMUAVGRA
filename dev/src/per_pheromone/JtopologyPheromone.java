@@ -26,7 +26,8 @@
  * @version 1.0
  * @date january 2014
  */
- 
+ package per_pheromone;
+
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Point;

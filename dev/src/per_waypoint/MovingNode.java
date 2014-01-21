@@ -59,9 +59,11 @@ public class MovingNode extends Node implements ClockListener, MessageListener{
 	 * @param None
 	 * @return an instance of Moving Node
 	 */
-	public MovingNode(){
+	public MovingNode(int i){
 		setProperty("icon", "/avion.png");
 		setProperty("size", 20);
+		setProperty("visited", false);
+		setProperty("name",i);
 		setState("UAV");
 		if(Main.usingCandC)
 			setCommunicationRange(133);
@@ -117,8 +119,13 @@ public class MovingNode extends Node implements ClockListener, MessageListener{
 		if(_time > 50)
 		{
 			_time=0;
-			if(isOnCommunicationWithCandC())
+			if(isOnCommunicationWithCandC()){
+				setProperty("map", neighborsRoute((Node)this));
+				for(Node n : getTopology().getNodes())
+					if(n.getState().toString().compareTo("C&C") != 0)
+						n.setProperty("visited", false);
 				send(null,getProperty("map"));  /* broadcast the pheromone map of the UAV */
+			}
 		}
 		scan((int)pos.getX(), (int)pos.getY());
 		if(!Main.usingCandC){
@@ -137,6 +144,39 @@ public class MovingNode extends Node implements ClockListener, MessageListener{
 			if(n.getState().toString().compareTo("C&C") == 0)
 				return true;
 		return false;
+	}
+	
+	/**
+	 * @brief look over all its neighbors and update its map with their map
+	 * @param Node actual
+	 * @return the map update by its neighbors
+	 */
+	private int[][] neighborsRoute(Node node) {
+		int[][] map = new int [_dimension][_dimension];
+		if(!(boolean) node.getProperty("visited")){
+			node.setProperty("visited",true);
+			map = (int[][]) node.getProperty("map");
+			for(Node n : node.getNeighbors()){
+				map = update(map, neighborsRoute(n));
+			}
+		}
+		return map;
+
+	}
+	
+	/**
+	 * @brief update both map
+	 * @param both map
+	 * @return the update
+	 */
+	private int[][] update(int[][] map, int[][] neighborsRoute) {
+		for(int i = 0; i < _dimension; i++){
+			for(int j=0;j<_dimension;j++){
+				if(neighborsRoute[i][j] > 0)
+					map[i][j] = 1;
+			}	
+		}
+		return map;
 	}
 
 	/**

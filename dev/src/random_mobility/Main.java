@@ -45,7 +45,7 @@ public class Main{
 	public static JtopologyWalk _jtopo;	/**< An instance of our topology */
 	public static JViewer _jv;					/**< An instance of a JViewer */
 	public static int _UAV_number = 10; /**< Number of UAV */
-	public static boolean usingCandC = false;   /**< boolean that permit to use C&C with the UAV or not */
+	public static boolean usingCandC = true;   /**< boolean that permit to use C&C with the UAV or not */
 	public static CandC nodeCandC;
 
 
@@ -60,8 +60,8 @@ public class Main{
 		topo.setDimensions(_dimension, _dimension);
 		Node.setModel("default", new MovingNode(42));
 		_jtopo = new JtopologyWalk(topo);
-		_jv = new JViewer(_jtopo);   
-
+		_jv = new JViewer(_jtopo);
+		
 		if(usingCandC){
 			nodeCandC = new CandC();
 			topo.addNode(_dimension / 2 - 10, _dimension - 50, nodeCandC);

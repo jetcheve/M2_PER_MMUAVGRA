@@ -19,8 +19,8 @@
  * along with this program (The other file named LICENCE).
  * If not, see {http://www.gnu.org/licenses/}.
  */
- 
- /**
+
+/**
  * @file Main.java
  * @author atessie, fcastagn, hpaziews, jetcheve & mtesta
  * @version 1.0
@@ -44,26 +44,28 @@ public class Main {
 	public static Jtopology_waypoint _jtopo;  /**< An instance of our topology */
 	public static int[][] _map = new int[_dimension][_dimension];  /**< Matrix of scan */
 	public static int _UAV_number = 10; /**< Number of UAV */
-    public static boolean usingCandC = false;   /**< boolean that permit to use C&C with the UAV or not */
+	public static boolean usingCandC = true;   /**< boolean that permit to use C&C with the UAV or not */
+	public static CandC nodeCandC;
 
-	
 
-	 /**
-         * @brief execute the main program
-         * @param None
-         * @return None
-         */
+	/**
+	 * @brief execute the main program
+	 * @param None
+	 * @return None
+	 */
 	public static void main(String[] args)
 	{
 		Topology topo = new Topology();
 		topo.setDimensions(_dimension, _dimension);
-		Node.setModel("default", new MovingNode());
+		Node.setModel("default", new MovingNode(42));
 		_jtopo = new Jtopology_waypoint(topo);
 		JViewer jv = new JViewer(_jtopo);
-		
-		if(usingCandC)
-        	topo.addNode(_dimension / 2 - 10, _dimension - 50, new CandC());;
+
+		if(usingCandC){
+			nodeCandC = new CandC();
+			topo.addNode(_dimension / 2 - 10, _dimension - 50, nodeCandC);
+		}
 		for(int i= 0;i<_UAV_number;i++)
-			topo.addNode(_dimension/2-10, _dimension-50);
+			topo.addNode(_dimension/2-10, _dimension-50,new MovingNode(i));
 	}
 }

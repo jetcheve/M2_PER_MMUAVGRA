@@ -67,6 +67,7 @@ public class MovingNode extends Node implements ClockListener, MessageListener{
 	public MovingNode(int i){
 		setProperty("icon", "/avion.png");
 		setProperty("size", 20);
+		setProperty("visited", false);
 		setProperty("name",i);
 		setState("UAV");
 		if(Main.usingCandC)
@@ -118,15 +119,16 @@ public class MovingNode extends Node implements ClockListener, MessageListener{
 		{
 			_time=0;
 		}*/
-		//setCommunicationRange(133);
-	 //	if(isOnCommunicationWithCandC())
-	//	{
-		//	setCommunicationRange(133);
-			//for(int i=0; i<100000000; i++);
-			//System.out.println("Node communniction range        "+getCommunicationRange());
-		if(Main.usingCandC)
-			send(Main.nodeCandC,getProperty("map"));  /* broadcast the pheromone map of the UAV */
-	//	}
+		setCommunicationRange(133);
+		if(Main.usingCandC){
+			if(isOnCommunicationWithCandC()){
+				setProperty("map", neighborsRoute((Node)this));
+				for(Node n : getTopology().getNodes())
+					if(n.getState().toString().compareTo("C&C") != 0)
+						n.setProperty("visited", false);
+				send(Main.nodeCandC,getProperty("map"));  /* broadcast the pheromone map of the UAV */
+			}
+		}
 		if(_x < (_dimension - _margin) && _x >= _margin && _y >= _margin && _y < (_dimension - _margin))
 			scan((int)_pos.getX(), (int)_pos.getY());
 		if(!Main.usingCandC){
@@ -140,26 +142,47 @@ public class MovingNode extends Node implements ClockListener, MessageListener{
 	 * @param None
 	 * @return true if there are a path,else false
 	 */
-	/*private boolean isOnCommunicationWithCandC() {
-		java.util.List<Node> neighbors = this.getNeighbors();
-		HashSet<Node> listeNode = new HashSet<Node>();
-		String res = "< "+this.getProperty("name")+" > ";
-		for(Node n : neighbors){//TODO
-			listeNode.add(n);
-			//System.out.println(n.getState().toString());
-			res += n.getState().toString() + " Node "+ n.getProperty("name");
-
+	private boolean isOnCommunicationWithCandC() {		
+		for(Node n : this.getNeighbors()){
 			if(n.getState().toString().compareTo("C&C") == 0)
-			{
-				//parcoursgraphe(this);//TODO
-				System.out.println(listeNode.toString());
-				System.out.println(res);
 				return true;
-
-			}
 		}
 		return false;
-	}*/
+	}
+
+	/**
+	 * @brief look over all its neighbors and update its map with their map
+	 * @param Node actual
+	 * @return the map update by its neighbors
+	 */
+	private int[][] neighborsRoute(Node node) {
+		int[][] map = new int [_dimension][_dimension];
+		if(!(boolean) node.getProperty("visited")){
+			node.setProperty("visited",true);
+			map = (int[][]) node.getProperty("map");
+			for(Node n : node.getNeighbors()){
+				map = update(map, neighborsRoute(n));
+			}
+		}
+		return map;
+
+	}
+
+	/**
+	 * @brief update both map
+	 * @param both map
+	 * @return the update
+	 */
+	private int[][] update(int[][] map, int[][] neighborsRoute) {
+		for(int i = 0; i < _dimension; i++){
+			for(int j=0;j<_dimension;j++){
+				if(neighborsRoute[i][j] > 0)
+					map[i][j] = 1;
+			}	
+		}
+		return map;
+	}
+
 
 	/**
 	 * @brief analyse the pheromone map and change the current direction of the UAV
