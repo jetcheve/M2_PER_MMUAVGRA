@@ -6,35 +6,12 @@
 
 \section{What we implemented}
 
-During two and a half months of this project, we implemented both models which were described in the article. As a reminder, these two models are a simple random and a model concerning pheromones. We also implemented the Random Waypoint model on the demand of our customers. In this section, we will explain the development work that we have provided and the different choices. We didn't find utility to make a UML diagram seen the simplicity of the architecture.
+During two and a half months of this project, we implemented both models which were described in the article. As a reminder, these two models are a simple random and a model concerning pheromones. We also implemented the Random Waypoint model on the demand of our clients. In this section, we will explain the development work that we have provided and the different choices.
 
-\subsection{Architecture}
-
-\subsubsection{Random Model}
-
-\begin{figure}[h]
-\includegraphics[scale=0.7]{../images/DiagrammedeclassesRandom.png}
-\caption{\label{RandomWalkDIA}Diagram of class Random model}
-\end{figure}
-
-The description of all the classes will be made in the next section of this chapter.
-
-\newpage
-
-\subsubsection{Pheromone model}
-
-\begin{figure}[h]
-\includegraphics[scale=0.6]{../images/DiagrammedeclassesPheromone.png}
-\caption{\label{RandomWalkDIA}Diagram of class Pheromone model}
-\end{figure}
-
-The description of all the classes will be made in the next section of this chapter.
-
-\newpage
 
 \subsection{Random model} 
 
-To implement this model, we needed three classes.\\
+To implement this model, we needed four classes.\\
 The first class, which is called \textit{Main.java}, allows as its name indicates it, launching the program. It is in this class that we define the size of the window, the matrix which will serve to simulate the scan of a zone (all the nodes will have the same matrix), and the instanciation of the various objects coming of JBotSim library. We have for example, an object named \textit{topo} which is a topology. This object is the basis for our simulator. It is to this topology that we are going to be able to add mobile nodes (here planes).\\
 
 We also instantiated a Jtopology's object type. We will explain this choice during the presentation of entities.\\
@@ -59,6 +36,7 @@ Each time a node scans a zone, it looks in the matrix if this position was alrea
 
 The third class of our architecture is called \textit{Jtopology\_Random}. It inherits from JTopology and is going to draw the scans footprint on the map. This class JTopology inherits from JPanel, and is situated in fact between a JViewer and a Topology.
 
+The last class 
 \subsection{Random Waypoint Model}
 
 This model is very similar to the previous. The only difference is their way to move.\\
