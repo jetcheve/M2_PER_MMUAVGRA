@@ -2,6 +2,15 @@
 
 \setcounter{chapter}{0}
 
+\chapter{Mobility models in the article}
+
+In the article, they study mainly Mobile Adhoc NETwork (MANET). MANET can manage network of mobile entities to collect, process and transmit data in large areas. The final goal of MANET research is to implement networking functionality to test and evaluate these ones. But one of this research requires several supporting models, including the model for nodes mobility. The authors present criterias that characterize wanted mobility properties for the movement of UAVs in a reconnaissance scenario. \\\\
+
+The article presents and uses two mobility models.\\
+The first model is a simple random model near the random Walk model presented previously. In this model, the UAVs can't communicate with each other. The UAVs have no coordination between them. This model is a Markov process. The UAV change its direction every second according to probability of action and have no backup position.\\
+
+The second model is a distributed pheromone repel model. It's a variant of the pheromone model presented previously. Compared to this model, the model of the article has not attractive pheromone. The mobility of an UAV depends on the mobility of the other UAVs. Each UAV have its own pheromone map. This map is a grid with element size 100*100 meters. Each element of this grid contains the level of pheromone and a timestamp representing the last time the pheromone was deposited. To move, an UAV looks three area in front of him and move to the area with the lower level of pheromone. If two area or three area have the same level, an UAV choose the area randomly. Once a area choosen, the UAV scan this area and deposit pheromon on it. Therefore other UAVs don't come to its position, they push UAV away from themself.
+
 \chapter{Scenarios}
 
 We saw that the issue of this article is "how well scan an area?".\\
@@ -13,3 +22,4 @@ For the reconnaissance data, to be of any use, it needs to be transmitted to the
 Fortunately a very simple model of communication is chosen for the scenario.  UAVs  within 8000  meters  of  each  other  can  communicate  with infinite  bandwidth.  If  they  are  further  away  no communication  is  possible.\\
 
 Concerning the reconnaissance scan, an image resolution of 0.5 meters is chosen. The scan area is 2000x1000 meters thanks to an 8 megapixel camera and the image proportions 2:1 (width:lenght).
+
