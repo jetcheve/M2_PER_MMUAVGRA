@@ -95,4 +95,6 @@ The bigger difficulty encountered has been reading a lot of articles, like refer
 
 Concerning the implementation, we did not meet many difficulties. The only big problem is the display of the scanned zones. On the advice of Mister Casteigts, we should create a class inheriting from JTopology and redefine the \textit{paint} method. Indeed, the display refreshment of the scanned zones is a problem because we lost scanned zones previously. We created an ArrayList to save area scanned to redraw them in every times.\\
 
-We have also an other trouble with the displaying. The UAV are drawn under the pheromones.
+We have also an other trouble with the displaying. The UAV are drawn under the pheromones.\\
+
+We implemented in the random walk model the communication between C\&C and UAVs. We did a recursive function to do that and it takes a lot of memory. We didn't find a function more efficient. At the beginning of the experiment, all UAVs start near the C\&C and communicate with it. Therefore the execution is slow at this moment.
