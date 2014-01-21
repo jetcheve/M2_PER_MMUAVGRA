@@ -19,8 +19,8 @@
  * along with this program (The other file named LICENCE).
  * If not, see {http://www.gnu.org/licenses/}.
  */
- 
- /**
+
+/**
  * @file MovingNode.java
  * @author atessie, fcastagn, hpaziews, jetcheve & mtesta
  * @version 1.0
@@ -34,21 +34,26 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import jbotsim.Clock;
+import jbotsim.Message;
 import jbotsim.Node;
 import jbotsim.event.ClockListener;
+import jbotsim.event.MessageListener;
 
 /**
  * @class MovingNode
  * @brief A node that represent an UAV
  * @details 
  */
-public class MovingNode extends Node implements ClockListener{
+public class MovingNode extends Node implements ClockListener, MessageListener{
 	private static long _start;    /**< used to calculate the time of the experiment*/
 	private static boolean display_trajectory = false;	
 	private static int _dimension = 480;  /**< dimension of the side of the frame */
 	private static double _totalscanpossible = _dimension * _dimension;  /**< number of the total point that can be scanned */
 	private Point2D _destination = new Point(0,0);
-	
+	private static int _time;
+	private boolean _first_launch = true;
+
+
 	/**
 	 * @brief Constructor of an UAV
 	 * @param None
@@ -57,15 +62,22 @@ public class MovingNode extends Node implements ClockListener{
 	public MovingNode(){
 		setProperty("icon", "/avion.png");
 		setProperty("size", 20);
-		setCommunicationRange(-1);
+		if(Main.usingCandC)
+			setCommunicationRange(133);
+		else
+			setCommunicationRange(-1);
 		Clock.addClockListener(this, 1);
+		addMessageListener(this);
 		int x = (int) (Math.random()*_dimension+1);
 		int y = (int) (Math.random()*_dimension+1);
 		_destination.setLocation(x, y);
 		setDirection(_destination);
 		new HashMap<Integer, ArrayList<Integer>>();
 		_start = System.currentTimeMillis();
+		_time = 0;
+
 	}
+
 
 	/**
 	 * @brief initialize the pheromone map of each UAV,
@@ -75,6 +87,19 @@ public class MovingNode extends Node implements ClockListener{
 	 * @return None
 	 */
 	public void onClock(){
+		//*************** INITIALIZATION OF THE PHEROMONE'S MAP *****************
+		if(_first_launch)
+		{
+			int[][] ScanMap = new int[_dimension][_dimension];
+			for(int i=0;i<_dimension;i++){                        
+				for(int j=0;j<_dimension;j++) {
+					ScanMap[i][j] =0;
+				}
+			}
+			setProperty("map", ScanMap);
+			_first_launch = false;
+		}
+		//*********************************************************************
 		if((int)getLocation().getX() >= (int)_destination.getX()-1 && (int) getLocation().getX() <=(int)_destination.getX()+1
 				&& (int)getLocation().getY() >= (int)_destination.getY()-1 && (int) getLocation().getY() <=(int)_destination.getY()+1)
 		{
@@ -87,8 +112,16 @@ public class MovingNode extends Node implements ClockListener{
 		Point2D pos = getLocation();
 		move(1);
 		wrapLocation();
+		_time++;
+		if(_time > 50)
+		{
+			_time=0;
+			send(null,getProperty("map"));  /* broadcast the pheromone map of the UAV */
+		}
 		scan((int)pos.getX(), (int)pos.getY());
-		displayScanPercentage();
+		if(!Main.usingCandC){
+			displayScanPercentage();
+		}
 	}
 
 	/**
@@ -97,15 +130,21 @@ public class MovingNode extends Node implements ClockListener{
 	 * @return None
 	 */
 	public void scan(int x, int y){
-		if(Main._map[x][y]==0)
-		{
-			Main._map[x][y]=1;
-			Main._totalscan++;
-			if(display_trajectory)
-				Main._jtopo.addPoint(x, y);
+		if(!Main.usingCandC){
+			if(Main._map[x][y]==0)
+			{
+				Main._map[x][y]=1;
+				Main._totalscan++;
+				if(display_trajectory)
+					Main._jtopo.addPoint(x, y);
+			}
 		}
+		int [][] tmp = (int[][]) getProperty("map");
+		if(tmp[x][y] == 0)
+			tmp[x][y] = 1;
+		setProperty("map", tmp);
 	}
-	
+
 	/**
 	 * @brief display the percentage of scanned area and the time of the experiment
 	 * @param None
@@ -113,13 +152,24 @@ public class MovingNode extends Node implements ClockListener{
 	 */
 	public void displayScanPercentage()
 	{
-	long s = (System.currentTimeMillis()-_start)/1000;
+		long s = (System.currentTimeMillis()-_start)/1000;
 		long min = 0;
 		if(s > 60){
 			min = (s-(s%60))/60;
 			s = s%60;
 		}
-		
+
 		System.out.println("Scan : "+ (Main._totalscan/_totalscanpossible*100) + "% during " + min + " min " + s + " sec");
 	}
+
+	/**
+	 * @brief receive the message and update his data with this message
+	 * @param the message sent by an UAV
+	 * @return None
+	 */
+	@Override
+	public void onMessage(Message msg) {
+	}
+
+
 }

@@ -44,6 +44,8 @@ public class Main {
 	public static Jtopology_waypoint _jtopo;  /**< An instance of our topology */
 	public static int[][] _map = new int[_dimension][_dimension];  /**< Matrix of scan */
 	public static int _UAV_number = 10; /**< Number of UAV */
+    public static boolean usingCandC = true;   /**< boolean that permit to use C&C with the UAV or not */
+
 	
 
 	 /**
@@ -58,6 +60,9 @@ public class Main {
 		Node.setModel("default", new MovingNode());
 		_jtopo = new Jtopology_waypoint(topo);
 		JViewer jv = new JViewer(_jtopo);
+		
+		if(usingCandC)
+        	topo.addNode(_dimension / 2 - 10, _dimension - 50, new CandC());;
 		for(int i= 0;i<_UAV_number;i++)
 			topo.addNode(_dimension/2-10, _dimension-50);
 	}

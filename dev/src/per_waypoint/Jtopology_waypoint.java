@@ -80,4 +80,16 @@ public class Jtopology_waypoint extends JTopology{
 	{
 		_list.add(new Point(x, y));
 	}
+	
+	/**
+     * @brief clear the liste of scanned area
+     * @param None
+     * @return None
+     */
+	public void clearListe() {
+		_list.clear();			
+	}
 }
+
+
+

@@ -30,24 +30,29 @@
 package random_mobility;
 
 import java.awt.geom.Point2D;
+
 import jbotsim.Clock;
+import jbotsim.Message;
 import jbotsim.Node;
 import jbotsim.event.ClockListener;
+import jbotsim.event.MessageListener;
 
 /**
  * @class MovingNode
  * @brief A node that represent an UAV
  * @details 
  */
-public class MovingNode extends Node implements ClockListener{
+public class MovingNode extends Node implements ClockListener, MessageListener{
 	private static boolean display_trajectory = false;
 	private int _lastdirection; //  1 -> left , 2-> straight ahead, 3 -> right
 	private static double _angle_towards; /**<direction of an UAV */
 	private static double _amplitude_variation_towards = Math.PI/4;
 	private static int _dimension = 500;  /**< dimension of the side of the frame */
 	private static long _start;	/**< used to calculate the time of the experiment*/
+	private static int _time;
 	private static int _margin = 5;
 	private static double _totalscanpossible= ((_dimension - (2*_margin)) * (_dimension- (2*_margin)));  /**< number of the total point that can be scanned */
+	private boolean _first_launch = true;
 
 
 	/**
@@ -58,12 +63,19 @@ public class MovingNode extends Node implements ClockListener{
 	public MovingNode(){
 		setProperty("icon", "/avion.png");
 		setProperty("size", 20);
-		setCommunicationRange(-1);
+		if(Main.usingCandC)
+			setCommunicationRange(133);
+		else
+			setCommunicationRange(-1);
 		Clock.addClockListener(this, 1);
+		Clock.addClockListener(this, 1);
+		addMessageListener(this);
 		_angle_towards = 3*Math.PI/2;  //direction : upward.
 		setDirection(_angle_towards);
 		_lastdirection = 2;
 		_start = System.currentTimeMillis();
+		_time = 0;
+
 	}
 
 	/**
@@ -73,6 +85,19 @@ public class MovingNode extends Node implements ClockListener{
 	 * @return None
 	 */
 	public void onClock(){
+		//*************** INITIALIZATION OF THE PHEROMONE'S MAP *****************
+		if(_first_launch)
+		{
+			int[][] ScanMap = new int[_dimension][_dimension];
+			for(int i=0;i<_dimension;i++){                        
+				for(int j=0;j<_dimension;j++) {
+					ScanMap[i][j] =0;
+				}
+			}
+			setProperty("map", ScanMap);
+			_first_launch = false;
+		}
+		//*********************************************************************
 		analysis();  //change the direction according to the last direction chosen
 		Point2D _pos = getLocation();
 		int _x = (int)_pos.getX();
@@ -83,9 +108,17 @@ public class MovingNode extends Node implements ClockListener{
 		_pos = getLocation();
 		_x = (int)_pos.getX();
 		_y = (int)_pos.getY();
+		_time++;
+		if(_time > 50)
+		{
+			_time=0;
+			send(null,getProperty("map"));  /* broadcast the pheromone map of the UAV */
+		}
 		if(_x < (_dimension - _margin) && _x >= _margin && _y >= _margin && _y < (_dimension - _margin))
 			scan((int)_pos.getX(), (int)_pos.getY());
-		display_percentage_scan();
+		if(!Main.usingCandC){
+			display_percentage_scan();
+		}
 	}
 
 	/**
@@ -152,13 +185,19 @@ public class MovingNode extends Node implements ClockListener{
 	 * @return None
 	 */
 	public void scan(int x, int y){
-		if(Main._map[x][y]==0)
-		{
-			Main._map[x][y]=1;
-			Main._totalscan++;
-			if(display_trajectory)
-				Main._jtopo.addPoint(x, y);
+		if(!Main.usingCandC){
+			if(Main._map[x][y]==0)
+			{
+				Main._map[x][y]=1;
+				Main._totalscan++;
+				if(display_trajectory)
+					Main._jtopo.addPoint(x, y);
+			}
 		}
+		int [][] tmp = (int[][]) getProperty("map");
+		if(tmp[x][y] == 0)
+			tmp[x][y] = 1;
+		setProperty("map", tmp);
 	}
 
 	/**
@@ -209,4 +248,14 @@ public class MovingNode extends Node implements ClockListener{
 
 		System.out.println("Scan : "+ (Main._totalscan/_totalscanpossible*100) + "% during " + min + " min " + s + " sec");
 	}
+
+	/**
+	 * @brief None communication between UAV
+	 * @param None
+	 * @return None
+	 */
+	@Override
+	public void onMessage(Message msg) {
+	}
+
 }

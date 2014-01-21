@@ -77,4 +77,15 @@ public class JtopologyWalk extends JTopology {
 	public void addPoint(int x,int y) {
 		_list.add(new Point(x, y));
 	}
+	
+	
+	/**
+     * @brief clear the liste of scanned area
+     * @param None
+     * @return None
+     */
+	public void clearListe() {
+		_list.clear();			
+	}
 }
+
