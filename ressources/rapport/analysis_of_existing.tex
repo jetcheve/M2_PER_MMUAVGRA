@@ -5,19 +5,21 @@
 In this part, we will present you many existing mobility models. Among them, we will see those wich are present in the article.\\ 
 We will show you, how work the model and what is their benefits and drawbacks for respond to the problematic quoted previously.\\
 
-We can divide models in two parts :
+\noindent We can divide models in two parts :
+
 \begin{itemize}
 \item Mathematical models
 \item Multi-Agent System (M.A.S)
 \end{itemize}
 
 \section{Mathematical models}
+
 \subsection{Random Walk}
 
 First described by Einstein in 1926, it was developed to mimic the extremely unpredictable movement of many entities in nature. A mobility node (MN) moves from its position to a new one by randomly choosing a direction and speed chosen by pre-defined ranges, [speedmin, speedmax] and [0, 2PI]. At the end of a constant time interval t or a constant distance traveled d, a new speed and direction are calculated. If a MN during its travel reaches a simulation boundary, it « bounces » off the simulation border with an angle determined by the incoming direction and continues to this new path.\\
 It's a memory-less mobility pattern because it retains no knowledge of its old locations and speed values. Therefore, the current position and speed of a MN is independent from its past location and speed. This can generate unrealistic movement because of sudden stops and sharp turns. If the specified time or distance of a MN motion is short, the resulting movement pattern will be a random roaming pattern restricted to a small part of the simulation area. Figure \ref{RandomWalkFig} shows an example of the movement observed from this model. All the MN begin in the center of the 300mx600m simulation area (at the position (150,300)). Every 60 seconds, each MN randomly chooses a direction between 0 and 2PI, and a speed between 0 and 10m/s.\\
 
-\begin{figure}[h]
+\begin{figure}[!h]
 \center
 \includegraphics[width=10cm,height=55mm]{../images/randomwalk1.png}
 \caption{\label{RandomWalkFig}Resulting pattern of a MN using the Random Walk Mobility Model\cite{SurveyMobilityModelsAdHoc1}}
@@ -26,7 +28,7 @@ It's a memory-less mobility pattern because it retains no knowledge of its old l
 \noindent\textbf{Pros :} This model can cover a large part of the area.\\
 \textbf{Cons :} It's a random model, so sometimes it could be good but also bad, and it is unrealistic. It leaves many holes too.\\
 
-\textbf{The article choose this model to compare it with others (that will see later), so we implement it.}\\
+\textbf{The article choose this model to compare it with others (that will see later), so we implement it.}
 
 \subsection{Random Waypoint}
 
@@ -39,6 +41,7 @@ It includes pause between changes in direction and/or speed. Once this pause exp
 \end{figure}
 
 During a run, MNs are initially distributed randomly around the simulation area. Figure \ref{RandomWaypointFig2} shows the average MN neighbors percentage of the MNs. The average is the cumulative percentage of total MNs that are a given MN's neighbor. Therefore, if the network has 20 nodes and a node has 2 neighbors, then the node's current neighbors percentage is 10\%. Moreover, during the first 600 seconds, due to initially distributed randomness of the MNs around the simulation area, there is an high variability in the average MN neighbors percentage.\\
+
 In the paper, three possible solutions are presented to avoid this initialization problem. The first is to save the location of the MNs after the initial high variability and use this position as the initial starting point of the MNs in the next simulations. The second is to change the initial distribution of the MNs in a specific area to be a distribution more common the model, like for example, initially placing the MNs in a triangle distribution. Lastly, the beginning of each simulation produces initialization problems due to the random distribution of the MNs around the simulation area. Throwing out the initial 1000 seconds of simulation time in each simulation ensures that the initialization problem is removed even if the MNs moves slowly. But if the MNs moves fast, we can discard fewer seconds of simulation time. This third solution ensures that each simulation has a random initial configuration.\\
 
 \begin{figure}[h]
@@ -47,7 +50,7 @@ In the paper, three possible solutions are presented to avoid this initializatio
 \caption{\label{RandomWaypointFig2}Average neighbor percentage vs. time\cite{SurveyMobilityModelsAdHoc1}}
 \end{figure}
 
-\textbf{This model is the second random mobility model which is very known, so we implement it because the clients requested it and because it looks like Random Walk so we can compare both. It also, presents the same benefits and drawbacks of its accomplice, and it is even better.}\\
+\textbf{This model is the second random mobility model which is very known, so we implement it because the clients requested it and because it looks like Random Walk so we can compare both. It also, presents the same benefits and drawbacks of its accomplice, and it is even better.}
 
 \subsection{Random Direction}
 
@@ -61,25 +64,25 @@ Figure \ref{RandomDirectionFig} shows us the resulting path of an MN using this 
 \caption{\label{RandomDirectionFig}Resulting pattern of a MN using the Random Direction Mobility Model\cite{SurveyMobilityModelsAdHoc1}}
 \end{figure}
 
-\textbf{Like the other random mobility models, it present basically the same pros and cons so we decided to not implement it.}
-
-\newpage
+\textbf{Like the other random mobility models, it presents basically the same pros and cons so we decided to not implement it.}
 
 \subsection{A Boundless Simulation Area}
 
 In this model, there is an important relationship between the old direction and velocity and the current direction and velocity. A velocity vector V = (v,theta with v a speed and theta an angular) is used to describe an MN's velocity and a position of an MN is represented as (x,y). The velocity vector and the position are updated in a regular time t.\\
+
 The Boundless Simulation Area Mobility Model is very different from other Mobility Models because here, an MN that reached a border of the simulation area continues its travel and reappears on the opposite side of the simulation area. It results from this that we can consider the simulation area like a torus-shape, illustrated by figure \ref{BoundlessFig}. The simulation area is transformed in two steps. Firstly, the top border is connected to the bottom border to create a cylinder and then we connected both open circular ends.\\
 
-\begin{figure}[h]
+\newpage
+
+\begin{figure}[!h]
 \center
 \includegraphics[width=10cm,height=55mm]{../images/boundlessmobilitymodel1.png}
 \caption{\label{BoundlessFig}Area mapped to a torus\cite{SurveyMobilityModelsAdHoc1}}
 \end{figure}
 
-
 With a speed between 0 and 10 m/s, an angular between 0 and 90 degrees and a time t to 0.1 seconds, the results of the boundless mobility models with this parameters can be seen on figure \ref{BoundlessFig2}\\
 
-\begin{figure}[h]
+\begin{figure}[!h]
 \center
 \includegraphics[width=10cm,height=55mm]{../images/boundlessmobilitymodel2.png}
 \caption{\label{BoundlessFig2}Resulting pattern of a MN using the Boundless Simulation Area Mobility Model\cite{SurveyMobilityModelsAdHoc1}}
@@ -87,22 +90,9 @@ With a speed between 0 and 10 m/s, an angular between 0 and 90 degrees and a tim
 
 \textbf{This model could be better than the others previously quoted, but we don't implement it, because it is more unrealistic. Indeed it allows an UAV to go through a border and reappears on the opposite side, and that impossible.}
 
-\newpage
-
 \subsection{City section}
 
 The aim of this model is to propose a realistic model. It is based on the vehicle's movement on road maps. The specificity of this model is the map which depends on each geographical zone. Here, vehicles are mobile nodes.\\
-
-%The mapping data blocks are available from the Americans office of census. The map information is retrieved from text files. These files are composed of several elements:
-
-%\begin{itemize}
-%\item The unique identifier for a specified road.
-%\item The nature of the road: it can be a highway or a street.
-%\item The longitude of the start of position.
-%\item The latitude of the start of departure
-%\item The latitude of arrived.
-%\item The longitude of arrived.
-%\end{itemize}
 
 All the intersections of the map are represented by nodes not mobile.
 This model also considers the volume of traffic : the more there is traffic, the thicker the line representing the road.
@@ -112,17 +102,16 @@ Here is the progress of this model. Every node begins in a point chosen randomly
 For example, here is a representation of the model. We see here that the traffic is a little sparse, but with very different speeds. The comparisons of these two regions base themselves on the inaccessible pairs, the length of the average route and to finish the changes of neighbors.\\
 
 Two situations are possible.
-The first situation, which they call region A, proposes a very dense road network with a constant speed limit on all the road network. The second situation, which they call region B, proposes a road network much less dense than the precedent, but with different speeds of movements.
+The first situation, which they call region A, proposes a very dense road network with a constant speed limit on all the road network. The second situation, which they call region B, proposes a road network much less dense than the precedent, but with different speeds of movements.\\
 
 The comparisons of these two regions base themselves on the inaccessible pairs, the length of the average route and to finish the changes of neighbors.\\
 
-Here are representations of these two regions:
+\noindent Here are representations of these two regions :
+
 \begin{figure}[h!]
     \begin{minipage}[b]{0.4\linewidth}
         \centering \includegraphics[scale=1]{../images/cityA.png}
-%la commande \centering permet de centre juste la ligne
         \caption{Region A : Street scenario corresponding to a square area of size 2400x2400 m\cite{VehicularAdHocNetworks9}}
-%\caption sert à inserer une légende
     \end{minipage}\hfill
     \begin{minipage}[b]{0.48\linewidth}
         \centering \includegraphics[scale=1]{../images/cityB.png}
@@ -155,45 +144,7 @@ Here are representations of these two regions:
 \end{itemize}
 \end{multicols}
 
-%Another experiment was conducted on the two regions previously mentioned with a routing protocol called DSR. The DSR protocol consists of two mechanisms : Route Discovery and Route Maintenance. According to the article, 
-%\begin{quotation}
-%To perform a Route Discovery for a destination node D, a source node S broadcasts a ROUTE REQUEST that gets flooded through the network in a controlled manager. This request is answered by a ROUTE REPLY from either D or some other node that knows a route to D. To reduce frequency and propagation of ROUTE REQUESTs each node aggressively caches source routes that the node learns or overhears.\\
-%Route Maintenance detects when some link over which a data packet is being transmitted breaks\cite{VehicularAdHocNetworks9}.
-%\end{quotation}
-
-%Simulations were made by using 150 nodes with a wireless transmission range of 500m. The communication  pattern  consisted of 10 constant bit rate flows, each sending 4 64 Bytes data packets from the source to the destination.
-%The evaluation of this protocol is made on 3 properties.
-
-%\begin{itemize}
-%\item Packet Delivery Ratio
-%\item Packet delivery latency
-%\item Packet overhead
-%\end{itemize}
-
-%Here are the results obtained with the DSR protocol:\\
-
-%\begin{figure}[h]
-%\center
-%\includegraphics{../images/protocoleDSR.png}
-%\caption{\label{ProtDSR}DSR Performance\cite{VehicularAdHocNetworks9}}
-%\end{figure}
-
-%We see that the obtained results are very similar in the Waypoint model. The average path length does not differ much.\\
-%We can conclude that from it the Waypoint model is a very good approximation of the model concerning streets.\\
-%Numerous improvements are possible so that the model is realistic :
-
-%\begin{itemize}
-%\item Changing settings depending on the time (lots of car in the morning for example).
-%\item Possibility of introducing obstacles.
-%\item Currently, each vehicle moves independently. But in real life, it has to pay attention to its environment.
-%\item The model does not take into account the waiting time in the intersections.
-%\end{itemize}
-
-%To conclude, this model uses real life data. A called  DSR protocol was used to test the model. We were able to notice that the Waypoint model is a good approximation of the model concerning streets.
-
 \textbf{This mobility model is more for reach a point than cover an area, so it's not present in our article and we don't implement it.}
-
-\newpage
 
 \subsection{Gauss-Markov}
 
@@ -207,7 +158,7 @@ The aim of this model is to be able to adapt with one parameter to different lev
 
 In figure \ref{Gauss-MarkovFig2}, an example of a resulting pattern of a MN using the Gauss-Markov Mobility Model is illustrated. The run takes 1000 seconds and the MN beings at the center of the simulation area. The parameter t is 1 second, the initial angular is 90 degrees and the speed is between 0 and 10 m/s. The Gauss-Markov MM can eliminate the sudden stops and sharp turns encountered in the Random Walk Mobility Model by saved past velocities and directions in order to be able to influence future velocities and directions.
 
-\begin{figure}[h]
+\begin{figure}[!h]
 \center
 \includegraphics[width=10cm,height=55mm]{../images/gauss-markovmodel2.png}
 \caption{\label{Gauss-MarkovFig2} Traveling pattern of an MN using the Gauss-Markov Mobility Model\cite{SurveyMobilityModelsAdHoc1}}
@@ -215,13 +166,13 @@ In figure \ref{Gauss-MarkovFig2}, an example of a resulting pattern of a MN usin
 
 \textbf{This model is not present in our article so we don't implement it. It's also because we already have two random mobility models and don't present significant benefits than the others.}
 
-\newpage
-
 \subsection{Reference Point Group Mobility Model}
 
 Group movements are based on the movement at the center of the group. The movement of the group center completely characterizes the motion of the MNs of its group, including their direction and speed. Each MN randomly and individually moves about their own pre-defined reference points, where their movements depend on the group movement. Their position are regularly updated each time t and a new direction is calculated for every MN according to the center of the group.\\
 The figure \ref{RPGMMFig} shows us an illustration of a group of three MNs that move together. The Random Waypoint Mobility Model is used for the random motion of each individual MN in the group and the movement at the center of the group.\\
 In the paper, an application of this model is explained. The RPGMM can be used for example in an avalanche rescue scenario. In a scenario like this, the cooperation between human and canine is essential. We can see the human as the center of the group and the dogs are the MNs of the group.\\
+
+\newpage
 
 \begin{figure}[h]
 \center
@@ -230,8 +181,6 @@ In the paper, an application of this model is explained. The RPGMM can be used f
 \end{figure}
 
 \textbf{This model uses Random Waypoint, but nodes moves together, so they cover slower the area. Because of this point and because our article don't use it, we don't implement it. And like it's said, this model can rather be used in an avalanche rescue scenario.}
-
-\newpage
 
 \subsection{Social Network Theory}
 
@@ -252,6 +201,7 @@ The objective of this model is to use social relationships between the individua
 The first step is the generation of the social network. It is represented by a matrix of interaction \pageref{MatricSN}.\\
 
 People can be grouped according to their social links or compared with their geographical location. Dynamic mechanisms are present in this model. The people can belong to a group at moment T, and change group afterward. The notion of distance is taken into in account in the parameters.\\
+
 An incalculable number of scenarios can be set up. Every group moves with a random speed and every host has a random speed of its own. A host, belonging to a group, moves inside this one. He can reach for example an aim which was fixed to its. Nodes not belonging to any group move randomly.\\
 
 When a node reached its aim, it has to make a choice:
@@ -264,9 +214,7 @@ Two scenarios are presented for this model. They are characterized by a number o
 \begin{figure}[h!]
     \begin{minipage}[b]{0.4\linewidth}
         \centering \includegraphics[scale=1]{../images/degreeConnectivitySocialNetwork30Nodes.png}
-%la commande \centering permet de centre juste la ligne
         \caption{Distribution of degree of connectivity (scenario with 30 hosts grouped into 5 groups\cite{networkTheory5}}
-%\caption sert à inserer une légende
     \end{minipage}\hfill
     \begin{minipage}[b]{0.48\linewidth}
         \centering \includegraphics[scale=1]{../images/degreeConnectivitySocialNetwork60Nodes.png}
@@ -278,14 +226,13 @@ In conclusion, as regards this model, we can say that generally, the models of e
 
 \textbf{This model is not present in our article too, and is not for area coverage, so it was not implemented.}
 
-\newpage
-
 \subsection{Pheromone}
 
 \subsubsection{Description of the model}
 
 This model is inspired by real pheromone. A pheromone is a chemical substance, secreted externally by certain animals, such as insects, affecting the behaviour or physiology of other animals of the same species.\footnote{\url{http://dictionary.reference.com/browse/pheromone?s=t}}\\
-This model use digital Pheromone.This pheromone has 3 properties :
+
+\noindent This model use digital Pheromone.This pheromone has 3 properties :
 
 \begin{itemize}
 \item  Deposited and withdrawn pheromone from an area. (Information fusion and aggregation).
@@ -293,7 +240,8 @@ This model use digital Pheromone.This pheromone has 3 properties :
 \item  Propagated from a place to its neighboring places. (Information diffusion and dissemination). 
 \end{itemize}
 
-A  digital  pheromone  represents  information  about  the  system. Different  "flavors"  of  pheromones convey different kinds of information.\\ We can have for example, attractive pheromone or repellent pheromone. The attractive pheromone will attract other UAVs whereas the repellent pheromone will repulse other UAVs. Digital pheromones exist within in an artificial space called a pheromone map.
+A  digital  pheromone  represents  information  about  the  system. Different  "flavors"  of  pheromones convey different kinds of information.\\
+ We can have for example, attractive pheromone or repellent pheromone. The attractive pheromone will attract other UAVs whereas the repellent pheromone will repulse other UAVs. Digital pheromones exist within in an artificial space called a pheromone map.
 
 \subsubsection{Possibles scenarios}
 
@@ -308,14 +256,15 @@ Pheromone logic  can  be  used  for  several  types  of  surveillance  and targe
 \caption{\label{surveillance}Attractive and repulsive pheromones for surveillance\cite{PerformanceOfDigitalPheromones10}}
 \end{figure}
 
-In Figure \ref{surveillance}, each step mean :\\
- 1. Surveillance area deposits attractive pheromone,\\
- 2. UAV deposits repulsive pheromone,\\ 
- 3. Pheromone infrastructure propagates both attractive and repulsive pheromone to form gradient,\\
- 4. UAV climbs net gradient, withdrawing attractive pheromone.
- 
 \newpage
- 
+
+In Figure \ref{surveillance}, each step mean :\\
+
+1. Surveillance area deposits attractive pheromone,\\
+2. UAV deposits repulsive pheromone,\\ 
+3. Pheromone infrastructure propagates both attractive and repulsive pheromone to form gradient,\\
+4. UAV climbs net gradient, withdrawing attractive pheromone.
+
 \item Target acquisition
 
 \begin{figure}[h]
@@ -325,6 +274,7 @@ In Figure \ref{surveillance}, each step mean :\\
 \end{figure}
 
 In Figure \ref{targetacquisition}, each step mean :\\
+
 1. UAVdet detects target and Red target is created,\\
 2. Red target deposits “NeedsID” pheromone, \\
 3. UAVid is more attracted to NeedsID pheromone than lawn pheromone and climbs gradient to ID target.
@@ -338,6 +288,7 @@ In Figure \ref{targetacquisition}, each step mean :\\
 \end{figure}
 
 In Figure \ref{tracking}, each step mean :\\
+
 1. UAV acquires target and large Visited pheromone deposit repelling 
 other UAVs,\\
 2. Red target estimates movement, deposits “Tracking” pheromone that eventually overcomes strength of Visited pheromone, \\
@@ -347,7 +298,7 @@ other UAVs,\\
 \subsubsection{Real scenario}
 
 We are going to see a real scenario which demonstrate the use of pheromone model.\\
-The demonstration used: 
+The demonstration used : 
 
 \begin{itemize}
 \item Four robots 
@@ -357,17 +308,21 @@ The demonstration used:
 
 The demonstration focused on the swarming algorithms that control and coordinate the behaviors of the heterogeneous mix of vehicles.\\
 Pheromone  algorithms  controlled  and  coordinated  the  flight  of  the  two  UAVs  as  they performed continuous  surveillance  over  an  urban  area  looking  for  potential  adversaries. The  two  air  units worked together to ensure even, thorough, and continuous coverage of all areas in the surveillance region  while  avoiding  any  collisions. They  also  provided  patrol coverage  of  a  mock  convoy  as  it moved through the area.\\ 
-While the UAVs surveyed a broad area over the airfield, the ground robots surveyed and patrolled around  some  mock  buildings  set  up  for  the  demo.\\
-During  the  demonstration,  one  of  the  ground robots  failed. The other  ground  robots were  able  to  dynamically  readjust  their  patrol  patterns to accommodate  the  missing  unit without  any  intervention  by  the  operator.\\
-This unplanned  event helped to demonstrate the robustness of these algorithms to unexpected events. The  demonstration  showed  cooperative  behavior  between  the  air  and  ground  units when  the identity of a potential adversary detected by one of the UAV’s was automatically confirmed by one of the ground robots with a special sensor capable of target identification.\\
-The operator simply gives a high level command to the whole swarm, such as “survey this area and track  any  identified  targets”  or  “patrol  around  this  convoy”.\\
-The  robots  autonomously  configured themselves to determine which robot would perform what task in order to accomplish the overall objective.
 
-\newpage
+While the UAVs surveyed a broad area over the airfield, the ground robots surveyed and patrolled around  some  mock  buildings  set  up  for  the  demo.\\
+
+During  the  demonstration,  one  of  the  ground robots  failed. The other  ground  robots were  able  to  dynamically  readjust  their  patrol  patterns to accommodate  the  missing  unit without  any  intervention  by  the  operator.\\
+
+This unplanned  event helped to demonstrate the robustness of these algorithms to unexpected events. The  demonstration  showed  cooperative  behavior  between  the  air  and  ground  units when  the identity of a potential adversary detected by one of the UAV’s was automatically confirmed by one of the ground robots with a special sensor capable of target identification.\\
+
+The operator simply gives a high level command to the whole swarm, such as “survey this area and track  any  identified  targets”  or  “patrol  around  this  convoy”.\\
+
+The  robots  autonomously  configured themselves to determine which robot would perform what task in order to accomplish the overall objective.
 
 \section{Multi-Agent System}
 
 The basic idea of this part is the simulation of mobile model by basing itself on animal behavior.\\
+
 It exists two kind of agents, the cognitive agents and the active agents.\\
 Basically, the difference  between them is based on the representation of the environment they have. If an entity can reasoning according to its environnment, then it's a cognitive agent, otherwise, if the representation of the environment is limited to the perception of the entity, then it's an active agent.\\
 In this part, we will present you, only the active agent.\\
@@ -379,7 +334,7 @@ The benefits of the natural agents are that they give solutions to problems well
 \subsection{Ants}
 
 They are the most actives agents known. The ants model is based on the fact that ants build networks of paths. These paths link their food source available to their nest.
-Each ant who eat has the same program:
+Each ant who eat has the same program :
 
 \begin{itemize}
 \item It must avoid obstacles.
@@ -392,18 +347,18 @@ Ants can die. Either they don't find food enough rapidly, or predators kill them
 All pheromone paths link to food. But the pheromones evaporate over time. The rate of pheromone can be reinforced if many ants come through the same path.\\
 Here is a representation of the behavior of ants :
 
+\newpage
+
 \begin{figure}[h]
 \center
 \includegraphics{../images/SchemaFourmi.png}
 \caption{\label{AntsRepresentation} Representation of ants\cite{RepresentationOfAnts}}
 \end{figure}
 
-\newpage
-
 \subsection{Ants: Brod Sorting}
 
 This model is similar to the model previously quoted. It is based on a system of sorting concerning entities. A nest shelters various things inside, larvae, eggs, food. The ant colony keeps the entities sorted by kind.
-The behavior of ants goes this way:
+The behavior of ants goes this way :
 
 \begin{itemize}
 \item Ants have a random behavior around the nest.
@@ -414,7 +369,7 @@ The behavior of ants goes this way:
 
 \subsection{Termites}
 
-This model is based on the behavior of termites. These also use pheromones. Here are the rules followed by termites:
+This model is based on the behavior of termites. These also use pheromones. Here are the rules followed by termites :
 
 \begin{itemize}
 \item Pheromones consist of physical waste.
@@ -427,7 +382,8 @@ This model is based on the behavior of termites. These also use pheromones. Here
 \subsection{Wasps}
 
 The model based on wasps consists of several characteristics.
-All the wasps are distributed in three groups.
+All the wasps are distributed in three groups :
+
 \begin{itemize}
 \item A single chief which distributes the various wasps in various groups.
 \item A group of foragers which has the mission to go hunting in order to obtain food.
@@ -444,7 +400,7 @@ This model is based on flocks of birds and schools of fish, which present the sa
 
 The human societies address similar problems, in air-traffic control and convoys of ships, but the human solutions depend on sophisticated communication an central coordination structures not available to birds and fish.\\
 
-So, in order to answer to these troubles, the model follow three simple rules.
+\noindent So, in order to answer to these troubles, the model follow three simple rules :
 \begin{itemize}
 \item maintain a specified minimum separation from the nearest object or neighbor,
 \item match magnitude and direction to nearby neighbor,
@@ -459,19 +415,19 @@ actions simultaneously respond to and change the overall structure of the flock.
 This model is based on the communication of wolves in order to hunt mooses.\\
 The system behavior is simple. A single wolf, cannot kill a moose, because of his larger and powerful hooves. So, in order to hunt him, pack of wolves, must first surround the moose, so that one can jump on it's backs, while it is occupied with the others.\\
 \textbf{The problem is how to modelized this behavior ?}\\
-%In fact, it's seems simple for us. For example, Human SWAT teams use radio to coordinate such surrounding maneuvers, but wolves don’t have walkie-talkies or similar long-range communication mechanisms.\\
-%So, this model was for many years a major problem in the field of distributed artificial intelligence, known as "predator-prey" problem.\\
+
 Many of the proposed solutions assumed reasoning and communication capabilities whose existence in wolves is doubtful at best. For example, the emulated wolves would communicate and negotiate their strategies with one another (“I’ll head for the north side; why don’t you go to the south?”).\\
 Finally, a simpler solution requires only rudimentary sensing and action on the part of both moose and wolves.\\
 These actions are emulated on a hexagonal grid, six wolves will always capture the moose (with one wolf on each cell adjacent to the moose’s cell) as long as it cannot run faster than them.\\
 
-The solution follow two points :
+\noindent The solution follow two points :
+
 \begin{itemize}
 \item The Moose move to the neighboring cell that is farthest away from the nearest wolf. As long as its rate of movement is faster than that of the wolves, this strategy permits it to escape.
 \item Wolves move to the neighboring cell with the highest score
 \end{itemize}
 
-The score of a cell is compute with this equation :
+\noindent The score of a cell is compute with this equation :
 \begin{lstlisting}[frame=trBL, title=Score calculation]
 			S = d(moose)-k*d(wolf)
 \end{lstlisting}

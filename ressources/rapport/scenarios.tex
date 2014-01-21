@@ -4,9 +4,10 @@
 
 \chapter{Mobility models in the article}
 
-In the article, they study mainly Mobile Adhoc NETwork (MANET). MANET can manage network of mobile entities to collect, process and transmit data in large areas. The final goal of MANET research is to implement networking functionality to test and evaluate these ones. But one of this research requires several supporting models, including the model for nodes mobility. The authors present criterias that characterize wanted mobility properties for the movement of UAVs in a reconnaissance scenario. \\\\
+In the article, they study mainly Mobile Adhoc NETwork (MANET). MANET can manage network of mobile entities to collect, process and transmit data in large areas. The final goal of MANET research is to implement networking functionality to test and evaluate these ones. But one of this research requires several supporting models, including the model for nodes mobility. The authors present criterias that characterize wanted mobility properties for the movement of UAVs in a reconnaissance scenario.\\
 
-The article presents and uses two mobility models.\\
+\noindent The article presents and uses two mobility models.\\
+
 The first model is a simple random model near the random Walk model presented previously. In this model, the UAVs can't communicate with each other. The UAVs have no coordination between them. This model is a Markov process. The UAV change its direction every second according to probability of action and have no backup position.\\
 
 The second model is a distributed pheromone repel model. It's a variant of the pheromone model presented previously. Compared to this model, the model of the article has not attractive pheromone. The mobility of an UAV depends on the mobility of the other UAVs. Each UAV have its own pheromone map. This map is a grid with element size 100*100 meters. Each element of this grid contains the level of pheromone and a timestamp representing the last time the pheromone was deposited. To move, an UAV looks three area in front of him and move to the area with the lower level of pheromone. If two area or three area have the same level, an UAV choose the area randomly. Once a area choosen, the UAV scan this area and deposit pheromone on it. Therefore other UAVs don't come to its position, they push UAVs away from themselves.
@@ -14,6 +15,7 @@ The second model is a distributed pheromone repel model. It's a variant of the p
 \chapter{Scenarios}
 
 We saw that the issue of this article is "how well scan an area?".\\
+
 So the scenario is the reconnaissance of an area. It takes place in a square with a side length of 30 kilometers.\\
 For this scenario, we use 10 UAVs and a command and control center (C\&C). Each UAV starts at the middle of the south edge heading north near the C\&C.
 The UAVs have to scan entirely the map once per hour.\\

@@ -62,11 +62,10 @@ In this table below, we can see the results about the percentage of the map neve
 
 It represents the maximum, median and minimum uncovered area for the ten runs. These numbers clearly show the ability of the pheromone model to cover the complete area. 
 
-\newpage
-
 \subsection{Connectivity}
 
 \begin{figure}[!h]
+\centering
    \includegraphics{../images/random_resultat_connectivite.png}
 \caption{\label{randomconnect} Random. Number of UAVs in contact with C\&C (max, average, min)\cite{UAV}}
 \end{figure}
@@ -74,6 +73,7 @@ It represents the maximum, median and minimum uncovered area for the ten runs. T
 \newpage
 
 \begin{figure}[!h]
+\centering
    \includegraphics{../images/pheromone_resultat_connectivite.png}
 \caption{\label{pheromoneconnect}Pheromone. Number of UAVs in contact with C\&C (max, average, min)\cite{UAV}}
 \end{figure}
@@ -85,6 +85,8 @@ In Figure \ref{randomconnect} and Figure \ref{pheromoneconnect},we can see the n
 \subsection{Scan coverage}
 
 The graphic \ref{scancoverage} is the result of our experiments using our implementation of the random walk and waypoint mobility model and the pheromone mobility model. Each run lasts 20 minutes and uses 10 UAVs per model.
+
+\newpage
 
 \begin{figure}[!hbtf]
 \centering
@@ -111,4 +113,3 @@ The pheromone model quickly distributes all the UAVs over the map because the UA
 The pheromone mobility model is the better model to reach quickly the most percentage of scanned area. Indeed, the random mobility models aren't appropriate to scan the entire area.
 
 \end{itemize}
-

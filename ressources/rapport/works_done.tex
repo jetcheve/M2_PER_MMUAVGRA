@@ -8,7 +8,6 @@
 
 During two and a half months of this project, we implemented both models which were described in the article. As a reminder, these two models are a simple random and a model concerning pheromones. We also implemented the Random Waypoint model on the demand of our clients. In this section, we will explain the development work that we have provided and the different choices.
 
-
 \subsection{Random model} 
 
 To implement this model, we needed four classes.\\
@@ -34,10 +33,9 @@ To respect as much as possible the reality, we had to modify the management of t
 
 Each time a node scans a zone, it looks in the matrix if this position was already scanned (0 if the zone was never scanned, 1 otherwise). If it is, then it makes nothing, otherwise it puts the value to 1.\\
 
-The third class of our architecture is called \textit{Jtopology\_Random}. It inherits from JTopology and is going to draw the scans footprint on the map. This class JTopology inherits from JPanel, and is situated in fact between a JViewer and a Topology.
+The third class of our architecture is called \textit{Jtopology\_Random}. It inherits from JTopology and is going to draw the scans footprint on the map. This class JTopology inherits from JPanel, and is situated in fact between a JViewer and a Topology.\\
 
 The last class represent the Command and control center (C\&C). all UAV need to transmit their data to it. The C\&C is a static point located at the UAVs' starting point. We can easyly remove it thanks to the boolean present on the main. When it is present, the display of the data represent the data from it. So the UAVs transmit their map and the C\&C udpate its own map with them. It manage the percentage of scan and the time of the experiment.
-
 
 \subsection{Random Waypoint Model}
 
@@ -51,15 +49,15 @@ In this model, we don't manage the edge of the window because all destination po
 
 Concerning the architecture, the implementation of the model of pheromones is very similar. We find practically 4 even classy. The C\&C class is similar to others models. Only the class \textit{MovingNode} is really going to be different because the movements of nodes are going to depend on a lot of parameter. First of all, this class implements a new interface which is \textit{MessageListener}. Indeed, in this model, nodes have to sent data each others (in this particular case their respective map).\\
 
-The method which is going to change compared with the random model is the method \textit{onClock}. Indeed, it is here that we are going to apply rules as described on the following image:
-
-\newpage
+The method which is going to change compared with the random model is the method \textit{onClock}. Indeed, it is here that we are going to apply rules as described on the following image :
 
 \begin{figure}[!h]
 \center
 \includegraphics{../images/pheromon_model.png}
 \caption{Pheromone search pattern\cite{UAV}}
 \end{figure}
+
+\newpage
 
 \begin{figure}[!h]
 \center
@@ -68,8 +66,6 @@ The method which is going to change compared with the random model is the method
 \end{figure}
 
 We handled all the cases described in the article, meaning node looks at the values of pheromones in its left diagonal, in front of him and in its right diagonal.
-
-\newpage
 
 \begin{figure}[!h]
 \center
@@ -92,8 +88,6 @@ These both cases \ref{case1} and \ref{case2} show how a node scan the map.
 \end{itemize}
 
 We handle the communication between each node with the \textit{MessageListener} and the method \textit{onMessage}. This method is called when a node do the method \textit{send}. We have no destination in the method \textit{send} to broadcast the message. We send message all ten top of clock to respect the conditions of the scenario of the article.
-
-\newpage
 
 \section{Difficulties Encountered \& Solutions}
 

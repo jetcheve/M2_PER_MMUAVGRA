@@ -55,8 +55,6 @@ Lost or unaivable UAVs during a scenario not involved the good progress of the s
 \caption{\label{RandomWalkDIA}Diagram of class Pheromone model}
 \end{figure}
 
-\newpage
-
 \chapter{Schedule}
 
 \section{Tasks list}
@@ -73,6 +71,7 @@ A list of task was identified from the beginning by the project to be able to le
 \end{itemize}
 
 \newpage
+
 \section{GANTT}
 
 \begin{figure}[htbf]
@@ -81,27 +80,27 @@ A list of task was identified from the beginning by the project to be able to le
 \caption{\label{Gantt}Diagram of Gantt of our project}
 \end{figure}
 
+\newpage
+
 \begin{figure}[htbf]
 \center
 \includegraphics[scale=0.7]{../images/Gantt2.png}
 \caption{\label{Gantt}Diagram of Gantt of our project}
 \end{figure}
 
-In this part, we will see the development environment we used, and the programming conventions we've applied.
-
 \chapter{Development environment and conventions}
 
 \section{Development environment}
 
-
 \subsection{GitHub}
 
 To write this report and to be able to implement both models most effectively possible, we used a tool of hosting and management of program which is called Github. It is a tools of versionning which allows the collaborative work and allows a simplification of the methods of work.\\
+
 We used it throughout the project to put the summaries of articles that we read, the result og our meeting, this report or still implementations.\\
 Our Git repository is located at the following address : \\
 \url{https://github.com/jetcheve/M2\_PER\_MMUAVGRA}.\\
 
-Our deposit is decomposes into three branches :
+\noindent Our deposit is decomposes into three branches :
 
 \begin{itemize}
 \item A master branch which is general to the whole deposit.
@@ -113,7 +112,7 @@ Our deposit is decomposes into three branches :
 
 Eclipse is an integrated development environment for creating projects in any programming language. It is used to develop programs in JAVA, Android, C, etc.\\
 
-We used Eclipse throughout the project implementation.\\
+\noindent We used Eclipse throughout the project implementation.\\
 
 As a supplement to Eclipse, we used a library that is called JBotsim \cite{JBotSim} proposed by Mr. Casteigts. This allows to simulate a dynamic network. This network is simulated with mobile nodes that interact. These nodes can send messages (in our case, maps of each UAVs).\\
 
@@ -152,8 +151,6 @@ int _var; /**< Detailed description after the member */
 We've also resorted to programming conventions that we defined between us.\\
 For example, we put all of our functions names or variable names, in the same language (English).\\
 
-\newpage
-
 Then, when a part of a code, was not finished yet, we put the following lines above the concerning part.
 
 \lstset{language=Java,basicstyle=\footnotesize,commentstyle=\color{blue}}
@@ -176,8 +173,7 @@ We've also used a convention for the bugs found and wrote these lines.\\
 \end{lstlisting}
 ~\\
 
-We've used GitHub too, in order to manage us.\\
-Indeed, it allows us :\\
+\noindent We've used GitHub too, in order to manage us. Indeed, it allows us :
 
 \begin{itemize}
 \item to create tasks, 
@@ -187,7 +183,8 @@ Indeed, it allows us :\\
 \item and see the state of our progress,
 \item define kinds of tasks (development, bug, report ...)
 \end{itemize}
-~\\
+
+\newpage
 
 \begin{figure}[!h]
    \includegraphics[scale=0.7]{../images/Milestones.png}
@@ -200,6 +197,7 @@ Indeed, it allows us :\\
 \caption{\label{Tasks}Example of Tasks}
 \end{figure}
 
+\newpage
 
 To finish, we've created the five essential files for a project :
 
